@@ -1,0 +1,188 @@
+.whatsapp {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  z-index: 9999;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.whatsapp:hover {
+  transform: scale(1.1);
+}
+
+.whatsapp img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.whatsapp-tooltip {
+  position: absolute;
+  bottom: 80px;
+  right: 20px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  font-size: 14px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+  border-radius: 5px;
+  height: 30px;
+  line-height: 30px;
+  white-space: nowrap;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.whatsapp:hover .whatsapp-tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+.logo-container {
+  position: absolute;
+  top: 120%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Nilai z-index yang lebih tinggi */
+}
+
+.logo {
+  width: 50px;
+  height: 50px;
+  margin: 15px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 9999; /* Nilai z-index yang lebih tinggi */
+}
+
+.carousel-item {
+  height: 55vh; /* Mengatur tinggi carousel menjadi setengah tinggi viewport */
+}
+
+.carousel-item img {
+  object-fit: cover; /* Memastikan gambar mengisi ruang carousel dengan proporsi aspek yang benar */
+  height: 100%; /* Mengisi tinggi carousel dengan gambar */
+}
+
+.payment-section {
+  text-align: center;
+  margin-top: 60px;
+}
+
+.payment-card-title {
+  background-color: #ffffff;
+  color: #010101;
+  font-size: 24px;
+  height: 320px;
+  position: relative;
+  font-weight: bold;
+  z-index: 3;
+}
+
+.payment-title {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+}
+
+.payment-card {
+  height: 300px;
+  width: 50vw;
+  display: inline-block;
+  z-index: 200;
+  clip-path: polygon(0 0, 100% 0, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+}
+
+.payment-image {
+  width: 100%;
+  height: auto;
+  z-index: 200;
+}
+
+.card-container-cari {
+  position: absolute;
+  top: 17%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+}
+
+.card-cari {
+  width: 100%;
+  max-width: 800px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 30px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+@media screen and (max-width: 992px) {
+  /* Media query untuk layar dengan lebar maksimum 992px */
+  .card-cari {
+    max-width: 500px;
+  }
+
+  .card-container-cari {
+    top: 6%;
+  }
+}
+@media screen and (max-width: 576px) {
+  /* Media query untuk layar dengan lebar maksimum 576px */
+  .card-cari {
+    border-radius: 15px;
+  }
+}
+
+.card-kanan {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  position: absolute;
+  top: 20%;
+  left: 25%;
+  margin-right: 10px; /* Jarak dari tepi kanan */
+  z-index: 150;
+}
+
+.card-kiri {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  position: absolute;
+  top: 20%;
+  right: 25%;
+  margin-left: 10px; /* Jarak dari tepi kiri */
+  z-index: 150;
+}
+
+/* Responsif pada layar dengan lebar kurang dari atau sama dengan 768px */
+@media (max-width: 768px) {
+  .card-kanan,
+  .card-kiri {
+    position: static;
+    margin-right: 0;
+    margin-left: 0;
+    top: initial;
+    left: initial;
+    right: initial;
+  }
+}
+
+.card-besar {
+  background-color: #ffffff;
+  max-height: 900px;
+  position: absolute;
+  margin-top: 10%;
+  z-index: 100;
+}
+
+footer {
+  margin-top: 300px;
+}
