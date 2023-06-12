@@ -1,25 +1,3 @@
-<?php
-
-use App\Models\UserModel;
-use Myth\Auth\Authentication\LocalAuthenticator;
-
-// Load the UserModel
-$userModel = new UserModel();
-
-// Get an instance of LocalAuthenticator
-$auth = new LocalAuthenticator($userModel);
-
-// Check if the user is logged in
-if ($auth->check()) {
-    // User is logged in
-    // ...
-} else {
-    // User is not logged in
-    // ...
-}
-
-// ...
-?>
 
 
 <!DOCTYPE html>
@@ -61,82 +39,87 @@ if ($auth->check()) {
 <body class="animsition ">
         <!-- HEADER DESKTOP-->
         <header class="header-desktop d-none d-lg-block p-md-3" >
-    <div class="section__content section__content--p35">
-        <div class="header3-wrap">
-            <a href="#">
-                <img class="img-cir logo-desktop"src="/img/logo.png" alt="Airputih" />
-            </a>
-            <div class="header__navbar">
-                <ul class="list-unstyled">
-                    <li class="has-sub">
-                        <a href="#album">
-                            <i class="fas fa-image text-dark"> Album</i>
-                        </a>   
-                    </li>
-                    <li>
-                        <a href="#member">
-                            <i class="fas fa-child text-dark"> Members</i>
+            <div class="section__content section__content--p35">
+                <div class="header3-wrap">
+                        <a href="#">
+                            <img class="img-cir logo-desktop"src="/img/logo.png" alt="Airputih" />
                         </a>
-                    </li>
-                    <li>
-                        <a href="#event">
-                            <i class="fas fa-trophy text-dark"> Events</i>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-                
-            <div class="account-wrap">
-                <div class="account-item account-item--style2 clearfix js-item-menu">
-                    <div class="image">
-                        <img src="" alt="User Photo">
-                    </div>
-                    <div class="content">
-                        <?php if ($isLoggedIn): ?>
-                            <a class="js-acc-btn" href="#"><?= $userName ?></a>
-                        <?php else: ?>
-                            <a class="js-acc-btn" href="login.php">Login</a>
-                        <?php endif; ?>
-                    </div>
-                    <div class="account-dropdown js-dropdown">
-                        <div class="info clearfix">
+                     <div class="header__navbar">
+                        <ul class="list-unstyled">
+                            <li class="has-sub">
+                               <a href="#album">
+                              <i class="fas fa-image text-dark"> Album</i>
+  
+                                </a>   
+                            </li>
+                            <li>
+                                <a href="#member">
+                                    <i class="fas fa-child text-dark"> Members</i>
+                                 </a>
+                            </li>
+                            <li>
+                                <a href="#event">
+                                    <i class="fas fa-trophy text-dark"> Events</i>
+                                   </a>
+                            </li>
+                                </ul>
+                             </div>
+                        
+                                <div class="account-wrap">
+                            <div class="account-item account-item--style2 clearfix js-item-menu">
+                           
                             <div class="image">
-                                <a href="#">
-                                    <img src="" alt="User Photo">
-                                </a>
+                            <img src="" alt="User Image">
+                                </div>
+                                
+                                <div class="content">
+                                    <a class="js-acc-btn" href="#"></a>
+                                </div>
+                                <div class="account-dropdown js-dropdown">
+                                    <div class="info clearfix">
+                                        <div class="image">
+                                            <a href="#">
+                                                 <img src="" alt="User Photo">
+                                            </a>
+                                        </div>
+                                        <div class="content">
+                                            <h5 class="name">
+                                                <a href="#"></a>
+                                            </h5>
+                                            <span class="email"></span>
+                                        </div>
+                                    </div>
+                                   
+                                    <div class="account-dropdown__body">
+                                        <div class="account-dropdown__item">
+                                            <a href="#">
+                                                <i class="zmdi zmdi-account"></i>Account</a>
+                                        </div>
+                                        <div class="account-dropdown__item">
+                                            <a href="#">
+                                                <i class="zmdi zmdi-settings"></i>Setting</a>
+                                        </div>
+                                        <div class="account-dropdown__item">
+                                            <a href="#">
+                                                <i class="zmdi zmdi-money-box"></i>Billing</a>
+                                        </div>
+                                    </div>
+                                    <div class="account-dropdown__footer">
+                                        <a href="logout.php">
+                                            <i class="zmdi zmdi-power"></i>Logout</a>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="content">
-                                <h5 class="name">
-                                    <a href="#"></a>
-                                </h5>
-                                <span class="email"></span>
-                            </div>
+                           
                         </div>
-                    
-                        <div class="account-dropdown__body">
-                            <div class="account-dropdown__item">
-                                <a href="#">
-                                    <i class="zmdi zmdi-account"></i>Account</a>
-                            </div>
-                            <div class="account-dropdown__item">
-                                <a href="#">
-                                    <i class="zmdi zmdi-settings"></i>Setting</a>
-                            </div>
-                            <div class="account-dropdown__item">
-                                <a href="#">
-                                    <i class="zmdi zmdi-money-box"></i>Billing</a>
-                            </div>
+                   
                         </div>
-                        <div class="account-dropdown__footer">
-                            <a href="logout.php">
-                                <i class="zmdi zmdi-power"></i>Logout</a>
-                        </div>
+                        
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</header>
+            </div>         
+                                
+        </header>
         <!-- END HEADER DESKTOP-->
 
            

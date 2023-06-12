@@ -34,16 +34,18 @@ $routes->get('/layout/carousel', 'CarouselController::index');
 
 
 $routes->get('berita/(:num)', 'News::detail/$1');
-$routes->get('/user/index', 'User::index');
 $routes->get('/', 'News::index');
+$routes->get('/', 'HomeController::index');
+$routes->get('/user', 'UserController::index');
+$routes->get('/home', 'UserController::index');
+
 $routes->group('', ['namespace' => 'App\Controllers'], function ($routes) {
     // ...
     $routes->post('login', 'AuthController::login');
     $routes->get('logout', 'AuthController::logout');
+    $routes->get('user', 'UserController::index');
     // ...
 });
-
-
 
 /*
  * --------------------------------------------------------------------
