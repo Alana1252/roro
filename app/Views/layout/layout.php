@@ -13,7 +13,7 @@
 <body style="background-color:#f1f1f1;">
     <header>
     <?= $this->include('layout/navbar'); ?>
-    <?= isset($userContent) ? $userContent : '' ?>
+
     <?= $this->include('layout/carousel'); ?>
     <?= $this->include('layout/caritiket'); ?>
     </header>

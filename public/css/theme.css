@@ -24,6 +24,7 @@
 .logo-desktop {
   height: 44px;
   width: 60px;
+  margin-left: 30px;
 }
 
 .img-120 {
@@ -312,7 +313,8 @@ strong {
 
 .account-wrap {
   position: relative;
-  right: 50px;
+  right: 70px;
+  margin-top: 10px;
 }
 
 .account-item {
@@ -1649,7 +1651,7 @@ strong {
 .header__navbar ul li a {
   display: block;
   font-size: 16px;
-  color: #ccc;
+  color: #ffffff;
   padding: 25px 30px;
   border-left: 1px solid rgba(255, 255, 255, 0.102);
 }
@@ -2546,4 +2548,24 @@ strong {
 
 .table-data3 tbody td.denied {
   color: #fa4251;
+}
+
+.button-shadow {
+  display: inline-block;
+  padding: 8px 15px;
+  border: none;
+  margin-right: 20px;
+  background: transparent;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+.button-shadow1 {
+  display: inline-block;
+  padding: 8px 15px;
+  border: none;
+  margin-right: 20px;
+  background: transparent;
+  box-shadow: 0px 0px 10px rgba(231, 231, 231, 0.3);
+  border-radius: 10px;
 }

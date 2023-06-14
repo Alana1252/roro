@@ -38,88 +38,92 @@
   
 <body class="animsition ">
         <!-- HEADER DESKTOP-->
-        <header class="header-desktop d-none d-lg-block p-md-3" >
-            <div class="section__content section__content--p35">
-                <div class="header3-wrap">
-                        <a href="#">
-                            <img class="img-cir logo-desktop"src="/img/logo.png" alt="Airputih" />
-                        </a>
-                     <div class="header__navbar">
-                        <ul class="list-unstyled">
-                            <li class="has-sub">
-                               <a href="#album">
-                              <i class="fas fa-image text-dark"> Album</i>
-  
-                                </a>   
-                            </li>
-                            <li>
-                                <a href="#member">
-                                    <i class="fas fa-child text-dark"> Members</i>
-                                 </a>
-                            </li>
-                            <li>
-                                <a href="#event">
-                                    <i class="fas fa-trophy text-dark"> Events</i>
-                                   </a>
-                            </li>
-                                </ul>
-                             </div>
-                        
-                                <div class="account-wrap">
-                            <div class="account-item account-item--style2 clearfix js-item-menu">
-                           
-                            <div class="image">
-                            <img src="" alt="User Image">
+        <header class="header-desktop d-none d-lg-block p-md-3">
+    <?php if (logged_in()): ?>
+        <div class="section__content section__content--p35">
+            <div class="header3-wrap">
+                <a href="#">
+                    <img class="img-cir logo-desktop" src="/img/logo.png" alt="Airputih" />
+                </a>
+                <div class="header__navbar">
+                    <ul class="list-unstyled">
+                        <li class="has-sub">
+                            <a href="#album">
+                                <i class="fas fa-image text-dark"> Album</i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#member">
+                                <i class="fas fa-child text-dark"> Members</i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#event">
+                                <i class="fas fa-trophy text-dark"> Events</i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="account-wrap">
+                    <div class="account-item account-item--style2 clearfix js-item-menu">
+                        <div class="image">
+                            <img src="<?= base_url('img/' . user()->user_image) ?>" alt="User Image">
+                        </div>
+                        <div class="content">
+                            <a class="js-acc-btn" href="#"></a>
+                        </div>
+                        <div class="account-dropdown js-dropdown">
+                            <div class="info clearfix">
+                                <div class="image">
+                                    <a href="#">
+                                        <img src="<?= base_url('img/' . user()->user_image) ?>" alt="User Image">
+                                    </a>
                                 </div>
-                                
                                 <div class="content">
-                                    <a class="js-acc-btn" href="#"></a>
-                                </div>
-                                <div class="account-dropdown js-dropdown">
-                                    <div class="info clearfix">
-                                        <div class="image">
-                                            <a href="#">
-                                                 <img src="" alt="User Photo">
-                                            </a>
-                                        </div>
-                                        <div class="content">
-                                            <h5 class="name">
-                                                <a href="#"></a>
-                                            </h5>
-                                            <span class="email"></span>
-                                        </div>
-                                    </div>
-                                   
-                                    <div class="account-dropdown__body">
-                                        <div class="account-dropdown__item">
-                                            <a href="#">
-                                                <i class="zmdi zmdi-account"></i>Account</a>
-                                        </div>
-                                        <div class="account-dropdown__item">
-                                            <a href="#">
-                                                <i class="zmdi zmdi-settings"></i>Setting</a>
-                                        </div>
-                                        <div class="account-dropdown__item">
-                                            <a href="#">
-                                                <i class="zmdi zmdi-money-box"></i>Billing</a>
-                                        </div>
-                                    </div>
-                                    <div class="account-dropdown__footer">
-                                        <a href="logout.php">
-                                            <i class="zmdi zmdi-power"></i>Logout</a>
-                                    </div>
+                                    <h5 class="name">
+                                        <?= user()->username ?>
+                                    </h5>
+                                    <span class="email"><a href="#"><?= user()->email ?></a></span>
                                 </div>
                             </div>
-                           
+                            <div class="account-dropdown__body">
+                                <div class="account-dropdown__item">
+                                    <a href="#">
+                                        <i class="zmdi zmdi-account"></i>Account</a>
+                                </div>
+                                <div class="account-dropdown__item">
+                                    <a href="#">
+                                        <i class="zmdi zmdi-settings"></i>Setting</a>
+                                </div>
+                                <div class="account-dropdown__item">
+                                    <a href="#">
+                                        <i class="zmdi zmdi-money-box"></i>Billing</a>
+                                </div>
+                            </div>
+                            <div class="account-dropdown__footer">
+                                <a href="<?= base_url('logout'); ?>">
+                                    <i class="zmdi zmdi-power"></i>Logout</a>
+                            </div>
                         </div>
-                   
-                        </div>
-                        
                     </div>
                 </div>
-            </div>         
-                                
-        </header>
+            </div>
+        </div>
+    <?php else: ?>
+        <div class="section__content section__content--p35">
+            <div class="header3-wrap">
+                <a href="#">
+                    <img class="img-cir logo-desktop" src="/img/logo.png" alt="Airputih" />
+                </a>
+                <div class="account-wrap">
+                    <a href="/login" class="btn button-shadow">Login</a>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+</header>
+
+
         <!-- END HEADER DESKTOP-->
 
            
@@ -216,6 +220,7 @@
     
     <script type="text/javascript">
   var header = document.querySelector('.header-desktop');
+  var loginbtn = document.querySelector('.button-shadow');
   var isis = document.querySelectorAll('.header__navbar ul li a i'); // Menggunakan querySelectorAll untuk memilih semua elemen "i" di dalam link
   var isScrolling = false;
 
@@ -232,11 +237,18 @@
     var scrollTimeout = setTimeout(function() {
       if (window.pageYOffset > 350) {
         header.style.backgroundColor = 'black';
+        loginbtn.classList.add('button-shadow1');
+        loginbtn.classList.remove('button-shadow');
+        loginbtn.style.color = 'white';
+        
         for (var i = 0; i < isis.length; i++) {
           isis[i].classList.remove('text-dark');
         }
       } else {
         header.style.backgroundColor = 'transparent';
+        loginbtn.classList.add('button-shadow');
+        loginbtn.classList.remove('button-shadow1');
+        loginbtn.style.color = 'black';
         for (var i = 0; i < isis.length; i++) {
           isis[i].classList.add('text-dark');
         }

@@ -9,7 +9,7 @@ class Pages extends BaseController
         $model = new News_model();
         $data['news'] = $model->getLatestNews();
 
-        return view('pages/home', $data);
+        return view('search_tiket', $data);
     }
     
     

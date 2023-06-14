@@ -29,20 +29,25 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Pages::index');
-$routes->get('/layout/carousel', 'CarouselController::index');
+$routes->add('/', 'HomeController::index'); // Route untuk halaman home
+        $routes->add('/user', 'UserController::index'); // Route untuk halaman user
+
+        $routes->addRedirect('/', 'HomeController::index');
+        $routes->get('/', 'News::index');
 
 
-$routes->get('berita/(:num)', 'News::detail/$1');
-$routes->get('/', 'News::index');
-$routes->get('/', 'HomeController::index');
-$routes->get('/user', 'UserController::index');
-$routes->get('/home', 'UserController::index');
+
+
+//Tiket Routes
+$routes->get('tiket/search', 'TiketController::search');
+$routes->get('/tiket', 'TiketController::index');
+$routes->get('cron/generate-tiket', 'CronController::generateTiket');
+
+
+
+
 
 $routes->group('', ['namespace' => 'App\Controllers'], function ($routes) {
-    // ...
-    $routes->post('login', 'AuthController::login');
-    $routes->get('logout', 'AuthController::logout');
     $routes->get('user', 'UserController::index');
     // ...
 });
