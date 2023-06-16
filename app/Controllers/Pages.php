@@ -4,16 +4,7 @@ namespace App\Controllers;
 use App\Models\News_model;
 class Pages extends BaseController
 {
-    public function index()
-    {
-        $model = new News_model();
-        $data['news'] = $model->getLatestNews();
-
-        return view('search_tiket', $data);
-    }
-    
-    
-
+   
     public function login()
     {
         $data = [

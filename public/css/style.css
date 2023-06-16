@@ -111,6 +111,12 @@
   z-index: 200;
 }
 
+.image-tiket {
+  width: 25px;
+  height: auto;
+  margin-left: 90px;
+}
+
 .card-container-cari {
   position: absolute;
   top: 17%;
@@ -185,4 +191,193 @@
 
 footer {
   margin-top: 300px;
+}
+.card-tiket {
+  width: 993px;
+  height: 200px;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  padding: 10px;
+  margin: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.card-caritiket {
+  width: 993px;
+  height: 300px;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  font-family: "Roboto", sans-serif;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.layanan-tiket {
+  margin-top: 10px;
+  display: flex;
+  margin-left: 75px;
+  align-items: center;
+}
+
+.logo-tiket {
+  width: 55px;
+  height: 40px;
+  margin-right: 65px;
+}
+
+.card-kapal {
+  width: 180px;
+  height: 30px;
+  background: rgba(235, 235, 235, 0.6);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 450px;
+}
+.tanggal-tiket {
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.458);
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  margin-bottom: 30px;
+  font-family: "Roboto", sans-serif;
+  justify-content: center;
+  opacity: 0.5; /* Nilai opacity untuk membuat watermark */
+}
+
+.card-lokasi {
+  margin-left: 40px;
+  display: flex;
+  float: left;
+}
+.card-asal {
+  width: 120px;
+  height: 30px;
+  background: rgba(235, 235, 235, 0.6);
+  border-radius: 14px;
+  margin-right: 250px;
+  align-items: center;
+  display: flex;
+  justify-content: center; /* Teks menjadi terpusat secara horizontal */
+}
+
+.card-tujuan {
+  width: 110px;
+  height: 30px;
+  background: rgba(235, 235, 235, 0.6);
+  border-radius: 14px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-right: 310px;
+}
+
+.button-pilih {
+  width: 100px;
+  height: 40px;
+  background: #f7b917;
+  border-radius: 7px;
+  align-items: center;
+  display: flex;
+  font-size: 20px;
+  color: white;
+  margin-top: 10px;
+  font-weight: bold;
+  font-family: "Roboto", sans-serif;
+  justify-content: center; /* Teks menjadi terpusat secara horizontal */
+}
+
+.card-jam {
+  margin-top: 30px;
+  margin-left: 70px;
+  display: flex;
+  align-items: center;
+  font-size: 25px;
+}
+
+.card-keberangkatan {
+  margin-right: 60px;
+  font-weight: bold;
+}
+
+.card-tiba {
+  margin-left: 60px;
+  font-weight: bold;
+}
+
+.tiket-harga {
+  margin-left: 300px;
+  font-weight: bold;
+  font-family: "Roboto", sans-serif;
+}
+
+.tiket-harga2 {
+  font-style: italic;
+}
+
+.garis-horizontal {
+  position: relative;
+  height: 2px;
+  background-color: rgb(4, 4, 4);
+  margin: 20px 0;
+  width: 20%;
+}
+
+.garis-horizontal::before {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+.kelas-text {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  padding: 0 10px;
+  font-weight: bold;
+}
+
+/* card nyari tiket di tiket */
+.caritiket-title {
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.caritiket-title2 {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+select,
+input {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 12px;
+  width: 250px;
+  margin-top: 7px;
+  margin-bottom: 15px;
+  font-size: 18px;
+  border-radius: 7px;
+}
+
+.select-icon-tiket {
+  background-repeat: no-repeat;
+  background-position: 90%;
+  background-size: 26px 26px; /* Sesuaikan ukuran ikon */
+}
+
+.ticket-align {
+  margin-left: 15px;
 }

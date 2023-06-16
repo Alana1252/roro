@@ -39,7 +39,9 @@
             <div class="card">
               <div class="row no-gutters">
                 <div class="col-md-4">
-                  <img src="/img/banner1.png" alt="Video Thumbnail" class="card-img">
+                <iframe class="card-img"
+src="https://www.youtube.com/embed/IpKXHZ67P6M">
+</iframe> 
                 </div>
                 <div class="col-md-8">
                   <div class="card-body">
