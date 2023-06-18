@@ -34,6 +34,7 @@ $routes->add('/', 'HomeController::index'); // Route untuk halaman home
 
         $routes->addRedirect('/', 'HomeController::index');
         $routes->get('/', 'News::index');
+        $routes->get('/home', 'News::index');
 
 
 
@@ -42,15 +43,21 @@ $routes->add('/', 'HomeController::index'); // Route untuk halaman home
 $routes->get('tiket/search', 'TiketController::search');
 $routes->get('/tiket', 'TiketController::index');
 $routes->get('cron/generate-tiket', 'CronController::generateTiket');
+$routes->add('/home', 'HomeController::index');
 
-
-
-
-
-$routes->group('', ['namespace' => 'App\Controllers'], function ($routes) {
-    $routes->get('user', 'UserController::index');
-    // ...
+$routes->group('/payment', ['namespace' => 'App\Controllers'], function ($routes) {
+    $routes->get('/', 'PaymentController::index');
+    $routes->get('payLater/(:any)', 'PaymentController::payLater/$1');
+    $routes->post('handlePaymentResult', 'PaymentController::handlePaymentResult');
 });
+
+
+
+
+
+
+
+
 
 /*
  * --------------------------------------------------------------------

@@ -5,7 +5,7 @@ use CodeIgniter\Config\BaseConfig;
 
 class Email extends BaseConfig
 {
-    public string $fromEmail  = 'go_roro@outlook.com';
+    public string $fromEmail  = 'go-roro@ti6a.my.id';
     public string $fromName   = 'GoRoRo';
     public string $recipients = '';
 
@@ -27,22 +27,22 @@ class Email extends BaseConfig
     /**
      * SMTP Server Address
      */
-    public string $SMTPHost = 'smtp.office365.com';
+    public string $SMTPHost = 'mail.ti6a.my.id';
 
     /**
      * SMTP Username
      */
-    public string $SMTPUser = 'go_roro@outlook.com';
+    public string $SMTPUser = 'go-roro@ti6a.my.id';
 
     /**
      * SMTP Password
      */
-    public string $SMTPPass = 'Alan2002';
+    public string $SMTPPass = 'Akg19092002';
 
     /**
      * SMTP Port
      */
-    public int $SMTPPort = 587;
+    public int $SMTPPort = 465;
 
     /**
      * SMTP Timeout (in seconds)
@@ -57,7 +57,7 @@ class Email extends BaseConfig
     /**
      * SMTP Encryption. Either tls or ssl
      */
-    public string $SMTPCrypto = 'tls';
+    public string $SMTPCrypto = 'ssl';
 
     /**
      * Enable word-wrap
@@ -114,3 +114,4 @@ class Email extends BaseConfig
      */
     public bool $DSN = false;
 }
+?>

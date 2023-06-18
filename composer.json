@@ -10,6 +10,7 @@
     "php": "^7.4 || ^8.0",
     "codeigniter4/framework": "^4.0",
     "jenssegers/date": "^4.0",
+    "midtrans/midtrans-php": "^2.5",
     "myth/auth": "^1.2",
     "snapappointments/bootstrap-select": "^1.13"
   },
