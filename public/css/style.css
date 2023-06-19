@@ -194,7 +194,7 @@ footer {
 }
 .card-tiket {
   width: 993px;
-  height: 200px;
+  height: 250px;
   border: 1px solid #ccc;
   border-radius: 15px;
   padding: 10px;
@@ -205,6 +205,8 @@ footer {
 .card-caritiket {
   width: 993px;
   height: 300px;
+  margin-left: 10px;
+  margin-top: 10px;
   border: 1px solid #ccc;
   border-radius: 15px;
   font-family: "Roboto", sans-serif;
@@ -212,15 +214,14 @@ footer {
 }
 
 .layanan-tiket {
-  margin-top: 10px;
   display: flex;
-  margin-left: 75px;
+  margin-left: 70px;
   align-items: center;
 }
 
 .logo-tiket {
-  width: 55px;
-  height: 40px;
+  width: 65px;
+  height: 50px;
   margin-right: 65px;
 }
 
@@ -232,7 +233,7 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 450px;
+  margin-right: 430px;
 }
 .tanggal-tiket {
   font-size: 16px;
@@ -270,26 +271,11 @@ footer {
   align-items: center;
   display: flex;
   justify-content: center;
-  margin-right: 310px;
-}
-
-.button-pilih {
-  width: 100px;
-  height: 40px;
-  background: #f7b917;
-  border-radius: 7px;
-  align-items: center;
-  display: flex;
-  font-size: 20px;
-  color: white;
-  margin-top: 10px;
-  font-weight: bold;
-  font-family: "Roboto", sans-serif;
-  justify-content: center; /* Teks menjadi terpusat secara horizontal */
+  margin-right: 270px;
 }
 
 .card-jam {
-  margin-top: 30px;
+  margin-top: 50px;
   margin-left: 70px;
   display: flex;
   align-items: center;
@@ -307,7 +293,7 @@ footer {
 }
 
 .tiket-harga {
-  margin-left: 300px;
+  margin-left: 250px;
   font-weight: bold;
   font-family: "Roboto", sans-serif;
 }
@@ -379,44 +365,26 @@ input {
 }
 
 .ticket-align {
-  margin-left: 15px;
+  margin-left: 45px;
 }
 
-.card-email {
-  background-color: #1c1c1ced;
-  padding: 20px;
-  font-family: "Roboto", sans-serif;
-  border-radius: 10px;
-}
-
-.card-title-email {
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.696);
-  margin-bottom: 10px;
-}
-
-.username-email {
-  font-size: 30px;
-  font-weight: bold;
-}
-
-.button-aktif {
-  font-size: 20px;
-  font-weight: bold;
-  display: flex;
-  height: auto;
+.button-cari {
+  width: 100px;
+  height: 40px;
+  background: #f7b917;
+  border-radius: 7px;
   align-items: center;
-  justify-content: center;
-  background-color: rgb(29, 28, 28);
-  color: rgb(100, 67, 234);
-  padding: 10px 20px;
+  display: inline-flex; /* Mengubah display menjadi inline-flex */
+  font-size: 20px;
+  color: white;
+  margin-top: 10px;
+  font-weight: bold;
+  font-family: "Roboto", sans-serif;
+  border-color: #ffffff;
+  justify-content: center; /* Teks menjadi terpusat secara horizontal */
 }
 
-.button-link {
-  text-decoration: none;
-}
-
-.email-logo {
-  height: 200px;
-  width: 200px;
+.button-cari:hover,
+.button-cari:active {
+  background: #f79917; /* Warna latar belakang saat dihover atau sedang diclick */
 }

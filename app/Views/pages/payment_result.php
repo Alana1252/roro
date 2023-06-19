@@ -7,7 +7,6 @@
     <p>Payment Type: <?= $result['payment_type']; ?></p>
     <p>Transaction Time: <?= $result['transaction_time']; ?></p>
     <p>Transaction Status: <?= $result['transaction_status']; ?></p>
-    <p>Fraud Status: <?= $result['fraud_status']; ?></p>
     <?php if (isset($result['va_numbers']) && !empty($result['va_numbers'])): ?>
       <p>Virtual Account Numbers:</p>
       <ul>

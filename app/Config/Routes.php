@@ -37,18 +37,26 @@ $routes->add('/', 'HomeController::index'); // Route untuk halaman home
         $routes->get('/home', 'News::index');
 
 
+        $routes->get('cron/generate-tiket', 'CronController::generateTiket');
 
 
 //Tiket Routes
 $routes->get('tiket/search', 'TiketController::search');
 $routes->get('/tiket', 'TiketController::index');
-$routes->get('cron/generate-tiket', 'CronController::generateTiket');
-$routes->add('/home', 'HomeController::index');
+$routes->post('/tiket/selectTicket', 'TambahtController::selectTicket');
 
-$routes->get('payment', 'TambahController::index');
-$routes->post('payment/tambahPaymentResult', 'TambahController::tambahPaymentResult');
-$routes->post('payment/tambah', 'TambahController::tambah');
-$routes->get('payment/recallCardPayment/(:num)', 'TambahController::recallCardPayment/$1');
+
+
+
+$routes->get('tambah', 'TambahController::index');
+$routes->post('tambah/tambahPaymentResult', 'TatiController::tambahPaymentResult');
+
+$routes->group('payment', ['namespace' => 'App\Controllers'], function ($routes) {
+    $routes->get('/', 'PaymentController::index');
+   
+});
+
+$routes->get('payment/showOrderInfo', 'PaymentController::showOrderInfo');
 
 
 // $routes->get('payment', 'PaymentController::index');

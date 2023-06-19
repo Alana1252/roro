@@ -22,7 +22,7 @@ class TambahController extends BaseController
 
         $params = [
             'transaction_details' => [
-                'order_id' => rand(),
+                'order_id' => 'BKS-' . rand(),
                 'gross_amount' => 10000,
             ],
         ];
@@ -66,4 +66,7 @@ class TambahController extends BaseController
     
         return $snapToken;
     }
+
+
+    
 }    

@@ -16,53 +16,54 @@
 </head>
 <body>
 <form action="<?= site_url('tiket/search'); ?>" method="get">
-<div class="container card-caritiket">
-<div class="ticket-align">
-    <div class="caritiket-title">Cari Tiket Anda</div>
-    <div class="caritiket-title2 selectpicker">Atur Jadwal Kedatangan Anda di Pelabuhan</div>
-  <div class="row">
-    <div class="col">
-    <div for="asal">Pelabuhan Asal:</div>
-    <select id="asal" name="asal" class="select-icon-tiket" style="background-image: url('/img/ship.png');">
-  <option value="2">Air Putih</option>
-  <option value="1">Sungai Selari</option>
-</select>
-    </div>
-    <div class="col">
-    <div for="tanggal">Tanggal Keberangkatan:</div>
-      <input type="date" id="tanggal" name="tanggal" min="<?= date('Y-m-d'); ?>" required>
+  <div class="card-caritiket">
+    <div class="ticket-align">
+      <div class="caritiket-title pt-1">Cari Tiket Anda</div>
+      <div class="caritiket-title2 selectpicker">Atur Jadwal Kedatangan Anda di Pelabuhan</div>
+      <div class="row">
+        <div class="col">
+          <div for="asal">Pelabuhan Asal:</div>
+          <select id="asal" name="asal" class="select-icon-tiket" style="background-image: url('/img/ship.png');">
+            <option value="2">Air Putih</option>
+            <option value="1">Sungai Selari</option>
+          </select>
+        </div>
+        <div class="col pt-1">
+          <div for="tanggal">Tanggal Keberangkatan:</div> 
+          <input type="date" id="tanggal" name="tanggal" min="<?= date('Y-m-d'); ?>" required>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div for="tujuan">Pelabuhan Tujuan:<a ><img src="/img/repeat.png" class="image-tiket" alt="Gambar"></a></div>
+          <select id="tujuan" name="tujuan" class="select-icon-tiket" style="background-image: url('/img/ship2.png');">
+            <option value="1">Sungai Selari</option>
+            <option value="2">Air Putih</option>
+          </select>
+        </div>
+        <div class="col">
+          <div for="Kelas">Kelas:</div>
+          <select id="kelas" name="kelas">
+            <option value="Ekonomi">Ekonomi</option>
+            <option value="Premium">Premium</option>
+          </select>
+           <button type="submit" class="button-cari ml-5">Cari</button>
+        </div>
+        
+         
+       
+      </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col">
-    <div for="tujuan">Pelabuhan Tujuan:<a ><img src="/img/repeat.png" class="image-tiket" alt="Gambar"></a></div>
-      <select id="tujuan" name="tujuan" class="select-icon-tiket" style="background-image: url('/img/ship2.png');">
-        <option value="1">Sungai Selari</option>
-        <option value="2">Air Putih</option>
-      </select>
-    </div>
-    <div class="col">
-      2 of 3
-    </div>
-    <div class="col">
-      3 of 3
-    </div>
-  </div>
-</div>
-</div>
+</form>
 
   
       
       
       
-      <select id="kelas" name="kelas">
-        <option value="Ekonomi">Ekonomi</option>
-        <option value="Premium">Premium</option>
-      </select>
-      <button type="submit">Cari</button>
-    </form>
-  </div>
-  </div>
+      
+      
+ 
 
   
 
@@ -72,7 +73,7 @@
         <?php foreach ($tikets as $tiket): ?>
             <div class="card-tiket">
             <div class="layanan-tiket">
-  <img class="logo-tiket" src="/img/logo.png" alt="Airputih" />
+  <img class="logo-tiket" src="/img/logo2.png" alt="Airputih" />
   <div class="card-kapal">
     <?= $kapalModel->getKapalName($tiket['kapal']); ?>
   </div>
@@ -100,7 +101,7 @@
                         <div class="card-tujuan">
                             <?= $lokasiModel->getTujuan($tiket['tujuan']); ?>
                         </div>
-                    <div class="button-pilih">
+                    <div class="button-cari">
                         Pilih
                     </div>
                         </div>

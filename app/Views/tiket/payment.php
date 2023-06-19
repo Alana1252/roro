@@ -25,7 +25,7 @@
 
       function tambahPaymentResult(result) {
         // Kirim data hasil pembayaran menggunakan metode AJAX
-        fetch('/payment/tambahPaymentResult', {
+        fetch('/tambah/tambahPaymentResult', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

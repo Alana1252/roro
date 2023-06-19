@@ -2,69 +2,80 @@
 
 namespace App\Controllers;
 
-use App\Models\TransactionModel;
+use GuzzleHttp\Client;
 use CodeIgniter\Controller;
+use App\Models\TransactionModel;
 
 class PaymentController extends Controller
 {
-    public function index()
+    public function showOrderInfo()
     {
         $transactionModel = new TransactionModel();
-        $transactions = $transactionModel->where('transaction_status', 'pending')->findAll();
+        $transactions = $transactionModel->getTransactionsWithSnapToken();
 
-        return view('transaction_list', ['transactions' => $transactions]);
-    }
-
-    public function getSnapToken()
-    {
-        $grossAmount = $this->request->getPost('gross_amount');
-
-        // Lakukan langkah-langkah untuk mendapatkan snap token
-        // Misalnya, melakukan request ke Midtrans API
-
-        $snapToken = 'SNAP_TOKEN'; // Contoh snap token yang diperoleh
-
-        $response = [
-            'success' => true,
-            'snap_token' => $snapToken
-        ];
-
-        return $this->response->setJSON($response);
-    }
-
-    public function handlePaymentResult()
-{
-    // Mendapatkan data dari response pembayaran Midtrans
-    $result = $_POST;
-
-    // Cek apakah transaksi berhasil
-    if ($result['transaction_status'] === 'settlement') {
-        // Mendapatkan ID transaksi
-        $transactionId = $result['order_id'];
-
-        // Mengambil data transaksi berdasarkan ID
-        $transactionModel = new TransactionModel();
-        $transaction = $transactionModel->find($transactionId);
-
-        // Periksa apakah transaksi ditemukan
-        if (!$transaction) {
-            // Handle jika transaksi tidak ditemukan
-            // Misalnya, tampilkan pesan error atau lakukan langkah lain yang sesuai
-            return;
+        $orderInfos = [];
+        foreach ($transactions as $transaction) {
+            $orderInfos[] = $this->getOrderInfo($transaction['snap_token']);
         }
 
-        // Ubah nilai kolom-kolom yang ingin diubah
-        $transactionModel->set($transactionId, [
-            'transaction_status' => 'completed',
-            'paid_amount' => $result['gross_amount']
+        // Update transaction status
+        $this->updateTransactionStatus($transactionModel);
+
+        return view('tiket/order_info', ['orderInfos' => $orderInfos]);
+    }
+
+    public function getOrderInfo($snapToken)
+    {
+        $client = new Client();
+        $url = 'https://app.sandbox.midtrans.com/snap/v1/transactions/' . $snapToken . '/status';
+
+        $response = $client->request('GET', $url, [
+            'headers' => [
+                'Accept' => 'application/json',
+                'Authorization' => 'Basic ' . base64_encode('SB-Mid-server-3hL5upG4ONsCghSB1dlFe2H3:')
+            ]
         ]);
 
-        // Simpan perubahan ke dalam database
-        $transactionModel->update();
+        $statusCode = $response->getStatusCode();
 
-        // Lakukan langkah-langkah lain yang diperlukan setelah transaksi berhasil dibayar
+        if ($statusCode == 200) {
+            $body = $response->getBody()->getContents();
+            $orderInfo = json_decode($body, true);
+
+            return $orderInfo;
+        } else {
+            // Handle responses other than status code 200 as needed
+            return null;
+        }
     }
-}
 
-    
+    public function updateTransactionStatus(TransactionModel $transactionModel)
+    {
+        $transactions = $transactionModel->findAll();
+
+        $client = new Client();
+
+        foreach ($transactions as $transaction) {
+            $url = 'https://app.sandbox.midtrans.com/snap/v1/transactions/' . $transaction['snap_token'] . '/status';
+
+            $response = $client->request('GET', $url, [
+                'headers' => [
+                    'Accept' => 'application/json',
+                    'Authorization' => 'Basic ' . base64_encode('SB-Mid-server-3hL5upG4ONsCghSB1dlFe2H3:')
+                ]
+            ]);
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode == 200) {
+                $body = $response->getBody()->getContents();
+                $orderInfo = json_decode($body, true);
+
+                // Update transaction status in the transaction table
+                $transactionModel->update($transaction['order_id'], ['transaction_status' => $orderInfo['transaction_status']]);
+            }
+        }
+
+        return redirect()->back()->with('success', 'Transaction status updated successfully.');
+    }
 }
