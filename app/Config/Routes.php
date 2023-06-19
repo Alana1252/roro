@@ -45,16 +45,15 @@ $routes->get('/tiket', 'TiketController::index');
 $routes->get('cron/generate-tiket', 'CronController::generateTiket');
 $routes->add('/home', 'HomeController::index');
 
-// $routes->group('/payment', ['namespace' => 'App\Controllers'], function ($routes) {
-//     $routes->get('/', 'PaymentController::index');
-//     $routes->post('handlePaymentResult', 'PaymentController::handlePaymentResult');
-    
+$routes->get('payment', 'TambahController::index');
+$routes->post('payment/tambahPaymentResult', 'TambahController::tambahPaymentResult');
+$routes->post('payment/tambah', 'TambahController::tambah');
+$routes->get('payment/recallCardPayment/(:num)', 'TambahController::recallCardPayment/$1');
 
-// });
 
-$routes->get('payment', 'PaymentController::index');
-$routes->post('payment/get-snap-token', 'PaymentController::getSnapToken');
-$routes->post('payment/handle-payment-result', 'PaymentController::handlePaymentResult');
+// $routes->get('payment', 'PaymentController::index');
+// $routes->post('payment/get-snap-token', 'PaymentController::getSnapToken');
+// $routes->post('payment/handle-payment-result', 'PaymentController::handlePaymentResult');
 
 
 

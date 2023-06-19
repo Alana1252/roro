@@ -32,25 +32,39 @@ class PaymentController extends Controller
         return $this->response->setJSON($response);
     }
 
-    public function handlePaymentResult($result)
-    {
-        // Lakukan langkah-langkah untuk menangani hasil pembayaran
-        // Misalnya, memperbarui status transaksi di database
+    public function handlePaymentResult()
+{
+    // Mendapatkan data dari response pembayaran Midtrans
+    $result = $_POST;
 
-        $transactionId = $result['order_id']; // Contoh pengambilan ID transaksi dari hasil pembayaran
+    // Cek apakah transaksi berhasil
+    if ($result['transaction_status'] === 'settlement') {
+        // Mendapatkan ID transaksi
+        $transactionId = $result['order_id'];
+
+        // Mengambil data transaksi berdasarkan ID
         $transactionModel = new TransactionModel();
         $transaction = $transactionModel->find($transactionId);
 
+        // Periksa apakah transaksi ditemukan
         if (!$transaction) {
             // Handle jika transaksi tidak ditemukan
             // Misalnya, tampilkan pesan error atau lakukan langkah lain yang sesuai
-            return redirect()->back()->with('error', 'Transaksi tidak ditemukan.');
+            return;
         }
 
-        // Perbarui status transaksi menjadi berhasil atau lainnya sesuai dengan hasil pembayaran
-        $transactionModel->update($transactionId, ['transaction_status' => $result['transaction_status']]);
+        // Ubah nilai kolom-kolom yang ingin diubah
+        $transactionModel->set($transactionId, [
+            'transaction_status' => 'completed',
+            'paid_amount' => $result['gross_amount']
+        ]);
 
-        // Tampilkan pesan sukses
-        return redirect()->back()->with('success', 'Pembayaran berhasil.');
+        // Simpan perubahan ke dalam database
+        $transactionModel->update();
+
+        // Lakukan langkah-langkah lain yang diperlukan setelah transaksi berhasil dibayar
     }
+}
+
+    
 }
