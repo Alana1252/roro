@@ -15,7 +15,7 @@ class CronController extends Controller
         // Set initial values
         $kapal = 1;
         $asal = 1;
-        
+
         // Get current date
         $currentDate = date('Y-m-d');
 
@@ -28,8 +28,8 @@ class CronController extends Controller
             for ($i = 1; $i <= 28; $i++) {
                 // Check if the tiket with the same tanggal and keberangkatan already exists
                 $existingTiket = $tiketModel->where('tanggal', $date)
-                                            ->where('keberangkatan', $i)
-                                            ->first();
+                    ->where('keberangkatan', $i)
+                    ->first();
 
                 // Insert new tiket if it doesn't already exist
                 if (!$existingTiket) {
@@ -40,6 +40,8 @@ class CronController extends Controller
                         'tiba' => $i,
                         'asal' => $asal,
                         'tujuan' => $asal,
+                        'kouta_penumpang' => 100,
+                        'kouta_kendaraan' => 100,
                     ];
                     $tiketModel->insert($data);
                 }

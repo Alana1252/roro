@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+
 use Jenssegers\Date\Date;
 use CodeIgniter\Model;
 
@@ -16,21 +17,24 @@ class TiketModel extends Model
         'asal',
         'tujuan',
         'kelas',
-        'harga'
+        'harga',
+        'kouta_kendaraan',
+        'kouta_penumpang',
     ];
+
     public function findAll(int $limit = 0, int $offset = 0)
-{
-    $tikets = parent::findAll($limit, $offset);
+    {
+        $tikets = parent::findAll($limit, $offset);
 
-    foreach ($tikets as &$tiket) {
-        $tanggal = Date::createFromFormat('Y-m-d', $tiket['tanggal']);
-        $tanggal->setLocale('id');
-        $tanggalFormatted = $tanggal->format('l, d F Y');
-        $tiket['tanggal_formatted'] = $tanggalFormatted;
+        foreach ($tikets as &$tiket) {
+            $tanggal = Date::createFromFormat('Y-m-d', $tiket['tanggal']);
+            $tanggal->setLocale('id');
+            $tanggalFormatted = $tanggal->format('l, d F Y');
+            $tiket['tanggal_formatted'] = $tanggalFormatted;
+        }
+
+        return $tikets;
     }
-
-    return $tikets;
-}
 
     public function getJamKeberangkatan($jamId)
     {
@@ -71,6 +75,7 @@ class TiketModel extends Model
         }
         return '';
     }
+
     public function getKelasName($kelasId)
     {
         $kelasModel = new KelasModel();
@@ -82,37 +87,42 @@ class TiketModel extends Model
         $kelasModel = new KelasModel();
         return $kelasModel->getHarga($kelasId);
     }
-    
 
-    public function searchTiket($tanggal, $asal)
+    public function searchTiket($tanggal, $asal, $kouta_penumpang)
     {
-        date_default_timezone_set('Asia/Jakarta'); // Set zona waktu ke WIB
-        $currentTime = date('H:i:s'); // Jam saat ini
+        date_default_timezone_set('Asia/Jakarta'); // Set time zone to WIB
+        $currentTime = date('H:i:s'); // Current time
         $jamModel = new JamModel();
-    
-        // Cek apakah tanggal adalah hari ini
+
+        // Check if the date is today
         $isToday = (date('Y-m-d') == $tanggal);
-    
-        // Jika bukan hari ini, jangan memfilter berdasarkan waktu saat ini
+
+        // If not today, don't filter based on the current time
         if (!$isToday) {
-            $filteredJamKeberangkatan = $jamModel->findAll(); // Ambil semua jam keberangkatan
+            $filteredJamKeberangkatan = $jamModel->findAll(); // Get all departure times
         } else {
-            // Ambil semua jam keberangkatan dari database
+            // Get all departure times from the database
             $jamKeberangkatan = $jamModel->findAll();
-    
-            // Filter jam keberangkatan berdasarkan waktu saat ini
-            $filteredJamKeberangkatan = array_filter($jamKeberangkatan, function($jam) use ($currentTime) {
+
+            // Filter departure times based on the current time
+            $filteredJamKeberangkatan = array_filter($jamKeberangkatan, function ($jam) use ($currentTime) {
                 return strtotime($jam['keberangkatan']) > strtotime($currentTime);
             });
         }
-    
-        // Ambil ID jam keberangkatan yang sudah difilter
+
+        // Get the filtered departure time IDs
         $filteredJamIds = array_column($filteredJamKeberangkatan, 'id_jam');
-    
+
+        // Perform the query with additional kouta_penumpang condition
         return $this->where('tanggal', $tanggal)
-                    ->whereIn('asal', [$asal])
-                    ->whereIn('keberangkatan', $filteredJamIds)
-                    ->findAll();
+            ->where('asal', $asal)
+            ->whereIn('keberangkatan', $filteredJamIds)
+            ->where('kouta_penumpang >=', $kouta_penumpang)
+            ->findAll();
     }
-    
-}    
+
+    public function getTiketById($id)
+    {
+        return $this->find($id);
+    }
+}

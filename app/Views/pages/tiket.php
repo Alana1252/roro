@@ -1,4 +1,11 @@
-<?= $this->include('layout/checkout_button') ?>
+<?= $this->extend('layout/tiket_view'); ?>
 
-<h1>Tiket Page</h1>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur, magnam.</p>
+<?= $this->section('content') ?>
+
+<!-- Konten halaman tiket -->
+
+
+
+<!-- Isi halaman tiket -->
+
+<?= $this->endSection(); ?>

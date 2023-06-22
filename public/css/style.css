@@ -112,9 +112,9 @@
 }
 
 .image-tiket {
-  width: 25px;
+  width: 15px;
   height: auto;
-  margin-left: 90px;
+  margin-left: 40px;
 }
 
 .card-container-cari {
@@ -193,8 +193,8 @@ footer {
   margin-top: 300px;
 }
 .card-tiket {
-  width: 993px;
-  height: 250px;
+  width: 750px;
+  height: 200px;
   border: 1px solid #ccc;
   border-radius: 15px;
   padding: 10px;
@@ -203,13 +203,14 @@ footer {
 }
 
 .card-caritiket {
-  width: 993px;
+  width: 750px;
   height: 300px;
   margin-left: 10px;
   margin-top: 10px;
   border: 1px solid #ccc;
   border-radius: 15px;
   font-family: "Roboto", sans-serif;
+  font-size: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
@@ -226,17 +227,17 @@ footer {
 }
 
 .card-kapal {
-  width: 180px;
-  height: 30px;
+  width: 150px;
+  height: 20px;
   background: rgba(235, 235, 235, 0.6);
   border-radius: 14px;
   display: flex;
   align-items: center;
+  font-size: 12px;
   justify-content: center;
-  margin-right: 430px;
 }
 .tanggal-tiket {
-  font-size: 16px;
+  font-size: 10px;
   color: rgba(0, 0, 0, 0.458);
   align-items: center;
   justify-content: center;
@@ -245,6 +246,7 @@ footer {
   font-family: "Roboto", sans-serif;
   justify-content: center;
   opacity: 0.5; /* Nilai opacity untuk membuat watermark */
+  margin-left: 250px;
 }
 
 .card-lokasi {
@@ -254,46 +256,48 @@ footer {
 }
 .card-asal {
   width: 120px;
-  height: 30px;
+  height: 20px;
   background: rgba(235, 235, 235, 0.6);
   border-radius: 14px;
-  margin-right: 250px;
+  margin-right: 150px;
   align-items: center;
+  font-size: 12px;
   display: flex;
   justify-content: center; /* Teks menjadi terpusat secara horizontal */
 }
 
 .card-tujuan {
-  width: 110px;
-  height: 30px;
+  width: 120px;
+  height: 20px;
+  font-size: 12px;
   background: rgba(235, 235, 235, 0.6);
   border-radius: 14px;
   align-items: center;
   display: flex;
+  margin-right: 200px;
+  margin-left: 10px;
   justify-content: center;
-  margin-right: 270px;
 }
 
 .card-jam {
   margin-top: 50px;
-  margin-left: 70px;
+  margin-left: 75px;
   display: flex;
   align-items: center;
-  font-size: 25px;
+  font-size: 18px;
 }
 
 .card-keberangkatan {
-  margin-right: 60px;
   font-weight: bold;
+  margin-right: 30px;
 }
 
 .card-tiba {
-  margin-left: 60px;
   font-weight: bold;
 }
 
 .tiket-harga {
-  margin-left: 250px;
+  margin-left: 200px;
   font-weight: bold;
   font-family: "Roboto", sans-serif;
 }
@@ -307,13 +311,13 @@ footer {
   height: 2px;
   background-color: rgb(4, 4, 4);
   margin: 20px 0;
-  width: 20%;
+  margin-right: 30px;
+  width: 30%;
 }
 
 .garis-horizontal::before {
   position: absolute;
   top: 20px;
-  left: 50%;
   transform: translateX(-50%);
   width: 60px;
   height: 24px;
@@ -335,11 +339,12 @@ footer {
 /* card nyari tiket di tiket */
 .caritiket-title {
   font-weight: bold;
-  font-size: 24px;
+  font-size: 20px;
+  margin-top: 10px;
 }
 
 .caritiket-title2 {
-  font-size: 16px;
+  font-size: 12px;
   margin-bottom: 20px;
 }
 
@@ -350,18 +355,19 @@ input {
   -moz-appearance: none;
   background-color: white;
   border: 1px solid #ccc;
-  padding: 12px;
-  width: 250px;
+  padding: 8px;
+  width: 150px;
   margin-top: 7px;
   margin-bottom: 15px;
-  font-size: 18px;
+  font-size: 10px;
   border-radius: 7px;
 }
 
 .select-icon-tiket {
   background-repeat: no-repeat;
-  background-position: 90%;
-  background-size: 26px 26px; /* Sesuaikan ukuran ikon */
+  background-position: 7%;
+  padding-left: 50px;
+  background-size: 17px 17px; /* Sesuaikan ukuran ikon */
 }
 
 .ticket-align {
@@ -369,15 +375,15 @@ input {
 }
 
 .button-cari {
-  width: 100px;
-  height: 40px;
+  width: 60px;
+  height: 30px;
   background: #f7b917;
   border-radius: 7px;
   align-items: center;
   display: inline-flex; /* Mengubah display menjadi inline-flex */
-  font-size: 20px;
+  font-size: 14px;
   color: white;
-  margin-top: 10px;
+  margin-top: 5px;
   font-weight: bold;
   font-family: "Roboto", sans-serif;
   border-color: #ffffff;
@@ -387,4 +393,250 @@ input {
 .button-cari:hover,
 .button-cari:active {
   background: #f79917; /* Warna latar belakang saat dihover atau sedang diclick */
+}
+.floating-card {
+  position: absolute;
+  background-color: #ffffff;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+  display: none;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.form-group label {
+  width: 120px;
+  margin-right: 10px;
+}
+
+.form-group input[type="number"] {
+  width: 40px;
+  text-align: center;
+  margin-right: 10px;
+}
+
+.form-group button {
+  padding: 2px 5px;
+}
+#floatingKendaraan {
+  position: absolute;
+  background-color: #ffffff;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+  display: none;
+}
+
+.card-kendaraan {
+  height: 40px;
+  width: 200px;
+  font-size: 12px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  border-width: 1px;
+  color: black;
+  margin-top: 10px;
+  font-family: "Roboto", sans-serif;
+  padding: 10px;
+  font-weight: bold;
+  align-items: center;
+  display: inline-flex;
+  cursor: pointer;
+}
+.card-kendaraan:hover {
+  border: 1px solid rgb(79, 61, 240);
+}
+
+.card-kendaraan1 {
+  height: 50px;
+  width: 250px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  border-width: 1px;
+  color: black;
+  margin-top: 10px;
+  font-family: "Roboto", sans-serif;
+  padding: 10px;
+  font-weight: bold;
+  align-items: center;
+  display: inline-flex;
+  cursor: pointer;
+}
+.card-kendaraan1:hover {
+  border: 1px solid rgb(79, 61, 240);
+}
+
+.card-left {
+  margin-right: 100px;
+  font-family: "Roboto", sans-serif;
+}
+
+.ui-datepicker-header {
+  background-color: black;
+}
+
+.ui-datepicker-header a.ui-datepicker-prev,
+.ui-datepicker-header a.ui-datepicker-next,
+.ui-datepicker-header span {
+  background-color: black;
+  color: white;
+} /* Mengubah tampilan tanggal yang dapat dipilih */
+.ui-datepicker-calendar .ui-state-default:not(.ui-state-disabled) {
+  background-color: black;
+  color: white;
+}
+
+/* Mengubah tampilan tanggal yang tidak dapat dipilih */
+.ui-datepicker-calendar .ui-state-disabled {
+  background-color: white;
+  color: black;
+}
+/* Mengubah warna latar belakang tombol di footer kalender picker menjadi hitam */
+.ui-datepicker-buttonpane button.ui-datepicker-current,
+.ui-datepicker-buttonpane button.ui-datepicker-close {
+  background-color: black;
+  color: white;
+}
+
+.penumpang {
+  background-color: rgb(255, 255, 255);
+  border: 1px solid #ccc;
+  margin-top: 10px;
+  border-radius: 0;
+  width: 50px;
+  height: 19pt;
+  font-size: 12px;
+  text-align: center;
+}
+
+.btn-penumpangTambah {
+  background-color: rgb(46, 46, 46);
+  color: white;
+  width: 20px;
+  height: 19pt;
+  border-top: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  border-left: none; /* atau border-left: 0; */
+  font-size: 18px;
+  border-radius: 0 5px 5px 0;
+  transform: translate(0%, -10%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-penumpangKurang {
+  background-color: rgb(46, 46, 46);
+  color: white;
+  width: 20px;
+  border-radius: 5px 0 0 5px;
+  height: 19pt;
+  border-top: 1px solid #ccc;
+  border-right: none;
+  border-bottom: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+  font-size: 18px;
+  transform: translate(0%, -10%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn-penumpangKurang:active,
+.btn-penumpangTambah:active {
+  background-color: rgb(79, 79, 79);
+  color: rgb(197, 197, 197);
+}
+
+.button-pilih {
+  width: 60px;
+  height: 25px;
+  background: #f7b917;
+  font-size: 12px;
+  border-radius: 7px;
+  align-items: center;
+  display: inline-flex; /* Mengubah display menjadi inline-flex */
+  color: white;
+  font-family: "Roboto", sans-serif;
+  border-color: #ffffff;
+  justify-content: center; /* Teks menjadi terpusat secara horizontal */
+}
+
+.card-penumpang {
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  border-width: 1px;
+  color: black;
+  margin-top: 10px;
+  font-family: "Roboto", sans-serif;
+  padding: 10px;
+}
+
+.text-penumpang {
+  position: absolute;
+  top: 28%;
+  font-size: 11px;
+  color: #c7c6c6;
+}
+
+.text-penumpang1 {
+  position: absolute;
+  top: 66%;
+  font-size: 11px;
+  color: #c7c6c6;
+}
+
+.font-abu {
+  color: #ccc;
+}
+
+.lingkaran-kecil {
+  width: 16px;
+  height: 16px;
+  border: 1px solid #a8a4a4;
+  border-radius: 50%;
+  background-color: transparent;
+  margin-left: 50%;
+  position: relative;
+  transform: translateX(-50%);
+}
+
+.selected {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgb(79, 61, 240);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.selected::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid rgb(79, 61, 240);
+}
+
+.text-left {
+  margin-right: 50px;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+.back-icon {
+  font-size: 12px;
+  margin-left: 5px;
 }

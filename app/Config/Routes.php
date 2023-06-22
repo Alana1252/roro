@@ -15,6 +15,7 @@ $routes->setDefaultController('Home');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
+
 // The Auto Routing (Legacy) is very dangerous. It is easy to create vulnerable apps
 // where controller filters or CSRF protection are bypassed.
 // If you don't want to define all routes, please use the Auto Routing (Improved).
@@ -30,38 +31,38 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->add('/', 'HomeController::index'); // Route untuk halaman home
-        $routes->add('/user', 'UserController::index'); // Route untuk halaman user
+$routes->add('/user', 'UserController::index'); // Route untuk halaman user
 
-        $routes->addRedirect('/', 'HomeController::index');
-        $routes->get('/', 'News::index');
-        $routes->get('/home', 'News::index');
+$routes->addRedirect('/', 'HomeController::index');
+$routes->get('/', 'News::index');
+$routes->get('/home', 'News::index');
 
 
-        $routes->get('cron/generate-tiket', 'CronController::generateTiket');
+$routes->get('generate', 'CronController::generateTiket');
 
 
 //Tiket Routes
 $routes->get('tiket/search', 'TiketController::search');
 $routes->get('/tiket', 'TiketController::index');
-$routes->post('/tiket/selectTicket', 'TambahtController::selectTicket');
+$routes->get('tiket/select/(:num)', 'DataController::selectTicket/$1');
+
+
+
+
 
 
 
 
 $routes->get('tambah', 'TambahController::index');
-$routes->post('tambah/tambahPaymentResult', 'TatiController::tambahPaymentResult');
+$routes->post('tambah/tambahPaymentResult', 'TambahController::tambahPaymentResult');
 
 $routes->group('payment', ['namespace' => 'App\Controllers'], function ($routes) {
     $routes->get('/', 'PaymentController::index');
-   
 });
 
 $routes->get('payment/showOrderInfo', 'PaymentController::showOrderInfo');
-
-
-// $routes->get('payment', 'PaymentController::index');
-// $routes->post('payment/get-snap-token', 'PaymentController::getSnapToken');
-// $routes->post('payment/handle-payment-result', 'PaymentController::handlePaymentResult');
+$routes->post('payment/get-snap-token', 'PaymentController::getSnapToken');
+$routes->post('payment/handle-payment-result', 'PaymentController::handlePaymentResult');
 
 
 
