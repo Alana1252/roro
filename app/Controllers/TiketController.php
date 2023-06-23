@@ -26,15 +26,19 @@ class TiketController extends Controller
         ]);
     }
 
+
+
     public function search()
     {
         $tanggal = $this->request->getVar('tanggal');
         $asal = $this->request->getVar('asal');
         $kelas = $this->request->getVar('kelas');
         $kouta_penumpang = $this->request->getVar('kouta_penumpang');
+        $kouta_kendaraan = $this->request->getVar('kouta_kendaraan');
+
 
         $tiketModel = new TiketModel();
-        $tikets = $tiketModel->searchTiket($tanggal, $asal, $kouta_penumpang);
+        $tikets = $tiketModel->searchTiket($tanggal, $asal, $kouta_penumpang, $kouta_kendaraan);
 
         $kapalModel = new KapalModel();
         $jamModel = new JamModel();
@@ -57,7 +61,8 @@ class TiketController extends Controller
             'tanggal' => $tanggal,
             'asal' => $asal,
             'kelas' => $kelas,
-            'kouta_penumpang' => $kouta_penumpang
+            'kouta_penumpang' => $kouta_penumpang,
+            'kouta_kendaraan' => $kouta_kendaraan
         ]);
 
         // Simpan data tiket dengan nilai kelas yang sesuai
@@ -65,14 +70,16 @@ class TiketController extends Controller
             $tiket['kelas'] = $kelasTiket;
         }
 
-        return view('pages/tiket_view', [
+        return view('pages/tiket', [
             'tikets' => $tikets,
             'kapalModel' => $kapalModel,
             'jamModel' => $jamModel,
             'lokasiModel' => $lokasiModel,
             'kelasModel' => $kelasModel,
             'harga' => $harga,
-            'namaKelas' => $kelas
+            'namaKelas' => $kelas,
+            'kouta_kendaraan' => $kouta_kendaraan,
+            'kouta_penumpang' => $kouta_penumpang
         ]);
     }
 }

@@ -44,7 +44,12 @@ $routes->get('generate', 'CronController::generateTiket');
 //Tiket Routes
 $routes->get('tiket/search', 'TiketController::search');
 $routes->get('/tiket', 'TiketController::index');
-$routes->get('tiket/select/(:num)', 'DataController::selectTicket/$1');
+
+
+
+
+$routes->get('detail-tiket', 'DataController::detailTiket', ['as' => 'detail-tiket']);
+$routes->post('select-ticket', 'DataController::selectTicket', ['as' => 'select-ticket']);
 
 
 

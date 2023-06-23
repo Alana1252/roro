@@ -18,10 +18,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <!-- Bootstrap CSS -->
-
-    <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- Bootstrap CSS-->
 
@@ -38,7 +34,13 @@
 <body class="animsition ">
     <!-- HEADER DESKTOP-->
     <header class="header-desktop d-none d-lg-block p-md-3">
-        <?php if (logged_in()) : ?>
+        <?php
+        $auth = service('authentication');
+        $isLoggedIn = $auth->check();
+        $user = $auth->user();
+        ?>
+
+        <?php if ($isLoggedIn) : ?>
             <div class="section__content section__content--p35">
                 <div class="header3-wrap">
                     <a href="#">
@@ -66,7 +68,7 @@
                     <div class="account-wrap">
                         <div class="account-item account-item--style2 clearfix js-item-menu">
                             <div class="image">
-                                <img src="<?= base_url('img/' . user()->user_image) ?>" alt="User Image">
+                                <img src="<?= base_url('img/' . $user->user_image) ?>" alt="User Image">
                             </div>
                             <div class="content">
                                 <a class="js-acc-btn" href="#"></a>
@@ -75,14 +77,14 @@
                                 <div class="info clearfix">
                                     <div class="image">
                                         <a href="#">
-                                            <img src="<?= base_url('img/' . user()->user_image) ?>" alt="User Image">
+                                            <img src="<?= base_url('img/' . $user->user_image) ?>" alt="User Image">
                                         </a>
                                     </div>
                                     <div class="content">
                                         <h5 class="name">
-                                            <?= user()->username ?>
+                                            <?= $user->username ?>
                                         </h5>
-                                        <span class="email"><a href="#"><?= user()->email ?></a></span>
+                                        <span class="email"><a href="#"><?= $user->email ?></a></span>
                                     </div>
                                 </div>
                                 <div class="account-dropdown__body">
@@ -212,7 +214,7 @@
 
 
     <!--{Penting}-->
-    <script src="/vendor/jquery-3.2.1.min.js"></script>
+
     <script src="/vendor/animsition/animsition.min.js"></script>
     <script src="/js/main.js"></script>
 

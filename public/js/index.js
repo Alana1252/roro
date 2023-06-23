@@ -29,13 +29,7 @@ function updateStepProgress() {
       stepEl.classList.add("checked");
       stepEl.innerHTML = `
       <i class="fas fa-check"></i>
-      <small>${
-        idx === 0
-          ? "Start"
-          : idx === stepsEl.length - 1
-          ? "Final"
-          : "Step " + idx
-      }</small>
+      <small>${idx === 0 ? "Start" : idx === stepsEl.length - 1 ? "Final" : "Step " + idx}</small>
       `;
     } else {
       stepEl.classList.remove("checked");
@@ -47,8 +41,7 @@ function updateStepProgress() {
 
   const checkedNumber = document.querySelectorAll(".checked");
 
-  progressEl.style.width =
-    ((checkedNumber.length - 1) / (stepsEl.length - 1)) * 100 + "%";
+  progressEl.style.width = ((checkedNumber.length - 1) / (stepsEl.length - 1)) * 100 + "%";
 
   if (currentChecked === 1) {
     prevEl.disabled = true;

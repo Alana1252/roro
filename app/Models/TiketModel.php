@@ -88,7 +88,7 @@ class TiketModel extends Model
         return $kelasModel->getHarga($kelasId);
     }
 
-    public function searchTiket($tanggal, $asal, $kouta_penumpang)
+    public function searchTiket($tanggal, $asal, $kouta_penumpang, $kouta_kendaraan)
     {
         date_default_timezone_set('Asia/Jakarta'); // Set time zone to WIB
         $currentTime = date('H:i:s'); // Current time
@@ -117,7 +117,7 @@ class TiketModel extends Model
         return $this->where('tanggal', $tanggal)
             ->where('asal', $asal)
             ->whereIn('keberangkatan', $filteredJamIds)
-            ->where('kouta_penumpang >=', $kouta_penumpang)
+
             ->findAll();
     }
 

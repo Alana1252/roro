@@ -126,8 +126,8 @@
 }
 
 .card-cari {
-  width: 100%;
-  max-width: 800px;
+  width: 750px;
+
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 30px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
@@ -136,11 +136,14 @@
 @media screen and (max-width: 992px) {
   /* Media query untuk layar dengan lebar maksimum 992px */
   .card-cari {
-    max-width: 500px;
+    width: 300px;
   }
 
   .card-container-cari {
-    top: 6%;
+    top: 10%;
+  }
+  .payment-section {
+    margin-top: 500px;
   }
 }
 @media screen and (max-width: 576px) {
@@ -204,13 +207,13 @@ footer {
 
 .card-caritiket {
   width: 750px;
-  height: 300px;
+  height: 320px;
   margin-left: 10px;
   margin-top: 10px;
   border: 1px solid #ccc;
   border-radius: 15px;
   font-family: "Roboto", sans-serif;
-  font-size: 10px;
+  font-size: 12px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
@@ -223,7 +226,7 @@ footer {
 .logo-tiket {
   width: 65px;
   height: 50px;
-  margin-right: 65px;
+  margin-right: 25px;
 }
 
 .card-kapal {
@@ -245,8 +248,8 @@ footer {
   margin-bottom: 30px;
   font-family: "Roboto", sans-serif;
   justify-content: center;
-  opacity: 0.5; /* Nilai opacity untuk membuat watermark */
-  margin-left: 250px;
+  opacity: 0.7; /* Nilai opacity untuk membuat watermark */
+  margin-left: 300px;
 }
 
 .card-lokasi {
@@ -274,8 +277,8 @@ footer {
   border-radius: 14px;
   align-items: center;
   display: flex;
-  margin-right: 200px;
-  margin-left: 10px;
+  margin-right: 190px;
+
   justify-content: center;
 }
 
@@ -289,15 +292,17 @@ footer {
 
 .card-keberangkatan {
   font-weight: bold;
-  margin-right: 30px;
+  margin-right: 35px;
 }
 
 .card-tiba {
   font-weight: bold;
+  margin-left: 15px;
+  margin-right: 45px;
 }
 
 .tiket-harga {
-  margin-left: 200px;
+  margin-left: 150px;
   font-weight: bold;
   font-family: "Roboto", sans-serif;
 }
@@ -311,7 +316,7 @@ footer {
   height: 2px;
   background-color: rgb(4, 4, 4);
   margin: 20px 0;
-  margin-right: 30px;
+  margin-right: 20px;
   width: 30%;
 }
 
@@ -347,7 +352,15 @@ footer {
   font-size: 12px;
   margin-bottom: 20px;
 }
+input::placeholder {
+  color: #000000;
+  opacity: 1; /* Untuk browser yang mendukung */
+}
 
+/* Contoh pengaturan warna teks placeholder dengan latar belakang input yang gelap */
+input.dark::placeholder {
+  color: #ccc;
+}
 select,
 input {
   appearance: none;
@@ -355,18 +368,17 @@ input {
   -moz-appearance: none;
   background-color: white;
   border: 1px solid #ccc;
-  padding: 8px;
-  width: 150px;
-  margin-top: 7px;
+  padding: 10px;
+  width: 180px;
   margin-bottom: 15px;
-  font-size: 10px;
+  cursor: default;
   border-radius: 7px;
 }
 
 .select-icon-tiket {
   background-repeat: no-repeat;
   background-position: 7%;
-  padding-left: 50px;
+  padding-left: 35px;
   background-size: 17px 17px; /* Sesuaikan ukuran ikon */
 }
 
@@ -383,7 +395,24 @@ input {
   display: inline-flex; /* Mengubah display menjadi inline-flex */
   font-size: 14px;
   color: white;
-  margin-top: 5px;
+  margin-left: 60%;
+  margin-top: 20px;
+  font-weight: bold;
+  font-family: "Roboto", sans-serif;
+  border-color: #ffffff;
+  justify-content: center; /* Teks menjadi terpusat secara horizontal */
+}
+
+.button-pilih {
+  width: 90px;
+  height: 30px;
+  background: #f7b917;
+  border-radius: 7px;
+  align-items: center;
+  display: inline-flex; /* Mengubah display menjadi inline-flex */
+  font-size: 14px;
+  color: white;
+  margin-top: 3px;
   font-weight: bold;
   font-family: "Roboto", sans-serif;
   border-color: #ffffff;
@@ -391,7 +420,8 @@ input {
 }
 
 .button-cari:hover,
-.button-cari:active {
+.button-pilih:hover {
+  cursor: pointer;
   background: #f79917; /* Warna latar belakang saat dihover atau sedang diclick */
 }
 .floating-card {
@@ -508,7 +538,7 @@ input {
 .penumpang {
   background-color: rgb(255, 255, 255);
   border: 1px solid #ccc;
-  margin-top: 10px;
+  margin-top: -5px;
   border-radius: 0;
   width: 50px;
   height: 19pt;
@@ -555,20 +585,6 @@ input {
   color: rgb(197, 197, 197);
 }
 
-.button-pilih {
-  width: 60px;
-  height: 25px;
-  background: #f7b917;
-  font-size: 12px;
-  border-radius: 7px;
-  align-items: center;
-  display: inline-flex; /* Mengubah display menjadi inline-flex */
-  color: white;
-  font-family: "Roboto", sans-serif;
-  border-color: #ffffff;
-  justify-content: center; /* Teks menjadi terpusat secara horizontal */
-}
-
 .card-penumpang {
   border-radius: 5px;
   border: 1px solid #ccc;
@@ -592,7 +608,10 @@ input {
   font-size: 11px;
   color: #c7c6c6;
 }
-
+.text-input {
+  margin-bottom: 7px;
+  margin-top: 10px;
+}
 .font-abu {
   color: #ccc;
 }

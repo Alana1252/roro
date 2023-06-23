@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use CodeIgniter\Controller;
-use Myth\Auth\Authentication\LocalAuthenticator;
+use Myth\Auth\Authentication;
 
 class HomeController extends Controller
 {
