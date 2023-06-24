@@ -199,9 +199,9 @@ class Auth extends \Myth\Auth\Config\Auth
      * @var string|null Name of the ResetterInterface class
      */
     // public $activeResetter = false;
-    
+
     public $activeResetter = 'Myth\Auth\Authentication\Resetters\EmailResetter';
-  
+
 
     /**
      * --------------------------------------------------------------------

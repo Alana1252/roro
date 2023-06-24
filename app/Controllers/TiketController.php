@@ -19,10 +19,20 @@ class TiketController extends Controller
         $isLoggedIn = $auth->check();
         $userImage = ($isLoggedIn) ? $auth->user()->user_img : '';
 
-        // Tampilkan halaman home.php dengan data isLoggedIn dan userImage
+        // Jika belum login, tampilkan modal login
+        if (!$isLoggedIn) {
+            return view('pages/tiket', [
+                'isLoggedIn' => $isLoggedIn,
+                'userImage' => $userImage,
+                'showModal' => true
+            ]);
+        }
+
+        // Jika sudah login, tampilkan halaman tiket
         return view('pages/tiket', [
             'isLoggedIn' => $isLoggedIn,
-            'userImage' => $userImage
+            'userImage' => $userImage,
+            'showModal' => false
         ]);
     }
 
@@ -36,6 +46,13 @@ class TiketController extends Controller
         $kouta_penumpang = $this->request->getVar('kouta_penumpang');
         $kouta_kendaraan = $this->request->getVar('kouta_kendaraan');
 
+        // Logika untuk menentukan kapan modal akan ditampilkan
+        $showModal = false; // Defaultnya false
+
+        // Contoh logika berdasarkan parameter tertentu
+        if ($tanggal == '2023-06-22' && $asal == 2 && $kelas == 'Ekonomi' && $kouta_penumpang == 1) {
+            $showModal = true; // Jika parameter sesuai, set $showModal menjadi true
+        }
 
         $tiketModel = new TiketModel();
         $tikets = $tiketModel->searchTiket($tanggal, $asal, $kouta_penumpang, $kouta_kendaraan);
@@ -79,7 +96,8 @@ class TiketController extends Controller
             'harga' => $harga,
             'namaKelas' => $kelas,
             'kouta_kendaraan' => $kouta_kendaraan,
-            'kouta_penumpang' => $kouta_penumpang
+            'kouta_penumpang' => $kouta_penumpang,
+            'showModal' => $showModal // Mengirim nilai $showModal ke view
         ]);
     }
 }

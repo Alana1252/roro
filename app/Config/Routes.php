@@ -46,8 +46,6 @@ $routes->get('tiket/search', 'TiketController::search');
 $routes->get('/tiket', 'TiketController::index');
 
 
-
-
 $routes->get('detail-tiket', 'DataController::detailTiket', ['as' => 'detail-tiket']);
 $routes->post('select-ticket', 'DataController::selectTicket', ['as' => 'select-ticket']);
 
