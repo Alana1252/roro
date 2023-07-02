@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+$auth = service('authentication');
+$isLoggedIn = $auth->check();
+$user = $auth->user();
+?>
 
 <head>
 
@@ -33,34 +38,28 @@
 
 <body class="animsition ">
     <!-- HEADER DESKTOP-->
-    <header class="header-desktop d-none d-lg-block p-md-3">
-        <?php
-        $auth = service('authentication');
-        $isLoggedIn = $auth->check();
-        $user = $auth->user();
-        ?>
-
+    <header class="header-desktop fixed-top" style="background-color: #1c1c1ced;">
         <?php if ($isLoggedIn) : ?>
             <div class="section__content section__content--p35">
                 <div class="header3-wrap">
                     <a href="#">
-                        <img class="img-cir logo-desktop" src="/img/logo2.png" alt="Airputih" />
+                        <img class="img-cir logo-desktop" style="width: 60px; height:60px;" src="/img/logo2.png" alt="Airputih" />
                     </a>
                     <div class="header__navbar">
                         <ul class="list-unstyled">
                             <li class="has-sub">
-                                <a href="/tiket_saya">
-                                    <i class="fas fa-ticket-alt text-dark"> Tiket Saya</i>
+                                <a href="#album">
+                                    <i class="fas fa-home "> Home</i>
                                 </a>
                             </li>
                             <li>
                                 <a href="#member">
-                                    <i class="fas fa-child text-dark"> Members</i>
+                                    <i class="fas fa-search "> Cari Tiket</i>
                                 </a>
                             </li>
                             <li>
                                 <a href="#event">
-                                    <i class="fas fa-trophy text-dark"> Events</i>
+                                    <i class="fa fa-ticket "> Tiket Anda</i>
                                 </a>
                             </li>
                         </ul>
@@ -98,7 +97,7 @@
                                     </div>
                                     <div class="account-dropdown__item">
                                         <a href="#">
-                                            <i class="zmdi zmdi-money-box"></i>Billing</a>
+                                            <i class="zmdi zmdi-money-box"></i>Tiket Anda</a>
                                     </div>
                                 </div>
                                 <div class="account-dropdown__footer">
@@ -114,7 +113,7 @@
             <div class="section__content section__content--p35">
                 <div class="header3-wrap">
                     <a href="#">
-                        <img class="img-cir logo-desktop" src="/img/logo2.png" alt="Airputih" />
+                        <img class="img-cir logo-desktop" src="/img/logo.png" alt="Airputih" />
                     </a>
                     <div class="account-wrap">
                         <a href="/login" class="btn button-shadow">Login</a>
@@ -183,8 +182,8 @@
                         </div>
                     </li>
                     <li>
-                        <a href="/tiket_saya">
-                            <i class="ml-2 fa fa-photo"></i>Tiket Saya</a>
+                        <a href="#album">
+                            <i class="ml-2 fa fa-photo"></i>Album</a>
                     </li>
                     <li>
                         <a href="#member">
@@ -218,62 +217,8 @@
     <script src="/vendor/animsition/animsition.min.js"></script>
     <script src="/js/main.js"></script>
 
-
-
-    <script type="text/javascript">
-        var header = document.querySelector('.header-desktop');
-        var loginbtn = document.querySelector('.button-shadow');
-        var isis = document.querySelectorAll('.header__navbar ul li a i'); // Menggunakan querySelectorAll untuk memilih semua elemen "i" di dalam link
-        var isScrolling = false;
-
-        window.addEventListener('scroll', function() {
-            if (!isScrolling) {
-                header.classList.add('text-dark');
-                for (var i = 0; i < isis.length; i++) {
-                    isis[i].classList.add('text-dark');
-                }
-                isScrolling = true;
-            }
-
-            clearTimeout(scrollTimeout);
-            var scrollTimeout = setTimeout(function() {
-                if (window.pageYOffset > 350) {
-                    header.style.backgroundColor = 'black';
-                    loginbtn.classList.add('button-shadow1');
-                    loginbtn.classList.remove('button-shadow');
-                    loginbtn.style.color = 'white';
-
-                    for (var i = 0; i < isis.length; i++) {
-                        isis[i].classList.remove('text-dark');
-                    }
-                } else {
-                    header.style.backgroundColor = 'transparent';
-                    loginbtn.classList.add('button-shadow');
-                    loginbtn.classList.remove('button-shadow1');
-                    loginbtn.style.color = 'black';
-                    for (var i = 0; i < isis.length; i++) {
-                        isis[i].classList.add('text-dark');
-                    }
-                }
-                isScrolling = true;
-            }, 100);
-        });
-    </script>
-
-
-
-
-
-
 </body>
 
 </html>
 
 </div>
-
-<script>
-    function toggleNavbarCard() {
-        var navbarCard = document.getElementById("navbarCard");
-        navbarCard.style.display = navbarCard.style.display === "block" ? "none" : "block";
-    }
-</script>

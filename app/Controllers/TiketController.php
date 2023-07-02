@@ -7,9 +7,9 @@ use App\Models\KapalModel;
 use App\Models\JamModel;
 use App\Models\LokasiModel;
 use App\Models\KelasModel;
-use CodeIgniter\Controller;
+use App\Controllers\BaseController;
 
-class TiketController extends Controller
+class TiketController extends BaseController
 {
     public function index()
     {
@@ -35,9 +35,6 @@ class TiketController extends Controller
             'showModal' => false
         ]);
     }
-
-
-
     public function search()
     {
         $tanggal = $this->request->getVar('tanggal');

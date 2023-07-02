@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <?php
 $auth = service('authentication');
 $isLoggedIn = $auth->check();

@@ -39,7 +39,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div for="tanggal" class="text-input">Tanggal Keberangkatan:</div>
-                                <input type="text" id="tanggal" placeholder="Pilih Tanggal" class="select-icon-tiket" style="background-size: 14px 14px; background-image: url('/img/calendar.png');" required readonly>
+                                <input type="text" id="tanggal" placeholder="Pilih Tanggal" class="select-icon-tiket" style="background-size: 14px 14px; background-image: url('/img/calendar.png');" readonly>
                             </div>
                         </div>
                         <div class="row">
@@ -118,7 +118,7 @@
                     </div>
                     <input name="kouta_kendaraan" id="koutaKendaraanValue" hidden></input>
                     <input type="number" name="kouta_penumpang" required hidden>
-                    <input type="hidden" id="hiddenTanggal" name="tanggal">
+                    <input type="hidden" id="hiddenTanggal" name="tanggal" required>
                 </form>
             </div>
         </div>

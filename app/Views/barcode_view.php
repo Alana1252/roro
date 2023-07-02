@@ -1,0 +1,1 @@
+<img src="<?= site_url('transaction/barcode/' . $order['snap_token']) ?>" alt="Barcode">

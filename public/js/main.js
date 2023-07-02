@@ -919,7 +919,6 @@
 
   try {
     //radar chart
-    var ctx = document.getElementById("radarChart");
     if (ctx) {
       ctx.height = 200;
       var myChart = new Chart(ctx, {

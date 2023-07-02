@@ -83,7 +83,7 @@
   background-color: #ffffff;
   color: #010101;
   font-size: 24px;
-  height: 320px;
+  height: 420px;
   position: relative;
   font-weight: bold;
   z-index: 3;
@@ -119,7 +119,7 @@
 
 .card-container-cari {
   position: absolute;
-  top: 17%;
+  top: 18%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 5;
@@ -127,7 +127,6 @@
 
 .card-cari {
   width: 750px;
-
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 30px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
@@ -140,7 +139,7 @@
   }
 
   .card-container-cari {
-    top: 10%;
+    top: 20%;
   }
   .payment-section {
     margin-top: 500px;
@@ -193,16 +192,20 @@
 }
 
 footer {
-  margin-top: 300px;
+  margin-top: 900px;
 }
 .card-tiket {
   width: 750px;
   height: 200px;
   border: 1px solid #ccc;
   border-radius: 15px;
+  background-color: #fff;
   padding: 10px;
   margin: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.card-tiket:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25), 0 5px 5px rgba(0, 0, 0, 0.22);
 }
 
 .card-caritiket {
@@ -216,7 +219,7 @@ footer {
   font-size: 12px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
-
+/* Tiket yang akan dipilih */
 .layanan-tiket {
   display: flex;
   margin-left: 70px;
@@ -308,7 +311,13 @@ footer {
 }
 
 .tiket-harga2 {
+  font-family: "Roboto", sans-serif;
   font-style: italic;
+}
+.jumlah-harga {
+  margin-left: 90px;
+  font-weight: bold;
+  font-family: "Roboto", sans-serif;
 }
 
 .garis-horizontal {
@@ -396,7 +405,7 @@ input {
   font-size: 14px;
   color: white;
   margin-left: 60%;
-  margin-top: 20px;
+
   font-weight: bold;
   font-family: "Roboto", sans-serif;
   border-color: #ffffff;
@@ -597,14 +606,14 @@ input {
 
 .text-penumpang {
   position: absolute;
-  top: 28%;
+  top: 27%;
   font-size: 11px;
   color: #c7c6c6;
 }
 
 .text-penumpang1 {
   position: absolute;
-  top: 66%;
+  top: 59%;
   font-size: 11px;
   color: #c7c6c6;
 }
@@ -786,4 +795,538 @@ input {
   .modal-box .modal-dialog {
     width: 95% !important;
   }
+}
+
+.card-baru {
+  background-color: white;
+  padding: 250px;
+  margin-top: 80px;
+}
+.tiket-pilih {
+  border-radius: 15px;
+}
+.tiket-pilih:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25), 0 5px 5px rgba(0, 0, 0, 0.22);
+}
+
+/* Form Wizard */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/*Background color*/
+#grad1 {
+  background-color: #f1f1f1;
+  height: 100%;
+}
+/*form styles*/
+#msform {
+  text-align: center;
+  position: relative;
+  margin-top: 20px;
+}
+
+#msform fieldset .form-card {
+  background: white;
+  border-radius: 15px;
+  padding: 20px 40px 30px 40px;
+  box-sizing: border-box;
+  width: 94%;
+  box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.2);
+  margin: 0 3% 20px 3%;
+  position: relative;
+}
+
+#msform .detail-form {
+  background: #f7b917;
+  color: white;
+  padding: 20px 40px 30px 40px;
+  box-sizing: border-box;
+  width: 94%;
+  text-align: center;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border: 1px solid #f7b917;
+  margin: 0 3% 20px 3%;
+  position: relative;
+}
+
+#msform .detail-form-isi1 {
+  background: #bc9020;
+  padding: 20px 40px 30px 40px;
+  box-sizing: border-box;
+  width: 94%;
+  text-align: left;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  margin: 0 3% 20px 3%;
+  position: relative;
+}
+
+#msform .detail-form-isi2 {
+  background: #bc9020;
+  padding: 20px 40px 30px 40px;
+  box-sizing: border-box;
+  width: 94%;
+  text-align: left;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  margin: 0 3% 20px 3%;
+  position: relative;
+}
+
+#msform fieldset {
+  background: white;
+  border: 0 none;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  padding-bottom: 20px;
+
+  /*stacking fieldsets above each other*/
+  position: relative;
+}
+
+/*Hide all except first fieldset*/
+#msform fieldset:not(:first-of-type) {
+  display: none;
+}
+
+#msform fieldset .form-card {
+  text-align: left;
+  color: #2c2c2c;
+}
+
+#msform input,
+#msform textarea {
+  padding: 0px 8px 4px 8px;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  border-radius: 0px;
+  margin-bottom: 25px;
+  margin-top: 2px;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: montserrat;
+  color: #2c3e50;
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+
+#msform input:focus,
+#msform textarea:focus {
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  border: none;
+  font-weight: bold;
+  border-bottom: 2px solid #f7b917;
+  outline-width: 0;
+}
+
+/*Blue Buttons*/
+#msform .action-button {
+  width: 100px;
+  background: #f7b917;
+  font-weight: bold;
+  color: white;
+  border: 0 none;
+  border-radius: 0px;
+  cursor: pointer;
+  padding: 10px 5px;
+  margin: 10px 5px;
+}
+
+#msform .action-button:hover,
+#msform .action-button:focus {
+  box-shadow: 0 0 0 2px white, 0 0 0 3px #f7b917;
+}
+
+/*Previous Buttons*/
+#msform .action-button-previous {
+  width: 100px;
+  background: #616161;
+  font-weight: bold;
+  color: white;
+  border: 0 none;
+  border-radius: 0px;
+  cursor: pointer;
+  padding: 10px 5px;
+  margin: 10px 5px;
+}
+
+#msform .action-button-previous:hover,
+#msform .action-button-previous:focus {
+  box-shadow: 0 0 0 2px white, 0 0 0 3px #616161;
+}
+
+/*Dropdown List Exp Date*/
+select.list-dt {
+  border: none;
+  outline: 0;
+  border-bottom: 1px solid #ccc;
+  padding: 2px 5px 3px 5px;
+  margin: 2px;
+}
+
+select.list-dt:focus {
+  border-bottom: 2px solid #f7b917;
+}
+
+/*The background card*/
+.card {
+  z-index: 0;
+  border: none;
+  border-radius: 0.5rem;
+  position: relative;
+}
+
+/*FieldSet headings*/
+.fs-title {
+  font-size: 25px;
+  color: #2c3e50;
+  margin-bottom: 10px;
+  font-weight: bold;
+  text-align: left;
+}
+
+/*progressbar*/
+#progressbar {
+  margin-bottom: 30px;
+  overflow: hidden;
+  color: lightgrey;
+}
+
+#progressbar .active {
+  color: #000000;
+}
+
+#progressbar li {
+  list-style-type: none;
+  font-size: 12px;
+  width: 25%;
+  float: left;
+  position: relative;
+}
+
+/*Icons in the ProgressBar*/
+#progressbar #tiket:before {
+  font-family: FontAwesome;
+  content: "\f145";
+}
+
+#progressbar #personal:before {
+  font-family: FontAwesome;
+  content: "\f007";
+}
+
+#progressbar #payment:before {
+  font-family: FontAwesome;
+  content: "\f09d";
+}
+
+#progressbar #confirm:before {
+  font-family: FontAwesome;
+  content: "\f00c";
+}
+
+/*ProgressBar before any progress*/
+#progressbar li:before {
+  width: 50px;
+  height: 50px;
+  line-height: 45px;
+  display: block;
+  font-size: 18px;
+  color: #ffffff;
+  background: lightgray;
+  border-radius: 50%;
+  margin: 0 auto 10px auto;
+  padding: 2px;
+}
+
+/*ProgressBar connectors*/
+#progressbar li:after {
+  content: "";
+  width: 100%;
+  height: 2px;
+  background: lightgray;
+  position: absolute;
+  left: 0;
+  top: 25px;
+  z-index: -1;
+}
+
+/*Color number of the step and the connector before it*/
+#progressbar li.active:before,
+#progressbar li.active:after {
+  background: #f7b917;
+}
+
+/*Imaged Radio Buttons*/
+.radio-group {
+  position: relative;
+  margin-bottom: 25px;
+}
+
+.radio {
+  display: inline-block;
+  width: 204;
+  height: 104;
+  border-radius: 0;
+  background: lightblue;
+  box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  cursor: pointer;
+  margin: 8px 2px;
+}
+
+.radio:hover {
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.radio.selected {
+  box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+#msform .image-container {
+  display: inline-block;
+}
+
+#msform .image-container img {
+  width: 200px;
+  margin-top: 20px;
+  height: 85px;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+#msform .image-container input[type="radio"] {
+  display: none;
+}
+
+#msform .image-container input[type="radio"]:checked + label img {
+  transform: scale(1.1);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.garis-putih {
+  border-top: 1px solid white;
+  margin-top: 30px;
+  margin-left: 10px;
+}
+
+.error {
+  border: 1px solid red;
+}
+
+.kiri-20 {
+  margin-left: 20px;
+}
+
+/* Tiket yang dipunya */
+.penyedia-layanan {
+  display: flex;
+  margin-left: 70px;
+  align-items: center;
+}
+
+.logo-tiket-saya {
+  width: 65px;
+  height: 50px;
+  margin-right: 25px;
+}
+
+.card-kapal-layanan {
+  width: 150px;
+  height: 20px;
+  background: rgba(235, 235, 235, 0.6);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  justify-content: center;
+}
+.tanggal-tiket-saya {
+  font-size: 10px;
+  color: rgba(0, 0, 0, 0.458);
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  margin-bottom: 30px;
+  font-family: "Roboto", sans-serif;
+  justify-content: center;
+  opacity: 0.7; /* Nilai opacity untuk membuat watermark */
+  margin-left: 300px;
+}
+
+.card-lokasi-saya {
+  margin-left: 40px;
+  display: flex;
+  float: left;
+}
+.card-asal-saya {
+  width: 120px;
+  height: 20px;
+  background: rgba(235, 235, 235, 0.6);
+  border-radius: 14px;
+  margin-right: 150px;
+  align-items: center;
+  font-size: 12px;
+  display: flex;
+  justify-content: center; /* Teks menjadi terpusat secara horizontal */
+}
+
+.card-tujuan-saya {
+  width: 120px;
+  height: 20px;
+  font-size: 12px;
+  background: rgba(235, 235, 235, 0.6);
+  border-radius: 14px;
+  align-items: center;
+  display: flex;
+  margin-right: 160px;
+  justify-content: center;
+}
+
+.card-detail-saya {
+  width: 90px;
+  height: 25px;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+}
+.card-detail-button {
+  width: 30px;
+  height: 25px;
+  font-size: 14px;
+  font-weight: bold;
+  background: rgba(235, 235, 235, 0.6);
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  align-items: center;
+  display: flex;
+  cursor: pointer;
+  justify-content: space-around;
+}
+.card-detail-button:hover {
+  background-color: black;
+  color: white;
+}
+
+.card-jam-saya {
+  margin-top: 50px;
+  margin-left: 75px;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+}
+
+.card-keberangkatan-saya {
+  font-weight: bold;
+  margin-right: 35px;
+}
+
+.card-tiba-saya {
+  font-weight: bold;
+  margin-left: 15px;
+  margin-right: 120px;
+}
+
+.tiket-harga-saya2 {
+  font-family: "Roboto", sans-serif;
+  font-style: italic;
+}
+.jumlah-harga {
+  margin-left: 90px;
+  font-weight: bold;
+  font-family: "Roboto", sans-serif;
+}
+
+.garis-horizontal-saya {
+  position: relative;
+  height: 2px;
+  background-color: rgb(4, 4, 4);
+  margin: 20px 0;
+  margin-right: 12px;
+  width: 25%;
+}
+
+.kelas-text-saya {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  padding: 0 10px;
+  font-weight: bold;
+}
+
+/* Card-detail-tiket */
+.card-detail-all {
+  width: 800px;
+  min-height: 440px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.card-detail-isi {
+  font-family: "Roboto", sans-serif;
+  margin-left: 38px;
+  margin-top: 20px;
+  font-size: 15px;
+}
+
+.table {
+  text-align: center;
+  width: 540px;
+}
+
+.garis-horizontal-detail {
+  position: relative;
+  height: 2px;
+  background-color: rgb(4, 4, 4);
+  margin: 10px 0;
+  width: 95%;
+}
+
+.detail2 {
+  font-size: 25px;
+  font-family: "Times New Roman", Times, serif;
+}
+.detail2-kelas {
+  position: absolute;
+  margin-right: 55px;
+  margin-top: -18px;
+  left: 82%;
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.logo-detail {
+  width: 75px;
+  height: 75px;
+}
+
+.detail-kapal {
+  width: 150px;
+  height: 20px;
+  background: rgb(220, 220, 220);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  justify-content: center;
+  margin-left: 55px;
 }

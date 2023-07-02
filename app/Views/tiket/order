@@ -60,9 +60,12 @@
                             <?= $orderInfo['transaction_status'] ?>
                         </div>
                     <?php endif; ?>
-                    <div class="card-detail-button" onclick="submitForm('<?= site_url('select-pesanan'); ?>', '<?= $orderInfo['order_id']; ?>')">
-                        <i class="material-icons">keyboard_arrow_down</i>
-                    </div>
+                    <form action="<?= site_url('select-pesanan'); ?>" method="post">
+                        <input type="hidden" name="order_id" value="<?= $orderInfo['order_id']; ?>">
+                        <div class="card-detail-button" onclick="submitForm('<?= site_url('select-pesanan'); ?>')">
+                            <i class="material-icons">keyboard_arrow_down</i>
+                        </div>
+                    </form>
                 </div>
             </div>
         <?php endif; ?>
@@ -71,19 +74,19 @@
 
 </html>
 <script>
-    function submitForm(action, order_id) {
+    function submitForm(url) {
         var form = document.createElement('form');
-        form.setAttribute('method', 'post');
-        form.setAttribute('action', action);
+        form.method = 'post';
+        form.action = url;
 
-        var hiddenField = document.createElement('input');
-        hiddenField.setAttribute('type', 'hidden');
-        hiddenField.setAttribute('name', 'order_id');
-        hiddenField.setAttribute('value', order_id);
+        var orderIdInput = document.createElement('input');
+        orderIdInput.type = 'hidden';
+        orderIdInput.name = 'order_id';
+        orderIdInput.value = '<?= $orderInfo['order_id']; ?>';
 
-        form.appendChild(hiddenField);
+        form.appendChild(orderIdInput);
+
         document.body.appendChild(form);
-
         form.submit();
     }
 </script>

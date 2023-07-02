@@ -45,17 +45,15 @@ $routes->get('generate', 'CronController::generateTiket');
 $routes->get('tiket/search', 'TiketController::search');
 $routes->get('/tiket', 'TiketController::index');
 
+$routes->get('detail-pesanan', 'PaymentController::showOrderDetails', ['as' => 'detail-pesanan']);
+$routes->post('select-pesanan', 'PaymentController::detailPesanan', ['as' => 'select-pesanan']);
+
 
 $routes->get('detail-tiket', 'DataController::detailTiket', ['as' => 'detail-tiket']);
 $routes->post('select-ticket', 'DataController::selectTicket', ['as' => 'select-ticket']);
 
 
-
-
-
-
-
-
+$routes->post('update_payment', 'TambahController::updatePayment');
 $routes->get('tambah', 'TambahController::index');
 $routes->post('tambah/tambahPaymentResult', 'TambahController::tambahPaymentResult');
 
@@ -63,7 +61,7 @@ $routes->group('payment', ['namespace' => 'App\Controllers'], function ($routes)
     $routes->get('/', 'PaymentController::index');
 });
 
-$routes->get('payment/showOrderInfo', 'PaymentController::showOrderInfo');
+$routes->get('tiket_saya', 'PaymentController::showOrderInfo');
 $routes->post('payment/get-snap-token', 'PaymentController::getSnapToken');
 $routes->post('payment/handle-payment-result', 'PaymentController::handlePaymentResult');
 
@@ -72,6 +70,7 @@ $routes->post('payment/handle-payment-result', 'PaymentController::handlePayment
 // ...
 
 
+$routes->get('transaction/barcode/(:any)', 'TransactionController@showBarcode/$1');
 
 
 

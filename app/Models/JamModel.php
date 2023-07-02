@@ -28,4 +28,3 @@ class JamModel extends Model
         return '';
     }
 }
-

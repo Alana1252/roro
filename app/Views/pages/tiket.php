@@ -1,10 +1,5 @@
 <!-- tiket_view.php -->
-<?php
-// Memeriksa apakah modal harus ditampilkan
-if ($showModal) {
-    echo view('layout/modal');
-}
-?>
+
 <?php
 $auth = service('authentication');
 $isLoggedIn = $auth->check();
@@ -162,7 +157,6 @@ $user = $auth->user();
                 </form>
             </div>
         </div>
-
         <?php if (!empty($tikets)) : ?>
             <?php foreach ($tikets as $index => $tiket) : ?>
                 <div class="card-tiket geser<?= $index ?>" style="margin-left: 350px;">
@@ -209,9 +203,7 @@ $user = $auth->user();
                 </div>
             <?php endforeach; ?>
         <?php else : ?>
-            <div class="no-tiket">
-                Tidak ada tiket yang sesuai dengan pencarian Anda.
-            </div>
+
         <?php endif; ?>
     <?php else : ?>
     <?php endif; ?>

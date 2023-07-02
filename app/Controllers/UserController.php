@@ -11,23 +11,31 @@ class UserController extends Controller
     {
         $auth = service('authentication');
 
-        // Cek apakah pengguna sudah login
+        // Check if the user is already logged in
         if ($auth->check()) {
-            // Dapatkan informasi pengguna yang sedang login
+            // Get the currently logged-in user
             $user = $auth->user();
 
-            // Ambil data pengguna
-            $userModel = new \Myth\Auth\Models\UserModel();
-            $userData = $userModel->find($user->id);
+            // Retrieve the user ID
+            $userId = $user->id;
 
-            // Tampilkan halaman user.php dengan data pengguna
+            // Load the user model
+            $userModel = new \App\Models\UserModel();
+
+            // Retrieve the user data by user ID
+            $userData = $userModel->find($userId);
+
+            // Set the user's name in a session variable
+            session()->set('user_name', $userData['name']);
+
+            // Pass the user data to the view
             $data = [
                 'user' => $userData
             ];
 
             return view('pages/user', $data);
         } else {
-            // Pengguna belum login, redirect ke halaman login
+            // User is not logged in, redirect to the login page
             return redirect()->to('/login');
         }
     }

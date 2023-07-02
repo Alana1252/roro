@@ -10,6 +10,7 @@ class TiketModel extends Model
     protected $table = 'tiket';
     protected $primaryKey = 'id_tiket';
     protected $allowedFields = [
+        'id_tiket',
         'kapal',
         'keberangkatan',
         'tiba',
@@ -21,15 +22,24 @@ class TiketModel extends Model
         'kouta_kendaraan',
         'kouta_penumpang',
     ];
+    public function getTanggalFormatted($tanggal, $withDay = true)
+    {
+        $tanggalObj = Date::createFromFormat('Y-m-d', $tanggal);
+        $tanggalObj->setLocale('id');
+        if ($withDay) {
+            $tanggalFormatted = $tanggalObj->format('l, d F Y');
+        } else {
+            $tanggalFormatted = $tanggalObj->format('d F Y');
+        }
+        return $tanggalFormatted;
+    }
 
-    public function findAll(int $limit = 0, int $offset = 0)
+    public function findAll($limit = 0, $offset = 0, $withDay = true)
     {
         $tikets = parent::findAll($limit, $offset);
 
         foreach ($tikets as &$tiket) {
-            $tanggal = Date::createFromFormat('Y-m-d', $tiket['tanggal']);
-            $tanggal->setLocale('id');
-            $tanggalFormatted = $tanggal->format('l, d F Y');
+            $tanggalFormatted = $this->getTanggalFormatted($tiket['tanggal'], $withDay);
             $tiket['tanggal_formatted'] = $tanggalFormatted;
         }
 
@@ -62,6 +72,16 @@ class TiketModel extends Model
         $tiket = $this->find($tiketId);
         if ($tiket) {
             return $lokasiModel->getAsal($tiket['asal']);
+        }
+        return '';
+    }
+
+    public function getJenis($jenisId)
+    {
+        $kendaraanModel = new KendaraanModel();
+        $tiket = $this->find($jenisId);
+        if ($tiket) {
+            return $kendaraanModel->getJenis($tiket['kouta_kendaraan']);
         }
         return '';
     }
@@ -124,5 +144,19 @@ class TiketModel extends Model
     public function getTiketById($id)
     {
         return $this->find($id);
+    }
+    public function decrementKoutaKendaraan($id_tiket, $koutaKendaraan)
+    {
+        return $this->db->table('tiket')
+            ->where('id_tiket', $id_tiket)
+            ->decrement('kouta_kendaraan', $koutaKendaraan);
+    }
+
+
+    public function decrementKoutaPenumpang($id_tiket, $koutaPenumpang)
+    {
+        return $this->db->table('tiket')
+            ->where('id_tiket', $id_tiket)
+            ->decrement('kouta_penumpang', $koutaPenumpang);
     }
 }

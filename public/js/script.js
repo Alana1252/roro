@@ -290,3 +290,23 @@ $(function () {
     }
   });
 })(jQuery);
+
+function redirectToDetailTiket() {
+  var dewasaValue = parseInt(document.getElementById("dewasa").value);
+  var bayiValue = parseInt(document.getElementById("bayi").value);
+  var jenisJasaValue = document.getElementById("jenis-jasa").value;
+
+  var url = "detail-tiket?dewasa=" + dewasaValue + "&bayi=" + bayiValue + "&jenis_jasa=" + jenisJasaValue;
+  window.location.href = url;
+}
+
+function selectImage(imageIndex) {
+  // Reset semua input radio keadaan tidak terpilih
+  var radioButtons = document.getElementsByName("gambar");
+  for (var i = 0; i < radioButtons.length; i++) {
+    radioButtons[i].checked = false;
+  }
+
+  // Tandai input radio terpilih
+  document.getElementById("radio" + imageIndex).checked = true;
+}
