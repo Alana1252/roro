@@ -68,11 +68,8 @@ $routes->post('payment/handle-payment-result', 'PaymentController::handlePayment
 
 
 // ...
-
-
-$routes->get('transaction/barcode/(:any)', 'TransactionController@showBarcode/$1');
-
-
+$routes->get('barcode', 'BarcodeController::index');
+$routes->get('tiket/print/(:segment)', 'PaymentController::generateBarcode/$1');
 
 
 /*

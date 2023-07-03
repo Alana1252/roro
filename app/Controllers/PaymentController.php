@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use Jenssegers\Date\Date;
 use GuzzleHttp\Client;
 use App\Controllers\BaseController;
 use App\Models\TransactionModel;
@@ -10,8 +11,14 @@ use App\Models\KapalModel;
 use App\Models\JamModel;
 use App\Models\LokasiModel;
 use App\Models\KendaraanModel;
-use TCPDFBarcode;
-use TCPDF;
+use Endroid\QrCode\Color\Color;
+use Endroid\QrCode\Encoding\Encoding;
+use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelLow;
+use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Logo\Logo;
+use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin;
+use Endroid\QrCode\Writer\PngWriter;
+
 
 class PaymentController extends BaseController
 {
@@ -63,6 +70,7 @@ class PaymentController extends BaseController
                         $orderInfo['kouta_penumpang'] = $transaction['kouta_penumpang'];
                         $orderInfo['kouta_kendaraan'] = $jenisKendaraan;
                         $orderInfo['tanggal'] = $tiketModel->getTanggalFormatted($tiket['tanggal']);
+
 
 
 
@@ -145,6 +153,37 @@ class PaymentController extends BaseController
 
                         $tiketModel->decrementKoutaKendaraan($id_tiket, $koutaKendaraan);
                         $tiketModel->decrementKoutaPenumpang($id_tiket, $koutaPenumpang);
+
+                        // Generate and store new barcode image
+                        $writer = new PngWriter();
+
+                        // Get the order ID from the transaction
+                        $orderId = $transaction['order_id'];
+
+                        // Create QR code URL with the order ID
+                        $qrCodeUrl = 'http://localhost:8081/print/' . $orderId;
+
+                        // Create QR code
+                        $qrCode = QrCode::create($qrCodeUrl)
+                            ->setEncoding(new Encoding('UTF-8'))
+                            ->setErrorCorrectionLevel(new ErrorCorrectionLevelLow())
+                            ->setSize(300)
+                            ->setMargin(10)
+                            ->setRoundBlockSizeMode(new RoundBlockSizeModeMargin())
+                            ->setForegroundColor(new Color(0, 0, 0))
+                            ->setBackgroundColor(new Color(255, 255, 255));
+
+                        // Create generic logo
+                        $logo = Logo::create(FCPATH . '/img/logo2.png')
+                            ->setResizeToWidth(50)
+                            ->setPunchoutBackground(true);
+
+                        $result = $writer->write($qrCode, $logo);
+
+                        $result->saveToFile(FCPATH . 'barcode/' . $orderId . '.png');
+
+                        // Update the transaction table with the barcode image name
+                        $transactionModel->update($orderId, ['barcode' => $orderId . '.png']);
                     }
                 }
             }
@@ -212,8 +251,8 @@ class PaymentController extends BaseController
             $id_kendaraan = $order['kouta_kendaraan'];
             $jenisKendaraan = $kendaraanModel->getJenis($id_kendaraan);
 
-
             $order['kouta_kendaraan'] = $jenisKendaraan;
+
             if ($tiket) {
                 $order['asal'] = $tiket['asal'];
                 $order['tujuan'] = $tiket['tujuan'];
@@ -230,12 +269,37 @@ class PaymentController extends BaseController
                 $order['keberangkatan'] = $jamModel->getJamKeberangkatan($tiket['keberangkatan']);
                 $order['tiba'] = $jamModel->getJamTiba($tiket['tiba']);
                 $order['tanggal'] = $tiketModel->getTanggalFormatted($tiket['tanggal']);
+                $order['barcode'] = $order['barcode'];
+            }
+
+            // Get the expiry time from Midtrans
+            $client = new Client();
+            $url = 'https://app.sandbox.midtrans.com/snap/v1/transactions/' . $order['snap_token'] . '/status';
+
+            $response = $client->request('GET', $url, [
+                'headers' => [
+                    'Accept' => 'application/json',
+                    'Authorization' => 'Basic ' . base64_encode('SB-Mid-server-3hL5upG4ONsCghSB1dlFe2H3:')
+                ]
+            ]);
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode == 200) {
+                $body = $response->getBody()->getContents();
+                $orderInfo = json_decode($body, true);
+
+                // Get the expiry time from the response
+                $expiryTime = $orderInfo['expiry_time'];
+                Date::setLocale('id'); // Atur bahasa ke Indonesia
+                $formattedExpiryTime = Date::parse($expiryTime)->format('l, d F Y, H:i');
+
+                // Pass the formatted expiry time to the view
+                return view('tiket/detail_pesanan', ['order' => $order, 'formattedExpiryTime' => $formattedExpiryTime]);
             }
         }
-
-        // Tampilkan halaman detail pesanan dengan data yang diambil
-        return view('tiket/detail_pesanan', ['order' => $order]);
     }
+
 
 
     private function formatCustomerNames($names)
@@ -249,26 +313,4 @@ class PaymentController extends BaseController
 
         return implode('<br>', $formattedNames);
     }
-    public function showBarcode($snap_token)
-    {
-        // Load library TCPDF Barcode
-        require_once APPPATH . 'ThirdParty/tcpdf/tcpdf_barcodes_2d.php';
-
-        // Generate barcode using TCPDF Barcode
-        $barcode = $this->getBarcode($snap_token, 'C39');
-
-        // Pass the barcode data to the view
-        $data['barcode'] = $barcode;
-
-        // Load the view file
-        return view('barcode_view', $data);
-    }
-
-    private function getBarcode($data, $type)
-    {
-        // Generate barcode using TCPDF Barcode
-        $barcodeobj = new TCPDFBarcode($data, $type);
-        return $barcodeobj->getBarcodeHTML();
-    }
-}
 }

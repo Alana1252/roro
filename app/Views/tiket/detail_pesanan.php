@@ -11,14 +11,6 @@
 
 <body style="background-color:#f1f1f1;">
     <?php if ($order) : ?>
-        <div><?= $order['transaction_status']; ?></div>
-        <div><?= $order['kouta_penumpang']; ?></div>
-
-        <div>Rp.<?= number_format($order['gross_amount'], 0, ',', '.') ?></div>
-
-
-        <div class="card-tujuan"><button onclick="showPaymentPopup('<?= $order['snap_token'] ?>')">Pay Now</button></div>
-
         <div class="card-detail-all">
             <div class="card-detail-isi">
                 <div class="fw-bold">Kode Pemesanan</div>
@@ -50,11 +42,15 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="row">
-                        <div class="detail-kapal">
-                            <?= $order['kapal']; ?>
+                    <?php if ($order['transaction_status'] === 'settlement') : ?>
+                        <div class="row">
+                            <div class="detail-kapal">
+                                <?= $order['kapal']; ?>
+                            </div>
+                            <div>
+                                <img class="barcode" src="/png/<?php echo $order['barcode']; ?>" alt="Barcode">
+                            </div>
                         </div>
-                    </div>
                 </div>
                 <div class="d-flex">
                     <div class="row">
@@ -66,14 +62,58 @@
                         <div class="kiri-20 fw-bold mb-5"><?= $order['kouta_kendaraan']; ?></div>
                     </div>
                 </div>
+            <?php endif; ?>
+            <?php if ($order['transaction_status'] === 'pending') : ?>
+                <div class="row kiri-20">
+                    <div>Nama Penumpang :
+                        <div class="kiri-20 fw-bold"><?= nl2br($order['nama_lengkap']) ?></div>
+                    </div>
+                </div>
             </div>
+            <div class="detail-layanan">Jenis Layanan :
+                <div class="kiri-20 fw-bold"><?= $order['kouta_kendaraan']; ?></div>
+            </div>
+            <div class="detail-kapal2"> <?= $order['kapal']; ?></div>
+            <div class="d-flex">
+                <div class="row">
+                    <div>Cara melakukan pembayaran:
+                        <div onclick="openPDF('<?= $order['pdf_url']; ?>')" class="kiri-50 fw-bold pdf-unduh text-decoration-underline">Click untuk mengunduh PDF</div>
+                    </div>
+                    <div>Lakukan pembayaran sebelum:
+                        <div class="kiri-50 fw-bold"><?= $formattedExpiryTime ?> WIB </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="text-center h4">
+                        <div class="fw-bold">Rp.<?= number_format($order['gross_amount'], 0, ',', '.') ?></div>
+                        <div class="text-warning h6">
+                            Menunggu Pembayaran
+                        </div>
+                        <div class="detail-button" onclick="showPaymentPopup('<?= $order['snap_token'] ?>')">Bayar</div>
+                    </div>
+                    </figure>
+                </div>
+            </div>
+        <?php endif; ?>
+        </div>
         </div>
     <?php else : ?>
         <p>Pesanan tidak ditemukan.</p>
     <?php endif; ?>
-
+    <button onclick="printOrderInfo()">Print</button>
 </body>
 
+<script>
+    function printOrderInfo() {
+        window.print();
+    }
+</script>
+<script>
+    function openPDF(url) {
+        // Open the URL in a new tab or window
+        window.open(url, '_blank');
+    }
+</script>
 <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-85jQuE_JFrArIBoY"></script>
 <script>
     // Fungsi untuk menampilkan pop-up pembayaran Midtrans

@@ -52,12 +52,12 @@
 
                     <?php if ($orderInfo['transaction_status'] === 'settlement') : ?>
                         <div class="card-detail-saya bg-success">
-                            <?= $orderInfo['transaction_status'] ?>
+                            Telah dibayar
                         </div>
                     <?php endif; ?>
                     <?php if ($orderInfo['transaction_status'] === 'pending') : ?>
                         <div class="card-detail-saya bg-warning">
-                            <?= $orderInfo['transaction_status'] ?>
+                            Belum dibayar
                         </div>
                     <?php endif; ?>
                     <div class="card-detail-button" onclick="submitForm('<?= site_url('select-pesanan'); ?>', '<?= $orderInfo['order_id']; ?>')">

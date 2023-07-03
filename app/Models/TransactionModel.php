@@ -23,8 +23,8 @@ class TransactionModel extends Model
         'kelas',
         'kouta_kendaraan',
         'kouta_penumpang',
+        'barcode',
         'pdf_url',
-        'finish_redirect_url',
         'snap_token',
     ];
 
@@ -40,5 +40,15 @@ class TransactionModel extends Model
     public function deleteTransaction($order_id)
     {
         return $this->where('order_id', $order_id)->delete();
+    }
+    public function getTransactionStatusLabel($transactionStatus)
+    {
+        if ($transactionStatus === 'pending') {
+            return 'Menunggu pembayaran';
+        } elseif ($transactionStatus === 'settlement') {
+            return 'Telah dibayar';
+        } else {
+            return $transactionStatus;
+        }
     }
 }

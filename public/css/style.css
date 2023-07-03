@@ -405,7 +405,6 @@ input {
   font-size: 14px;
   color: white;
   margin-left: 60%;
-
   font-weight: bold;
   font-family: "Roboto", sans-serif;
   border-color: #ffffff;
@@ -429,6 +428,7 @@ input {
 }
 
 .button-cari:hover,
+.detail-button:hover,
 .button-pilih:hover {
   cursor: pointer;
   background: #f79917; /* Warna latar belakang saat dihover atau sedang diclick */
@@ -1124,6 +1124,9 @@ select.list-dt:focus {
 .kiri-20 {
   margin-left: 20px;
 }
+.kiri-50 {
+  margin-left: 60px;
+}
 
 /* Tiket yang dipunya */
 .penyedia-layanan {
@@ -1186,12 +1189,12 @@ select.list-dt:focus {
   border-radius: 14px;
   align-items: center;
   display: flex;
-  margin-right: 160px;
+  margin-right: 130px;
   justify-content: center;
 }
 
 .card-detail-saya {
-  width: 90px;
+  width: 120px;
   height: 25px;
   font-size: 14px;
   font-weight: bold;
@@ -1236,7 +1239,7 @@ select.list-dt:focus {
 .card-tiba-saya {
   font-weight: bold;
   margin-left: 15px;
-  margin-right: 120px;
+  margin-right: 100px;
 }
 
 .tiket-harga-saya2 {
@@ -1270,6 +1273,7 @@ select.list-dt:focus {
 
 /* Card-detail-tiket */
 .card-detail-all {
+  cursor: default;
   width: 800px;
   min-height: 440px;
   position: absolute;
@@ -1329,4 +1333,52 @@ select.list-dt:focus {
   font-size: 12px;
   justify-content: center;
   margin-left: 55px;
+}
+.detail-kapal2 {
+  position: absolute;
+  top: 30%;
+  left: 10%;
+  width: 150px;
+  height: 20px;
+  background: rgb(220, 220, 220);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  justify-content: center;
+  margin-left: 55px;
+}
+
+.barcode {
+  top: 47%;
+  position: absolute;
+  height: 180px;
+  width: 180px;
+  margin-left: 30px;
+}
+.detail-layanan {
+  top: 25%;
+  right: 13%;
+  position: absolute;
+}
+.detail-button {
+  width: 90px;
+  height: 30px;
+  background: #f7b917;
+  border-radius: 7px;
+  align-items: center;
+  display: inline-flex; /* Mengubah display menjadi inline-flex */
+  font-size: 14px;
+  color: white;
+  margin-top: 3px;
+  font-weight: bold;
+  font-family: "Roboto", sans-serif;
+  border-color: #ffffff;
+  justify-content: center; /* Teks menjadi terpusat secara horizontal */
+}
+.pdf-unduh {
+  cursor: pointer;
+}
+.pdf-unduh:hover {
+  color: skyblue;
 }

@@ -42,6 +42,8 @@ class Autoload extends AutoloadConfig
     public $psr4 = [
         APP_NAMESPACE => APPPATH, // For custom app namespace
         'Config'      => APPPATH . 'Config',
+        'App'         => APPPATH,
+        'Picqer'      => ROOTPATH . 'vendor/picqer/php-barcode-generator/src'
     ];
 
     /**

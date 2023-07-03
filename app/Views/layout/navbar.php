@@ -245,6 +245,7 @@
 
                     for (var i = 0; i < isis.length; i++) {
                         isis[i].classList.remove('text-dark');
+
                     }
                 } else {
                     header.style.backgroundColor = 'transparent';
