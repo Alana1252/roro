@@ -48,7 +48,7 @@
                                 <?= $order['kapal']; ?>
                             </div>
                             <div>
-                                <img class="barcode" src="/png/<?php echo $order['barcode']; ?>" alt="Barcode">
+                                <img class="barcode" src="/barcode/<?php echo $order['barcode']; ?>" alt="Barcode">
                             </div>
                         </div>
                 </div>

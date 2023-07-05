@@ -23,6 +23,12 @@
   width: 120px;
   height: 120px;
 }
+.img-50 {
+  width: 50px;
+  position: absolute;
+  height: 50px;
+  bottom: 3%;
+}
 ul {
   margin: 0;
 }

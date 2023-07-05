@@ -271,7 +271,7 @@
 
                 $.ajax({
                     type: 'POST',
-                    url: '/update_payment',
+                    url: '/tambah/update_payment',
                     data: formData,
                     success: function(response) {
                         // Handle the success response here, if needed

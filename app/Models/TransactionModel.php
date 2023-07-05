@@ -51,4 +51,20 @@ class TransactionModel extends Model
             return $transactionStatus;
         }
     }
+    public function countSuccessfulTickets($userId)
+    {
+        return $this->db->table('transaksi')
+            ->join('users', 'transaksi.users = users.id')
+            ->where('transaksi.transaction_status', 'settlement')
+            ->where('users.id', $userId)
+            ->countAllResults();
+    }
+    public function countPendingTickets($userId)
+    {
+        return $this->db->table('transaksi')
+            ->join('users', 'transaksi.users = users.id')
+            ->where('transaksi.transaction_status', 'pending')
+            ->where('users.id', $userId)
+            ->countAllResults();
+    }
 }

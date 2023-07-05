@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filters;
+namespace Myth\Auth\Filters;
 
 use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RedirectResponse;
@@ -26,7 +26,7 @@ class LoginFilter extends BaseFilter implements FilterInterface
         }
 
         // If no user is logged in then send them to the login form.
-        if (!$this->authenticate->check()) {
+        if (! $this->authenticate->check()) {
             session()->set('redirect_url', current_url());
 
             return redirect($this->reservedRoutes['login']);

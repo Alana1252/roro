@@ -23,7 +23,7 @@ $user = $auth->user();
     <!--Sidebar-->
 
     <div class="wrapper d-flex align-items-stretch">
-        <nav id="sidebar" class="active">
+        <nav id="sidebar" class="">
             <div class="p-4 pt-5">
                 <img src="<?= base_url('img/' . $user->user_image) ?>" class="img logo rounded-circle mb-5" id="imgBlock" class="imgBlock">
                 <ul class="list-unstyled components mb-5">
@@ -48,13 +48,13 @@ $user = $auth->user();
                                 <a href="home.php">Home</a>
                             </li>
                             <li>
-                                <a href="album.php">Album</a>
+                                <a href="album.php">Tiket</a>
                             </li>
                             <li>
-                                <a href="memori.php">Memori Usages</a>
+                                <a href="memori.php">Transaksi</a>
                             </li>
                             <li>
-                                <a href="event.php">Event Settings</a>
+                                <a href="event.php">User</a>
                             </li>
                         </ul>
                     </li>
@@ -129,6 +129,7 @@ $user = $auth->user();
             </nav>
 
 </head>
+
 
 <body>
 

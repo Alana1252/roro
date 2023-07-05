@@ -84,7 +84,7 @@ class PaymentController extends BaseController
         $this->updateTransactionStatus($transactionModel, $tiketModel);
 
 
-        return view('tiket/order_info', [
+        return view('tiket/tiket_saya', [
             'orderInfos' => $orderInfos,
 
         ]);
@@ -220,7 +220,7 @@ class PaymentController extends BaseController
         session()->setFlashdata('order_id', $orderId);
 
         // Redirect ke halaman detail pesanan
-        return redirect()->to("detail-pesanan");
+        return redirect()->to("tiket/detail-tiket");
     }
 
     public function showOrderDetails()
@@ -238,7 +238,7 @@ class PaymentController extends BaseController
         // Validasi order ID
         if (!$orderId) {
             // Jika order ID tidak ada, arahkan ke halaman /tiket_saya
-            return redirect()->to("/tiket_saya");
+            return redirect()->to("tiket/tiket_saya");
         }
 
         // Ambil data pesanan berdasarkan order ID

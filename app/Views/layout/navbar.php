@@ -49,7 +49,7 @@
                     <div class="header__navbar">
                         <ul class="list-unstyled">
                             <li class="has-sub">
-                                <a href="/tiket_saya">
+                                <a href="tiket/tiket_saya">
                                     <i class="fas fa-ticket-alt text-dark"> Tiket Saya</i>
                                 </a>
                             </li>
@@ -183,7 +183,7 @@
                         </div>
                     </li>
                     <li>
-                        <a href="/tiket_saya">
+                        <a href="tiket/tiket_saya">
                             <i class="ml-2 fa fa-photo"></i>Tiket Saya</a>
                     </li>
                     <li>
@@ -245,6 +245,7 @@
 
                     for (var i = 0; i < isis.length; i++) {
                         isis[i].classList.remove('text-dark');
+                        ss
 
                     }
                 } else {

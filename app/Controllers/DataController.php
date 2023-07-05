@@ -22,7 +22,7 @@ class DataController extends BaseController
         session()->set('selected_tiket_id', $tiketId);
 
         // Redirect ke halaman detail tiket
-        return redirect()->to('detail-tiket');
+        return redirect()->to('tambah/tiket');
     }
 
     public function detailTiket()
@@ -99,7 +99,7 @@ class DataController extends BaseController
         $snapToken = Snap::getSnapToken($params);
 
         // Tampilkan halaman detail tiket dengan data tiket yang dipilih, golongan penumpang, jenis kendaraan, harga kendaraan, dan jumlah harga
-        return view('tiket/detail_tiket', [
+        return view('tiket/tambah_pesanan', [
             'tiket' => $tiket,
             'kapalModel' => $kapalModel,
             'jamModel' => $jamModel,

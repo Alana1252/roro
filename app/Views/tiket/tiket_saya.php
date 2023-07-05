@@ -60,7 +60,7 @@
                             Belum dibayar
                         </div>
                     <?php endif; ?>
-                    <div class="card-detail-button" onclick="submitForm('<?= site_url('select-pesanan'); ?>', '<?= $orderInfo['order_id']; ?>')">
+                    <div class="card-detail-button" onclick="submitForm('<?= site_url('tiket/select-detail'); ?>', '<?= $orderInfo['order_id']; ?>')">
                         <i class="material-icons">keyboard_arrow_down</i>
                     </div>
                 </div>

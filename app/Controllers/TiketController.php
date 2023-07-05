@@ -8,6 +8,8 @@ use App\Models\JamModel;
 use App\Models\LokasiModel;
 use App\Models\KelasModel;
 use App\Controllers\BaseController;
+use App\Models\TransactionModel;
+use App\Models\KendaraanModel;
 
 class TiketController extends BaseController
 {
@@ -21,7 +23,7 @@ class TiketController extends BaseController
 
         // Jika belum login, tampilkan modal login
         if (!$isLoggedIn) {
-            return view('pages/tiket', [
+            return view('pages/cari_tiket', [
                 'isLoggedIn' => $isLoggedIn,
                 'userImage' => $userImage,
                 'showModal' => true
@@ -29,7 +31,7 @@ class TiketController extends BaseController
         }
 
         // Jika sudah login, tampilkan halaman tiket
-        return view('pages/tiket', [
+        return view('pages/cari_tiket', [
             'isLoggedIn' => $isLoggedIn,
             'userImage' => $userImage,
             'showModal' => false
@@ -84,7 +86,7 @@ class TiketController extends BaseController
             $tiket['kelas'] = $kelasTiket;
         }
 
-        return view('pages/tiket', [
+        return view('pages/cari_tiket', [
             'tikets' => $tikets,
             'kapalModel' => $kapalModel,
             'jamModel' => $jamModel,
@@ -96,5 +98,101 @@ class TiketController extends BaseController
             'kouta_penumpang' => $kouta_penumpang,
             'showModal' => $showModal // Mengirim nilai $showModal ke view
         ]);
+    }
+
+    public function searchTransaksi()
+    {
+        $tiketModel = new TiketModel();
+        $orderId = $this->request->getPost('order_id');
+
+        // Validasi input order_id
+        $validation = \Config\Services::validation();
+        $validation->setRules(['order_id' => 'required']);
+        if (!$validation->run(['order_id' => $orderId])) {
+            return redirect()->back()->withInput()->with('error', $validation->getErrors());
+        }
+
+        // Cari order_id dalam tabel transaksi
+        $transactionModel = new TransactionModel();
+        $transaction = $transactionModel->where('order_id', $orderId)->first();
+
+        if (!$transaction) {
+            return redirect()->back()->withInput()->with('error', 'Tiket tidak ditemukan.');
+        }
+
+        $tiket = $tiketModel->find($transaction['id_tiket']);
+        $jamModel = new JamModel();
+        $jamKeberangkatan = $jamModel->find($tiket['keberangkatan']);
+        $tanggalJamKeberangkatan = $tiket['tanggal'] . ' ' . $jamKeberangkatan['keberangkatan'];
+
+        $now = date('Y-m-d H:i:s');
+        if ($tanggalJamKeberangkatan < $now) {
+            return redirect()->back()->withInput()->with('error', 'Tiket anda sudah melewati waktunya');
+        }
+
+        // Redirect ke halaman tampilan order_id
+        return redirect()->to("/order/print/$orderId");
+    }
+
+
+    public function cariOrder()
+    {
+        return view('pages/cari_orderid');
+    }
+    public function view($orderId)
+    {
+        // Cari transaksi berdasarkan order_id
+        $transactionModel = new TransactionModel();
+        $kendaraanModel = new KendaraanModel();
+        $tiketModel = new TiketModel();
+        $kapalModel = new KapalModel();
+        $lokasiModel = new LokasiModel();
+        $jamModel = new JamModel();
+        $transaction = $transactionModel->where('order_id', $orderId)->first();
+        $order = $transactionModel->find($orderId);
+        if (!$transaction) {
+            return redirect()->back()->with('error', 'Tiket tidak ditemukan.');
+        }
+        if ($order) {
+            $id_tiket = $order['id_tiket'];
+            $tiket = $tiketModel->find($id_tiket);
+
+            $id_kendaraan = $order['kouta_kendaraan'];
+            $jenisKendaraan = $kendaraanModel->getJenis($id_kendaraan);
+
+            $order['kouta_kendaraan'] = $jenisKendaraan;
+
+            if ($tiket) {
+                $order['asal'] = $tiket['asal'];
+                $order['tujuan'] = $tiket['tujuan'];
+                $order['keberangkatan'] = $tiket['keberangkatan'];
+                $order['tiba'] = $tiket['tiba'];
+                $order['kapal'] = $kapalModel->getKapalName($tiket['kapal']);
+                $order['kelas'] = $order['kelas'];
+                $order['nama_lengkap'] = $this->formatCustomerNames($order['nama_lengkap']);
+                $order['kouta_penumpang'] = $order['kouta_penumpang'];
+                $order['kouta_kendaraan'] = $jenisKendaraan;
+                $order['tanggal'] = $tiketModel->getTanggalFormatted($tiket['tanggal']);
+                $order['asal'] = $lokasiModel->getAsal($tiket['asal']);
+                $order['tujuan'] = $lokasiModel->getTujuan($tiket['tujuan']);
+                $order['keberangkatan'] = $jamModel->getJamKeberangkatan($tiket['keberangkatan']);
+                $order['tiba'] = $jamModel->getJamTiba($tiket['tiba']);
+                $order['tanggal'] = $tiketModel->getTanggalFormatted($tiket['tanggal']);
+                $order['barcode'] = $order['barcode'];
+            }
+            // Tampilkan halaman tampilan order_id dengan data transaksi
+            return view('tiket/print_tiket', ['orderId' => $orderId, 'order' => $order]);
+        }
+    }
+    private function formatCustomerNames($names)
+    {
+        $customerNames = explode(',', $names);
+        $formattedNames = [];
+
+        foreach ($customerNames as $key => $name) {
+            $formattedNames[] =  ($key + 1) . '. ' . trim($name);
+        }
+
+        return implode('<br>', $formattedNames);
     }
 }

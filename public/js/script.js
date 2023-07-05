@@ -1,3 +1,40 @@
+// Sidebar
+(function ($) {
+  "use strict";
+
+  var fullHeight = function () {
+    $(".js-fullheight").css("height", $(window).height());
+    $(window).resize(function () {
+      $(".js-fullheight").css("height", $(window).height());
+    });
+  };
+  fullHeight();
+
+  // Tambahkan kelas "active" saat halaman dimuat
+  $(document).ready(function () {
+    $(".footer").hide();
+  });
+
+  $("#sidebarCollapse").on("click", function () {
+    $("#sidebar").toggleClass("active");
+
+    // Animasikan pergerakan geser menggunakan efek slide
+    if ($("#sidebar").hasClass("active")) {
+      $("#geser").animate({ "margin-left": "350px" }, 500);
+      $(".footer").hide();
+      $(".card-tiket").each(function (index) {
+        $(this).animate({ "margin-left": "350px" }, 500);
+      });
+    } else {
+      $("#geser").animate({ "margin-left": "200px" }, 500);
+      $(".footer").show();
+      $(".card-tiket").each(function (index) {
+        $(this).animate({ "margin-left": "200px" }, 500);
+      });
+    }
+  });
+})(jQuery);
+
 var asalSelect = document.getElementById("asal");
 var tujuanSelect = document.getElementById("tujuan");
 
@@ -252,44 +289,6 @@ $(function () {
     },
   });
 });
-
-// Sidebar
-(function ($) {
-  "use strict";
-
-  var fullHeight = function () {
-    $(".js-fullheight").css("height", $(window).height());
-    $(window).resize(function () {
-      $(".js-fullheight").css("height", $(window).height());
-    });
-  };
-  fullHeight();
-
-  // Tambahkan kelas "active" saat halaman dimuat
-  $(document).ready(function () {
-    $("#sidebar").addClass("active");
-    $(".footer").hide();
-  });
-
-  $("#sidebarCollapse").on("click", function () {
-    $("#sidebar").toggleClass("active");
-
-    // Animasikan pergerakan geser menggunakan efek slide
-    if ($("#sidebar").hasClass("active")) {
-      $("#geser").animate({ "margin-left": "350px" }, 500);
-      $(".footer").hide();
-      $(".card-tiket").each(function (index) {
-        $(this).animate({ "margin-left": "350px" }, 500);
-      });
-    } else {
-      $("#geser").animate({ "margin-left": "200px" }, 500);
-      $(".footer").show();
-      $(".card-tiket").each(function (index) {
-        $(this).animate({ "margin-left": "200px" }, 500);
-      });
-    }
-  });
-})(jQuery);
 
 function redirectToDetailTiket() {
   var dewasaValue = parseInt(document.getElementById("dewasa").value);

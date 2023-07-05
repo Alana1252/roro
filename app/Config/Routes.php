@@ -31,45 +31,42 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->add('/', 'HomeController::index'); // Route untuk halaman home
-$routes->add('/user', 'UserController::index'); // Route untuk halaman user
+
 
 $routes->addRedirect('/', 'HomeController::index');
 $routes->get('/', 'News::index');
 $routes->get('/home', 'News::index');
 
-
+//generate tiket
 $routes->get('generate', 'CronController::generateTiket');
 
 
-//Tiket Routes
+//Cari Tiket
 $routes->get('tiket/search', 'TiketController::search');
 $routes->get('/tiket', 'TiketController::index');
 
-$routes->get('detail-pesanan', 'PaymentController::showOrderDetails', ['as' => 'detail-pesanan']);
-$routes->post('select-pesanan', 'PaymentController::detailPesanan', ['as' => 'select-pesanan']);
+//detail tiket saya
+$routes->get('tiket/tiket-saya', 'PaymentController::showOrderInfo');
+$routes->get('tiket/detail-tiket', 'PaymentController::showOrderDetails', ['as' => 'detail-pesanan']);
+$routes->post('tiket/select-detail', 'PaymentController::detailPesanan', ['as' => 'select-pesanan']);
 
-
-$routes->get('detail-tiket', 'DataController::detailTiket', ['as' => 'detail-tiket']);
-$routes->post('select-ticket', 'DataController::selectTicket', ['as' => 'select-ticket']);
-
-
-$routes->post('update_payment', 'TambahController::updatePayment');
-$routes->get('tambah', 'TambahController::index');
+//Tambah tiket hasil pencarian
+$routes->get('tambah/tiket', 'DataController::detailTiket', ['as' => 'detail-tiket']);
+$routes->post('tambah-tiket', 'DataController::selectTicket', ['as' => 'select-ticket']);
+$routes->post('tambah/update_payment', 'TambahController::updatePayment');
 $routes->post('tambah/tambahPaymentResult', 'TambahController::tambahPaymentResult');
 
-$routes->group('payment', ['namespace' => 'App\Controllers'], function ($routes) {
-    $routes->get('/', 'PaymentController::index');
-});
+//Print tiket
+$routes->get('/cari-orderid', 'TiketController::cariOrder');
+$routes->add('/order/search', 'TiketController::searchTransaksi'); // Route untuk pencarian order_id (POST)
+$routes->add('/order/print/(:any)', 'TiketController::view/$1'); // Route untuk halaman tampilan order_id
 
-$routes->get('tiket_saya', 'PaymentController::showOrderInfo');
-$routes->post('payment/get-snap-token', 'PaymentController::getSnapToken');
-$routes->post('payment/handle-payment-result', 'PaymentController::handlePaymentResult');
+$routes->get('/admin', 'AdminController::index', ['filter' => 'role:admin']);
+$routes->get('/admin/index', 'AdminController::index', ['filter' => 'role:admin']);
+$routes->get('/admin', 'AdminController::index', ['filter' => 'role:admin']); // Menampilkan halaman admin
+$routes->post('/admin/update-user', 'AdminController::updateUser', ['filter' => 'role:admin']); // Mengupdate data pengguna
 
 
-
-// ...
-$routes->get('barcode', 'BarcodeController::index');
-$routes->get('tiket/print/(:segment)', 'PaymentController::generateBarcode/$1');
 
 
 /*

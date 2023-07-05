@@ -194,7 +194,7 @@ $user = $auth->user();
                                 Habis
                             </div>
                         <?php else : ?>
-                            <form action="<?= site_url('select-ticket'); ?>" method="post">
+                            <form action="<?= site_url('tambah-tiket'); ?>" method="post">
                                 <input type="hidden" name="tiket_id" value="<?= $tiket['id_tiket']; ?>">
                                 <button type="submit" class="button-pilih">Pilih Tiket</button>
                             </form>

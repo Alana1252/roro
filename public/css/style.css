@@ -1382,3 +1382,64 @@ select.list-dt:focus {
 .pdf-unduh:hover {
   color: skyblue;
 }
+
+/* Print-Tiket */
+.garis-horizontal-print {
+  position: relative;
+  height: 2px;
+  background-color: rgb(4, 4, 4);
+  margin: 10px 0;
+  width: 49%;
+}
+.print-kelas {
+  position: absolute;
+  margin-right: 55px;
+  margin-top: -18px;
+  left: 42%;
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.barcode-print {
+  top: 30%;
+  position: absolute;
+  height: 180px;
+  width: 180px;
+  margin-left: 30px;
+}
+@media print {
+  .card-detail-isi {
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    padding: 20px;
+  }
+}
+.label {
+  display: inline-block;
+  width: 100px;
+}
+
+.value {
+  display: inline-block;
+}
+.admin {
+  background-color: yellow;
+  -webkit-clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+  clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+}
+
+.operator {
+  background-color: rgb(103, 238, 103);
+  -webkit-clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+  clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+}
+.user {
+  background-color: rgb(168, 168, 168);
+  -webkit-clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+  clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+}
