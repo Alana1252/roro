@@ -1,3 +1,16 @@
+function getData() {
+  // Mengambil data dari server, misalnya melalui AJAX
+
+  // Contoh data yang diambil dari server
+  var labels = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli"];
+  var data = [78, 81, 80, 45, 34, 12, 40];
+
+  // Mengupdate grafik dengan data baru
+  myChart.data.labels = labels;
+  myChart.data.datasets[0].data = data;
+  myChart.update();
+}
+
 (function ($) {
   // USE STRICT
   "use strict";
@@ -10,7 +23,7 @@
       var myChart = new Chart(ctx, {
         type: "line",
         data: {
-          labels: ["January", "February", "March", "April", "May", "June", "July"],
+          labels: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli"],
           type: "line",
           datasets: [
             {
@@ -356,14 +369,14 @@
           datasets: [
             {
               label: "My First dataset",
-              data: [24, 5],
+              data: [60, 40],
               backgroundColor: ["#00b5e9", "#fa4251"],
               hoverBackgroundColor: ["#00b5e9", "#fa4251"],
               borderWidth: [0, 0],
               hoverBorderColor: ["transparent", "transparent"],
             },
           ],
-          labels: ["Members", "Not Members"],
+          labels: ["Products", "Services"],
         },
         options: {
           maintainAspectRatio: false,
@@ -632,7 +645,7 @@
               hoverBorderColor: ["transparent", "transparent"],
             },
           ],
-          labels: ["Members", "Not Members"],
+          labels: ["Products", "Services"],
         },
         options: {
           maintainAspectRatio: false,
@@ -919,6 +932,7 @@
 
   try {
     //radar chart
+    var ctx = document.getElementById("radarChart");
     if (ctx) {
       ctx.height = 200;
       var myChart = new Chart(ctx, {

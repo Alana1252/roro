@@ -12,15 +12,19 @@ $user = $auth->user();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Library Bootstrap Icons CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- jQuery -->
-
+    <link href="/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
     <link rel="stylesheet" href="/css/theme.css" media="all">
     <!--Sidebar-->
+</head>
+
+<body class="animsition ">
 
     <div class="wrapper d-flex align-items-stretch">
         <nav id="sidebar" class="">
@@ -31,38 +35,38 @@ $user = $auth->user();
                         <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><?= $user->username ?><span class="name"></span>!</a>
                         <ul class="collapse list-unstyled" id="homeSubmenu">
                             <li>
-                                <a>Email: <?= $user->email ?></a>
+                                <a><i class="fa fa-envelope"></i> <?= $user->email ?></a>
                             </li>
                             <li>
-                                <a>Created: <?= $user->created_at ?></a>
+                                <a><i class="fa fa-user-plus"></i> <?= $user->created_at ?></a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="page.php">Account Options</a>
+                        <a href="/account/my-account"><i class="bi bi-person-fill-gear"></i> Account Options</a>
                     </li>
                     <li>
-                        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
+                        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle "><i class="bi bi-back"></i> Pages</a>
                         <ul class="collapse list-unstyled" id="pageSubmenu">
                             <li>
-                                <a href="home.php">Home</a>
+                                <a href="/home"><i class="bi bi-house-fill "></i> Home</a>
                             </li>
                             <li>
-                                <a href="album.php">Tiket</a>
+                                <a href="/admin/tiket"><i class="bi bi-ticket-perforated-fill"></i> Tiket</a>
                             </li>
                             <li>
-                                <a href="memori.php">Transaksi</a>
+                                <a href="/admin/transaksi"><i class="bi bi-cash-stack"></i> Transaksi</a>
                             </li>
                             <li>
-                                <a href="event.php">User</a>
+                                <a href="/admin/user"><i class="bi bi-people-fill"></i> Users</a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="https://ti6a.my.id/">Go to Website</a>
+                        <a href="/home"><i class="bi bi-cassette-fill"></i> Go to Website</a>
                     </li>
                     <li>
-                        <a href="#">Contact Me</a>
+                        <a href="/logout"><i class="fa fa-sign-out"></i> Log Out</a>
                     </li>
                 </ul>
 
@@ -92,48 +96,30 @@ $user = $auth->user();
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item">
-                                <a class="nav-link" href="index.php">Home</a>
+                                <a class="nav-link" href="/home">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="album.php">Album</a>
+                                <a class="nav-link" href="/admin/tiket">Tiket</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="memori.php">Memory</a>
+                                <a class="nav-link" href="/admin/transaksi">Transaksi</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="event.php">Event</a>
+                                <a class="nav-link" href="/admin/user">User</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/admin/more">More</a>
                             </li>
 
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
-                            <div class="collapse navbar-collapse" id="navbarNav">
-                                <ul class="navbar-nav ml-auto">
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="bi bi-person-fill"></i>
-                                            <i class="bi bi-sort-desc"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                            <p></p>
-                                            <a class="dropdown-item" href="page.php" class="rounded-circle mr-2" style="height: 23px; width: 23px;">
-                                                <strong class="text-left"></strong>
-                                                <hr class="dropdown-divider" />
-                                                <a class="dropdown-item text-center" href="/logout">Log Out</a>
-                                    </li>
-                                </ul>
-                            </div>
                         </ul>
                     </div>
                 </div>
             </nav>
-
-</head>
-
-
-<body>
-
-
+            <script src="/vendor/animsition/animsition.min.js"></script>
+            <script src="/js/main.js"></script>
 </body>
 
 </html>

@@ -28,6 +28,7 @@ class TransactionModel extends Model
         'snap_token',
     ];
 
+
     public function insertTransaction($data)
     {
         $this->insert($data);
@@ -66,5 +67,48 @@ class TransactionModel extends Model
             ->where('transaksi.transaction_status', 'pending')
             ->where('users.id', $userId)
             ->countAllResults();
+    }
+
+    public function jumlahPaymentBerhasil()
+    {
+        return $this->db->table('transaksi')
+            ->where('transaction_status', 'settlement')
+            ->selectSum('gross_amount')
+            ->get()
+            ->getRowArray();
+    }
+    public function jumlahPaymentPending()
+    {
+        return $this->db->table('transaksi')
+            ->where('transaction_status', 'pending')
+            ->selectSum('gross_amount')
+            ->get()
+            ->getRowArray();
+    }
+    public function jumlahPaymentAll()
+    {
+        return $this->db->table('transaksi')
+            ->selectSum('gross_amount')
+            ->get()
+            ->getRowArray();
+    }
+    public function getpaymentBulan()
+    {
+        $bulanIni = date('Y-m');
+        $this->where('transaction_status', 'settlement');
+        $this->like('transaction_time', $bulanIni);
+        $result = $this->get()->getRowArray();
+
+        return $result;
+    }
+
+    public function getTiketBulan()
+    {
+        $bulanIni = date('Y-m');
+        $this->where('transaction_status', 'settlement');
+        $this->like('transaction_time', $bulanIni);
+        $result = $this->countAllResults();
+
+        return $result;
     }
 }

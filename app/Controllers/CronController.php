@@ -2,8 +2,8 @@
 
 namespace App\Controllers;
 
-use App\Models\TiketModel;
 use CodeIgniter\Controller;
+use App\Models\TiketModel;
 
 class CronController extends Controller
 {
@@ -19,8 +19,8 @@ class CronController extends Controller
         // Get current date
         $currentDate = date('Y-m-d');
 
-        // Get the end date by adding 2 weeks to the current date
-        $endDate = date('Y-m-d', strtotime('+2 weeks', strtotime($currentDate)));
+        // Get the end date by adding 1 month to the current date
+        $endDate = date('Y-m-d', strtotime('+1 month', strtotime($currentDate)));
 
         // Generate and insert new tiket into the database for each date
         $date = $currentDate;
@@ -54,5 +54,8 @@ class CronController extends Controller
             // Move to the next date
             $date = date('Y-m-d', strtotime('+1 day', strtotime($date)));
         }
+
+        // Return success message and redirect
+        return redirect()->to(site_url('/home'))->with('success', 'Tiket berhasil digenerate');
     }
 }

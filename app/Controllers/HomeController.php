@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use CodeIgniter\Controller;
+use App\Models\TransactionModel;
 
 class HomeController extends Controller
 {
@@ -17,7 +18,8 @@ class HomeController extends Controller
         // Tampilkan halaman home.php dengan data isLoggedIn dan userImage
         return view('pages/home', [
             'isLoggedIn' => $isLoggedIn,
-            'userImage' => $userImage
+            'userImage' => $userImage,
+
         ]);
     }
 }

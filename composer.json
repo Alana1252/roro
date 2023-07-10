@@ -12,8 +12,10 @@
     "endroid/qr-code": "^4.8",
     "guzzlehttp/guzzle": "^7.7",
     "jenssegers/date": "^4.0",
+    "maatwebsite/excel": "^1.1",
     "midtrans/midtrans-php": "^2.5",
     "myth/auth": "^1.2",
+    "phpoffice/phpspreadsheet": "^1.29",
     "snapappointments/bootstrap-select": "^1.13"
   },
   "require-dev": {
