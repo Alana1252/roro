@@ -4,7 +4,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <div><?php if ($user->status === 'Aktif') : ?>
-                            <img src="<?= base_url('img/' . $user->user_image) ?>" class="img img-50">
+                            <img src="<?= base_url('/img/user/' . $user->user_image) ?>" class="img img-50">
                         <?php endif ?>
                         <h5 class="modal-title" id="detailModalLabel<?= $user->userid; ?>">Detail Pengguna</h5>
                     </div>

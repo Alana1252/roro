@@ -56,6 +56,6 @@ class CronController extends Controller
         }
 
         // Return success message and redirect
-        return redirect()->to(site_url('/home'))->with('success', 'Tiket berhasil digenerate');
+        return redirect()->to(site_url('/admin/tiket'))->with('success', 'Tiket berhasil digenerate');
     }
 }

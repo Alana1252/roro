@@ -22,6 +22,7 @@ use Endroid\QrCode\Writer\PngWriter;
 
 class PaymentController extends BaseController
 {
+
     public function showOrderInfo()
     {
         $kendaraanModel = new KendaraanModel();
@@ -42,24 +43,22 @@ class PaymentController extends BaseController
         }
 
         $orderInfos = [];
+        $hasTransaction = false; // Menandakan apakah pengguna memiliki transaksi atau tidak
+
         foreach ($transactions as $transaction) {
-            // Get the user ID from the transaction data
             $transactionUserId = $transaction['users'];
 
             if ($transaction) {
                 $id_tiket = $transaction['id_tiket'];
                 $id_kendaraan = $transaction['kouta_kendaraan'];
 
-                // Mengambil data tiket berdasarkan id_tiket
                 $tiket = $tiketModel->find($id_tiket);
                 $jenisKendaraan = $kendaraanModel->getJenis($id_kendaraan);
 
-                // Check if the transaction user ID matches the logged-in user ID
                 if ($userId && $transactionUserId === $userId) {
                     $orderInfo = $this->getOrderInfo($transaction['snap_token']);
 
                     if ($tiket) {
-                        // Add the tiket data to the orderInfo array
                         $orderInfo['asal'] = $lokasiModel->getAsal($tiket['asal']);
                         $orderInfo['tujuan'] = $lokasiModel->getTujuan($tiket['tujuan']);
                         $orderInfo['keberangkatan'] = $jamModel->getJamKeberangkatan($tiket['keberangkatan']);
@@ -71,24 +70,26 @@ class PaymentController extends BaseController
                         $orderInfo['kouta_kendaraan'] = $jenisKendaraan;
                         $orderInfo['tanggal'] = $tiketModel->getTanggalFormatted($tiket['tanggal']);
 
-
-
-
                         $orderInfos[] = $orderInfo;
+                        $hasTransaction = true; // Setel nilai ke true karena pengguna memiliki transaksi
                     }
                 }
             }
         }
 
+        if (!$hasTransaction) {
+            // Jika pengguna tidak memiliki transaksi, redirect ke halaman "/tiket"
+            return redirect()->to('/tiket');
+        }
+
         // Update transaction status
         $this->updateTransactionStatus($transactionModel, $tiketModel);
 
-
         return view('tiket/tiket_saya', [
             'orderInfos' => $orderInfos,
-
         ]);
     }
+
     public function getOrderInfo($snapToken)
     {
         $client = new Client();
@@ -174,7 +175,7 @@ class PaymentController extends BaseController
                             ->setBackgroundColor(new Color(255, 255, 255));
 
                         // Create generic logo
-                        $logo = Logo::create(FCPATH . '/img/logo2.png')
+                        $logo = Logo::create(FCPATH . '/img/icon/logo.png')
                             ->setResizeToWidth(50)
                             ->setPunchoutBackground(true);
 
@@ -204,14 +205,22 @@ class PaymentController extends BaseController
                 if ($transaction['kouta_kendaraan'] > $tiket['kouta_kendaraan'] || $transaction['kouta_penumpang'] > $tiket['kouta_penumpang']) {
                     $transactionModel->delete($transaction['order_id']);
                 }
+            } else {
+                $transactionModel->delete($transaction['order_id']);
             }
         }
 
-
+        // Delete transactions with transaction_status = 'expire'
+        $expireTransactions = $transactionModel->where('transaction_status', 'expire')->findAll();
+        foreach ($expireTransactions as $transaction) {
+            $transactionModel->delete($transaction['order_id']);
+        }
 
 
         return redirect()->back()->with('success', 'Transaction status updated successfully.');
     }
+
+
     public function detailPesanan()
     {
         $orderId = $this->request->getPost('order_id'); // Ambil order ID dari input form
@@ -238,7 +247,7 @@ class PaymentController extends BaseController
         // Validasi order ID
         if (!$orderId) {
             // Jika order ID tidak ada, arahkan ke halaman /tiket_saya
-            return redirect()->to("tiket/tiket_saya");
+            return redirect()->to("tiket/tiket-saya");
         }
 
         // Ambil data pesanan berdasarkan order ID

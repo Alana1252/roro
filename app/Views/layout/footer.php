@@ -114,8 +114,8 @@
 
   <!-- Copyright -->
   <div class="text-center" style="background-color: black;">
-    © 2021 Copyright:
-    <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+    <img src="/img/icon/.png" style="max-width: 35px; max-height:35px;">
+    <a class="fw-bold text-white">Go-RoRo</a>
   </div>
   <!-- Copyright -->
 </footer>

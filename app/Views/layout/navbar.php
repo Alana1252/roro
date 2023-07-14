@@ -44,23 +44,23 @@
             <div class="section__content section__content--p35">
                 <div class="header3-wrap">
                     <a href="#">
-                        <img class="img-cir logo-desktop" src="/img/logo2.png" alt="Airputih" />
+                        <img class="img-cir logo-desktop" src="/img/icon/logo.png" alt="Airputih" />
                     </a>
                     <div class="header__navbar">
                         <ul class="list-unstyled">
                             <li class="has-sub">
-                                <a href="tiket/tiket_saya">
+                                <a href="tiket/tiket-saya">
                                     <i class="fas fa-ticket-alt text-dark"> Tiket Saya</i>
                                 </a>
                             </li>
                             <li>
-                                <a href="#member">
-                                    <i class="fas fa-child text-dark"> Members</i>
+                                <a href="/tiket">
+                                    <i class="fas fas fa-search text-dark"> Cari Tiket</i>
                                 </a>
                             </li>
                             <li>
-                                <a href="#event">
-                                    <i class="fas fa-trophy text-dark"> Events</i>
+                                <a href="/live-cctv">
+                                    <i class="fas bi-camera-video-fill text-dark"> Live CCTV</i>
                                 </a>
                             </li>
                         </ul>
@@ -68,7 +68,7 @@
                     <div class="account-wrap">
                         <div class="account-item account-item--style2 clearfix js-item-menu">
                             <div class="image">
-                                <img src="<?= base_url('img/' . $user->user_image) ?>" alt="User Image">
+                                <img src="<?= base_url('img/user/' . $user->user_image) ?>" alt="User Image">
                             </div>
                             <div class="content">
                                 <a class="js-acc-btn" href="#"></a>
@@ -77,7 +77,7 @@
                                 <div class="info clearfix">
                                     <div class="image">
                                         <a href="#">
-                                            <img src="<?= base_url('img/' . $user->user_image) ?>" alt="User Image">
+                                            <img src="<?= base_url('img/user/' . $user->user_image) ?>" alt="User Image">
                                         </a>
                                     </div>
                                     <div class="content">
@@ -89,16 +89,12 @@
                                 </div>
                                 <div class="account-dropdown__body">
                                     <div class="account-dropdown__item">
-                                        <a href="#">
+                                        <a href="user/account">
                                             <i class="zmdi zmdi-account"></i>Account</a>
                                     </div>
                                     <div class="account-dropdown__item">
-                                        <a href="#">
-                                            <i class="zmdi zmdi-settings"></i>Setting</a>
-                                    </div>
-                                    <div class="account-dropdown__item">
-                                        <a href="#">
-                                            <i class="zmdi zmdi-money-box"></i>Billing</a>
+                                        <a href="/tiket/tiket-saya">
+                                            <i class="zmdi zmdi-shopping-cart"></i>Tiket Saya</a>
                                     </div>
                                 </div>
                                 <div class="account-dropdown__footer">
@@ -114,7 +110,7 @@
             <div class="section__content section__content--p35">
                 <div class="header3-wrap">
                     <a href="#">
-                        <img class="img-cir logo-desktop" src="/img/logo2.png" alt="Airputih" />
+                        <img class="img-cir logo-desktop" src="/img/icon/logo.png" alt="Airputih" />
                     </a>
                     <div class="account-wrap">
                         <a href="/login" class="btn button-shadow">Login</a>
@@ -136,7 +132,7 @@
             <div class="container-fluid">
                 <div class="header-mobile-inner">
 
-                    <img src="/img/logo.png" alt="Logo" class="logos">
+                    <img src="/img/icon/.png" alt="Logo" class="logos">
 
                     <button class="hamburger hamburger--slider" type="button">
                         <span class="hamburger-box">
@@ -149,59 +145,54 @@
         <nav class="navbar-mobile">
             <div class="container-fluid">
                 <ul class="navbar-mobile__list list-unstyled">
-                    <li>
-                        <div class="account-wrap">
-                            <div class="account-item clearfix js-item-menu">
-
-                                <div class="image" style="width: 25px; height: auto; margin-left: 20px; margin-top: 17px;">
-                                    <img src="" alt="User Photo">
-                                </div>
-                                <div class="content">
-                                    <a class="js-acc-btn" href="#"></a>
-                                </div>
-                                <div class="account-dropdown js-dropdown">
-                                    <div class="info clearfix">
-                                        <div class="image ">
-                                            <img src="" alt="User Photo">
-                                        </div>
-                                        <div class="content">
-                                            <div class="name">
-
-                                                <div class="email"></div>
+                    <?php if ($isLoggedIn) : ?>
+                        <li>
+                            <div class="account-wrap ml-4">
+                                <div class="account-item clearfix js-item-menu">
+                                    <div class="content">
+                                        <div class="info clearfix">
+                                            <div class="image mr-3">
+                                                <img src="<?= base_url('img/user/' . $user->user_image) ?>" alt="User Image">
+                                            </div>
+                                            <div class="content">
+                                                <div class="name">
+                                                    <?= $user->username ?>
+                                                    <div class="email"> <?= $user->email ?></div>
+                                                </div>
+                                            </div>
+                                            <div class="account-dropdown__body">
                                             </div>
                                         </div>
-                                        <div class="account-dropdown__body">
-                                        </div>
-                                        <div class="account-dropdown__item">
-                                            <i class="zmdi zmdi-settings"></i> Settings
-                                        </div>
-
                                     </div>
                                 </div>
-
                             </div>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="tiket/tiket_saya">
-                            <i class="ml-2 fa fa-photo"></i>Tiket Saya</a>
-                    </li>
-                    <li>
-                        <a href="#member">
-                            <i class="ml-2 fa fa-group"></i>Member</a>
-                    </li>
-                    <li>
-                        <a href="#event">
-                            <i class="ml-2 fa fa-gamepad"></i>Event</a>
-                    </li>
-                    <li>
-                        <a href="#about">
-                            <i class="ml-3 fa fa-info"></i>About</a>
-                    </li>
-                    <li>
-                        <a href="login/logout.php">
-                            <i class="ml-2 fa fa-power-off"></i>Logout</a>
-                    </li>
+                        </li>
+                        <li>
+                            <a href="tiket/tiket-saya">
+                                <i class="ml-2 fas fa-ticket-alt"></i>Tiket Saya</a>
+                        </li>
+                        <li>
+                            <a href="/tiket">
+                                <i class="ml-2 fas fa-search"></i>Cari Tiket</a>
+                        </li>
+                        <li>
+                            <a href="/live-cctv">
+                                <i class="ml-2 bi-camera-video-fill"></i>Live CCTV</a>
+                        </li>
+                        <li>
+                            <a href="#about">
+                                <i class="ml-2 fa fa-gear"></i>Settings</a>
+                        </li>
+                        <li>
+                            <a href="logout.php">
+                                <i class="ml-2 fa fa-power-off"></i>Logout</a>
+                        </li>
+                    <?php else : ?>
+                        <li>
+                            <a href="/login">
+                                <i class="ml-2 fa bi bi-box-arrow-in-right"></i>Login</a>
+                        </li>
+                    <?php endif; ?>
                 </ul>
             </div>
         </nav>

@@ -11,10 +11,10 @@
     <!-- Include jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link href="/css/style.css" rel="stylesheet" media="all">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <!-- Include Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-    <title>Wizard Form</title>
+    <title>Tambah Tiket | Go-RoRo</title>
     <style>
         .slide {
             display: none;
@@ -42,10 +42,11 @@
                                 <div class="slide" id="slide1">
                                     <fieldset>
                                         <div class="form-card">
-                                            <h2 class="fs-title">Tiket Anda</h2>
-                                            <?= $this->include('layout/tiket_dipilih'); ?>
+                                            <h2 class="fs-title">Personal Information</h2>
+                                            <div><?= $this->include('layout/tiket_dipilih'); ?></div>
                                         </div>
-                                        <button onclick="nextSlide()">Next</button>
+                                        <a href="/tiket"><button class="btn btn-warning"><i class="bi bi-caret-left-fill"></i> Cancel</button></a>
+                                        <button class="btn btn-success" onclick="nextSlide()">Next <i class="bi bi-caret-right-fill"></i></button>
                                     </fieldset>
                                 </div>
                                 <div class="slide" id="slide2">
@@ -54,8 +55,8 @@
                                             <h2 class="fs-title">Personal Information</h2>
                                             <div id="nameInputs"></div>
                                         </div>
-                                        <button onclick="previousSlide()">Previous</button>
-                                        <button onclick="nextSlide()">Next</button>
+                                        <button class="btn btn-warning" onclick="previousSlide()"><i class="bi bi-caret-left-fill"></i> Previous</button>
+                                        <button class="btn btn-success" onclick="nextSlide()">Next <i class="bi bi-caret-right-fill"></i></button>
                                     </fieldset>
                                 </div>
                                 <div class="slide" id="slide3">
@@ -86,20 +87,14 @@
                                             </div>
                                             <div class="row detail-form-isi2">
                                                 <div class="col">
-                                                    <div class="">Metode Pembayaran :</div>
-                                                    <div class="image-container">
-                                                        <input type="radio" id="radio1" name="gambar" onclick="selectImage(1)">
-                                                        <label for="radio1">
-                                                            <button id="pay-button">Pay!</button>
-                                                            <img src="img/alfamart.png" alt="Gambar 1" />
-                                                        </label>
-                                                    </div>
-
-                                                    <div class="image-container">
-                                                        <input type="radio" id="radio2" name="gambar" onclick="selectImage(2)">
-                                                        <label for="radio2">
-                                                            <img src="img/gopay.png" alt="Gambar 2" />
-                                                        </label>
+                                                    <div class="">Metode Pembayaran</div>
+                                                    <div class="card mscard" id="pay-button" style="max-width: 18rem;">
+                                                        <img src="/img/layout/bankpng.png" alt="bank" style="height: 25px; width:100px; ">
+                                                        <div class="card-body ">
+                                                            <p class="card-text fw-bold" style="position: absolute; top:35%;">Rp.<?php echo number_format($jumlahHarga, 0, ',', '.'); ?></p>
+                                                            <div class="card-footer bg-transparent" style="position: absolute; top:70%; width:110px;"></div>
+                                                        </div>
+                                                        <div class="ml-4">TEST</div>
                                                     </div>
                                                 </div>
                                                 <div class="col">
@@ -120,11 +115,12 @@
                                                     <div>: Rp.<?php echo number_format($hargaPenumpang, 0, ',', '.'); ?></div>
                                                     <div class="garis-putih"></div>
                                                     <div class="pt-2">: Rp.<?php echo number_format($jumlahHarga, 0, ',', '.'); ?></div>
+
                                                 </div>
                                             </div>
                                         </div>
-                                        <button onclick="previousSlide()">Previous</button>
-                                        <button onclick="nextSlide()">Next</button>
+                                        <button class="btn btn-warning" onclick="previousSlide()"><i class="bi bi-caret-left-fill"></i> Previous</button>
+                                        <button class="btn btn-success" onclick="nextSlide()">Next <i class="bi bi-caret-right-fill"></i></button>
                                     </fieldset>
                                 </div>
                                 <div class="slide" id="slide4">

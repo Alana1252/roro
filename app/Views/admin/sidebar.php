@@ -8,7 +8,7 @@ $user = $auth->user();
 ?>
 
 <head>
-    <title></title>
+    <title><?= $title ?> | Go-RoRo</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Library Bootstrap Icons CSS -->
@@ -39,29 +39,45 @@ $user = $auth->user();
                         <span class="icon-wrapper">
                             <i class="bi bi-house icons"></i>
                         </span>
-                        <div>Home</div>
+                        <div>Dashboard</div>
                     </a>
                 </li>
-                <li class="deactive">
-                    <a href="/tiket">
-                        <span class="icon-wrapper">
-                            <i class="bi bi-search icons"></i>
-                        </span>
-                        <div>Cari Tiket</div>
-                    </a>
-                </li>
-                <li class="deactive">
-                    <a href="/tiket/tiket-saya">
-                        <i class="bi bi-ticket-perforated icons"></i>
-                        <div>Tiket Saya</div>
-                    </a>
-                </li>
-                <li class="deactive">
-                    <a href="/live-cctv">
-                        <i class="bi bi-camera-video icons"></i>
-                        <div>Live CCTV</div>
-                    </a>
-                </li>
+                <?php if (!logged_in() || in_groups('admin')) : ?>
+                    <li class="deactive">
+                        <a href="/admin/transaksi">
+                            <span class="icon-wrapper">
+                                <i class="bi bi-graph-up icons"></i>
+                            </span>
+                            <div>Transaksi</div>
+                        </a>
+                    </li>
+                    <li class="deactive">
+                        <a href="/admin/tiket">
+                            <i class="bi bi-ticket-perforated icons"></i>
+                            <div>Tiket</div>
+                        </a>
+                    </li>
+                    <li class="deactive">
+                        <a href="/admin/user">
+                            <i class="bi bi-people icons"></i>
+                            <div>Users</div>
+                        </a>
+                    </li>
+                <?php elseif (in_groups('operator')) : ?><li class="deactive">
+                        <a href="/operator/tiket">
+                            <span class="icon-wrapper">
+                                <i class="bi bi-ticket-perforated icons"></i>
+                            </span>
+                            <div>Tiket</div>
+                        </a>
+                    </li>
+                    <li class="deactive">
+                        <a href="/operator/print">
+                            <i class="bi bi-printer icons"></i>
+                            <div>Print Tiket</div>
+                        </a>
+                    </li>
+                <?php endif; ?>
             </ul>
 
             <div class="footer">
@@ -119,16 +135,16 @@ $user = $auth->user();
                                         <div class="account-dropdown__body">
                                             <div class="account-dropdown__item">
                                                 <a href="/user/account">
-                                                    <i class="bi bi-person"></i>Account</a>
+                                                    <i class="zmdi zmdi-account"></i>Account</a>
                                             </div>
                                             <div class="account-dropdown__item">
-                                                <a href="/tiket/tiket-saya">
-                                                    <i class="bi bi-ticket-perforated"></i>Tiket</a>
+                                                <a href="#">
+                                                    <i class="zmdi zmdi-money-box"></i>Billing</a>
                                             </div>
                                         </div>
                                         <div class="account-dropdown__footer">
-                                            <a href="logout">
-                                                <i class="bi bi-power"></i>Logout</a>
+                                            <a href="#">
+                                                <i class="zmdi zmdi-power"></i>Logout</a>
                                         </div>
                                     </div>
                                 </div>

@@ -38,15 +38,18 @@ $routes->add('/home', 'HomeController::index');
 $routes->addRedirect('/', 'HomeController::index');
 $routes->get('/', 'News::index');
 $routes->get('/home', 'News::index');
+$routes->get('live-cctv', 'LiveController::index');
 
 
-//generate tiket
-$routes->get('generate', 'CronController::generateTiket');
+$routes->get('user/account', 'UserController::user');
 
 
 //Cari Tiket
 $routes->get('tiket/search', 'TiketController::search', ['as' => 'search']);
 $routes->get('/tiket', 'TiketController::index');
+$routes->post('user/upload-profile-image', 'UserController::updateProfileImage', ['as' => 'user.upload_profile_image']);
+$routes->post('user/update-username', 'UserController::updateUsername', ['as' => 'user.update_username']);
+
 
 //detail tiket saya
 $routes->get('tiket/tiket-saya', 'PaymentController::showOrderInfo');
@@ -60,18 +63,23 @@ $routes->post('tambah/update_payment', 'TambahController::updatePayment');
 $routes->post('tambah/tambahPaymentResult', 'TambahController::tambahPaymentResult');
 
 //Print tiket
-$routes->get('/cari-orderid', 'TiketController::cariOrder');
-$routes->add('/order/search', 'TiketController::searchTransaksi'); // Route untuk pencarian order_id (POST)
-$routes->add('/order/print/(:any)', 'TiketController::view/$1'); // Route untuk halaman tampilan order_id
+$routes->get('operator/print', 'OperatorController::cariOrder');
+$routes->add('/operator/search', 'OperatorController::searchTransaksi'); // Route untuk pencarian order_id (POST)
+$routes->add('/operator/print/(:any)', 'OperatorController::view/$1'); // Route untuk halaman tampilan order_id
+
 
 $routes->get('/admin', 'AdminController::user', ['filter' => 'role:admin']);
 $routes->get('/admin/user', 'AdminController::user', ['filter' => 'role:admin']);
 $routes->add('user/edit/(:segment)', 'AdminController::editUser/$1', ['filter' => 'role:admin']);
-$routes->get('user/delete/(:num)', 'AdminController::deleteUser/$1');
+$routes->get('user/delete/(:num)', 'AdminController::deleteUser/$1', ['filter' => 'role:admin']);
 $routes->get('/admin/tiket', 'AdminController::showTicket', ['filter' => 'role:admin']);
 $routes->add('tiket/edit/(:segment)', 'AdminController::editTiket/$1', ['filter' => 'role:admin']);
 $routes->get('tiket/delete/(:num)', 'AdminController::deleteTiket/$1', ['filter' => 'role:admin']);
 $routes->get('tiket/delete/all', 'AdminController::deleteAllTiket', ['filter' => 'role:admin']);
+$routes->get('/admin/transaksi', 'AdminController::transaksi', ['filter' => 'role:admin']);
+$routes->add('transaksi/edit/(:segment)', 'AdminController::editTransaksi/$1', ['filter' => 'role:admin']);
+$routes->get('transaksi/delete/(:segment)', 'AdminController::deleteTransaksi/$1', ['filter' => 'role:admin']);
+
 $routes->get('tiket/generate', 'CronController::generateTiket', ['filter' => 'role:admin']);
 $routes->get('export-tiket', 'AdminController::exportTiket', ['as' => 'exportTiket'], ['filter' => 'role:admin']);
 

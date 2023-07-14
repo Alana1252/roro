@@ -9,6 +9,9 @@
   transition: transform 0.3s;
 }
 
+.fw-bold {
+  font-weight: bold;
+}
 .whatsapp:hover {
   transform: scale(1.1);
 }
@@ -119,10 +122,10 @@
 
 .card-container-cari {
   position: absolute;
-  top: 18%;
+  top: 25%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 5;
+  z-index: 120;
 }
 
 .card-cari {
@@ -139,7 +142,7 @@
   }
 
   .card-container-cari {
-    top: 20%;
+    top: 10%;
   }
   .payment-section {
     margin-top: 500px;
@@ -192,7 +195,7 @@
 }
 
 footer {
-  margin-top: 900px;
+  margin-top: 90px;
 }
 .card-tiket {
   width: 750px;
@@ -519,18 +522,18 @@ input.dark::placeholder {
 }
 
 .ui-datepicker-header {
-  background-color: black;
+  background-color: rgb(255, 255, 255);
 }
 
 .ui-datepicker-header a.ui-datepicker-prev,
 .ui-datepicker-header a.ui-datepicker-next,
 .ui-datepicker-header span {
-  background-color: black;
-  color: white;
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
 } /* Mengubah tampilan tanggal yang dapat dipilih */
 .ui-datepicker-calendar .ui-state-default:not(.ui-state-disabled) {
-  background-color: black;
-  color: white;
+  background-color: rgba(255, 255, 255, 0.41);
+  color: rgb(0, 0, 0);
 }
 
 /* Mengubah tampilan tanggal yang tidak dapat dipilih */
@@ -1096,20 +1099,18 @@ select.list-dt:focus {
 }
 
 #msform .image-container img {
-  width: 200px;
+  width: 150px;
   margin-top: 20px;
   height: 85px;
   border-radius: 10px;
   transition: transform 0.3s ease;
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.2);
 }
-
-#msform .image-container input[type="radio"] {
-  display: none;
+#msform .image-container img:hover {
+  border: 1px solid rgb(255, 255, 255);
 }
-
-#msform .image-container input[type="radio"]:checked + label img {
-  transform: scale(1.1);
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+#msform .image-container .active {
+  border: 2px solid rgb(255, 255, 255);
 }
 
 .garis-putih {
@@ -1274,13 +1275,10 @@ select.list-dt:focus {
 
 /* Card-detail-tiket */
 .card-detail-all {
+  margin-left: 250px;
   cursor: default;
   width: 800px;
   min-height: 440px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   border: 1px solid #ccc;
   border-radius: 15px;
   background-color: #ffffff;
@@ -1314,7 +1312,7 @@ select.list-dt:focus {
   position: absolute;
   margin-right: 55px;
   margin-top: -18px;
-  left: 82%;
+  left: 76%;
   font-size: 20px;
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -1351,15 +1349,15 @@ select.list-dt:focus {
 }
 
 .barcode {
-  top: 47%;
+  top: 48%;
   position: absolute;
   height: 180px;
   width: 180px;
-  margin-left: 30px;
+  right: 18.5%;
 }
 .detail-layanan {
   top: 25%;
-  right: 13%;
+  right: 5%;
   position: absolute;
 }
 .detail-button {
@@ -1548,4 +1546,25 @@ Dropdown tiket */
 
 .f-right {
   float: right;
+}
+
+.filter-tiketsaya {
+  color: gray;
+  position: absolute;
+  font-size: 24px;
+  top: 3%;
+  left: 24%;
+}
+
+.mscard {
+  width: 150px;
+  height: 85px;
+  z-index: 9999;
+  background: rgb(241, 238, 238);
+  color: rgb(49, 49, 49);
+  cursor: pointer;
+}
+
+.mscard:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }

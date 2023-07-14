@@ -16,7 +16,7 @@
             <div class="detail2"><?= $order['order_id']; ?></div>
             <div class="print-kelas fw-bold"><?= $order['kelas']; ?></div>
             <div class="garis-horizontal-print"></div>
-            <img class="logo-detail" src="/img/logo2.png" alt="Logo" />
+            <img class="logo-detail" src="/img/icon/logo.png" alt="Logo" />
             <div class="d-flex">
                 <div class="row">
                     <table class="table table-bordered border-dark">

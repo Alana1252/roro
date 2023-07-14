@@ -4,14 +4,16 @@ namespace App\Controllers;
 
 use App\Models\TiketModel;
 use App\Models\UserModel;
+use App\Models\TransactionModel;
 use Myth\Auth\Models\GroupModel;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-use App\Models\TransactionModel;
+
 
 
 class AdminController extends BaseController
 {
+    protected $transactionModel;
     protected $tiketModel;
     protected $kendaraanModel;
     protected $groupModel;
@@ -20,6 +22,7 @@ class AdminController extends BaseController
 
     public function __construct()
     {
+        $this->transactionModel = new TransactionModel();
         $this->tiketModel = new TiketModel();
         $this->groupModel = new GroupModel();
         $this->userModel = new UserModel();
@@ -259,6 +262,178 @@ class AdminController extends BaseController
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Disposition: attachment;filename="' . $filename . '"');
         header('Cache-Control: max-age=0');
+        // Mengatur latar belakang kuning untuk header
+        $headerStyle = $spreadsheet->getActiveSheet()->getStyle('A1:G1');
+        $headerFill = $headerStyle->getFill();
+        $headerFill->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
+
+        // Save the Excel file to output
+        $writer->save('php://output');
+        exit;
+    }
+
+    public function transaksi()
+    {
+        $data['title'] = 'Transaksi List';
+        $this->builder = $this->db->table('transaksi');
+
+        // Join the 'tiket' table with 'jam' table
+        $this->builder->join('tiket', 'tiket.id_tiket = transaksi.id_tiket');
+        $this->builder->join('jam j1', 'j1.id_jam = tiket.keberangkatan');
+        $this->builder->join('jam j2', 'j2.id_jam = tiket.tiba');
+        $this->builder->join('keberangkatan l1', 'l1.id_keberangkatan = tiket.asal');
+        $this->builder->join('keberangkatan l2', 'l2.id_keberangkatan = tiket.tujuan');
+        $this->builder->join('users', 'users.id = transaksi.users');
+        $this->builder->join('kendaraan', 'kendaraan.id_kendaraan = transaksi.kouta_kendaraan');
+
+        // Select the desired columns, including the username from the users table and the jenis from the kendaraan table
+        $this->builder->select('transaksi.order_id, tiket.id_tiket as idtiket, j1.keberangkatan, j2.tiba, l1.asal, l2.tujuan, tiket.tanggal, transaksi.kouta_penumpang, transaksi.kouta_kendaraan, transaksi.kelas, users.username, transaksi.nama_lengkap, transaksi.gross_amount, transaksi.payment_type, transaksi.payment_method, transaksi.transaction_time, transaksi.transaction_status, transaksi.barcode, kendaraan.jenis');
+
+        $query = $this->builder->get();
+
+        $transaksi = $query->getResult();
+
+        foreach ($transaksi as &$row) {
+            $namaLengkapArray = explode(', ', $row->nama_lengkap);
+            $jumlahNama = count($namaLengkapArray);
+            $namaPertama = $namaLengkapArray[0];
+            $namaLengkapFormatted = '';
+            for ($i = 0; $i < $jumlahNama; $i++) {
+                $nomorUrut = $i + 1;
+                $namaLengkapFormatted .= '<div>' . $nomorUrut . '. ' . $namaLengkapArray[$i] . '</div>';
+            }
+            $inputNamaLengkap = $namaLengkapArray;
+            $row->nama_pertama = $namaPertama;
+            $row->nama_lengkap = $namaLengkapFormatted;
+
+
+            $row->input_nama_lengkap = $inputNamaLengkap;
+        }
+
+        $data['transaksi'] = $transaksi;
+
+        return view('admin/transaksi', $data);
+    }
+
+    public function editTransaksi($id)
+    {
+        $transaksi = $this->transactionModel->find($id);
+
+        if (!$transaksi) {
+            return redirect()->back()->with('error', 'Transaksi tidak ditemukan.');
+        }
+
+        // Mendapatkan data nama_lengkap dari input form
+        $namaLengkap = $this->request->getPost('nama_lengkap');
+
+        // Memperbarui data transaksi dengan nilai yang sesuai
+        $data = [
+            'nama_lengkap' => implode(', ', $namaLengkap), // Menggabungkan array nama_lengkap menjadi satu string dengan pemisah koma
+            'transaction_status' => $this->request->getPost('transaction_status'),
+            'payment_method' => $this->request->getPost('payment_method'),
+            'kelas' => $this->request->getPost('kelas'),
+            'kouta_penumpang' => count($namaLengkap),
+            'kouta_kendaraan' => $this->request->getPost('kouta_kendaraan'),
+        ];
+
+        $this->transactionModel->update($id, $data);
+        return redirect('admin/transaksi')->with('success', 'Transaksi diperbarui.');
+    }
+
+    public function deleteTransaksi($id)
+    {
+        $transaksi = $this->transactionModel->find($id);
+
+        if (!$transaksi) {
+            return redirect()->back()->with('error', 'Transaksi tidak ditemukan.');
+        }
+
+        $this->transactionModel->delete($id);
+
+        return redirect('admin/transaksi')->with('success', 'Transaksi berhasil dihapus.');
+    }
+
+
+    public function exportTransaksi()
+    {
+        $this->builder = $this->db->table('transaksi');
+
+        // Join the 'tiket' table with 'jam' table
+        $this->builder->join('tiket', 'tiket.id_tiket = transaksi.id_tiket');
+        $this->builder->join('jam j1', 'j1.id_jam = tiket.keberangkatan');
+        $this->builder->join('jam j2', 'j2.id_jam = tiket.tiba');
+        $this->builder->join('keberangkatan l1', 'l1.id_keberangkatan = tiket.asal');
+        $this->builder->join('keberangkatan l2', 'l2.id_keberangkatan = tiket.tujuan');
+        $this->builder->join('users', 'users.id = transaksi.users');
+        $this->builder->join('kendaraan', 'kendaraan.id_kendaraan = transaksi.kouta_kendaraan');
+
+        // Select the desired columns, including the username from the users table and the jenis from the kendaraan table
+        $this->builder->select('transaksi.order_id, tiket.id_tiket as idtiket, j1.keberangkatan, j2.tiba, l1.asal, l2.tujuan, tiket.tanggal, transaksi.kouta_penumpang, transaksi.kouta_kendaraan, transaksi.kelas, users.username, transaksi.nama_lengkap, transaksi.gross_amount, transaksi.payment_type, transaksi.payment_method, transaksi.transaction_time, transaksi.transaction_status, transaksi.barcode, kendaraan.jenis');
+
+        $query = $this->builder->get();
+
+        $data = $query->getResult();
+
+
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+
+        // Set the column headers
+        $sheet->setCellValue('A1', 'Order ID');
+        $sheet->setCellValue('B1', 'Tiket ID');
+        $sheet->setCellValue('C1', 'Nama Pemesan');
+        $sheet->setCellValue('D1', 'Jumlah Penumpang');
+        $sheet->setCellValue('E1', 'Golongan');
+        $sheet->setCellValue('F1', 'Kelas');
+        $sheet->setCellValue('G1', 'Jumlah Pembayaran');
+        $sheet->setCellValue('H1', 'Tipe Pembayaran');
+        $sheet->setCellValue('I1', 'Waktu Pembayaran');
+        $sheet->setCellValue('J1', 'Status Pembayaran');
+        $sheet->setCellValue('K1', 'Nama Penumpang');
+
+
+        $sheet = $spreadsheet->getActiveSheet();
+        $sheet->getColumnDimension('A')->setWidth(20);
+        $sheet->getColumnDimension('B')->setWidth(10);
+        $sheet->getColumnDimension('C')->setWidth(15);
+        $sheet->getColumnDimension('D')->setWidth(18);
+        $sheet->getColumnDimension('E')->setWidth(15);
+        $sheet->getColumnDimension('F')->setWidth(15);
+        $sheet->getColumnDimension('G')->setWidth(18);
+        $sheet->getColumnDimension('H')->setWidth(15);
+        $sheet->getColumnDimension('I')->setWidth(15);
+        $sheet->getColumnDimension('J')->setWidth(15);
+        $sheet->getColumnDimension('K')->setWidth(35);
+        // Populate the data
+        $row = 2;
+        foreach ($data as $item) {
+            $sheet->setCellValue('A' . $row, $item->order_id);
+            $sheet->setCellValue('B' . $row, $item->idtiket);
+            $sheet->setCellValue('C' . $row, $item->username);
+            $sheet->setCellValue('D' . $row, $item->kouta_penumpang);
+            $sheet->setCellValue('E' . $row, $item->jenis);
+            $sheet->setCellValue('F' . $row, $item->kelas);
+            $sheet->setCellValue('G' . $row, $item->gross_amount);
+            $sheet->setCellValue('H' . $row, $item->payment_method);
+            $sheet->setCellValue('I' . $row, $item->transaction_time);
+            $sheet->setCellValue('J' . $row, $item->transaction_status);
+            $sheet->setCellValue('K' . $row, $item->nama_lengkap);
+
+            $row++;
+        }
+        $spreadsheet->getProperties()->setCreator('Alan Kamesta Ginting');
+        // Create the Excel file
+        $writer = new Xlsx($spreadsheet);
+        $filename = 'transaksi_list.xlsx';
+
+        // Set the appropriate headers for the download
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="' . $filename . '"');
+        header('Cache-Control: max-age=0');
+        // Mengatur latar belakang kuning untuk header
+        $headerStyle = $spreadsheet->getActiveSheet()->getStyle('A1:K1');
+        $headerFill = $headerStyle->getFill();
+        $headerFill->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
 
         // Save the Excel file to output
         $writer->save('php://output');

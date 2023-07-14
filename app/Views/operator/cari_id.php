@@ -53,7 +53,7 @@
         <h1>Cari Tiket Anda</h1>
 
 
-        <form action="/order/search" method="post">
+        <form action="/operator/search" method="post">
             <div class="form-group">
                 <input type="text" id="order_id" placeholder="BKS-XXXXXXXXXX" name="order_id" required>
             </div>

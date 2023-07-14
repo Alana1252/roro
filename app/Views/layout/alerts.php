@@ -184,3 +184,26 @@ $user = $auth->user();
     session()->set('adminLoggedIn', true);
     ?>
 <?php endif; ?>
+<?php if (in_groups('operator') && !session()->get('adminLoggedIn')) : ?>
+    <div class="alert alert-success alert-white rounded animate__animated position-absolute end-0 m-3 animate__slideInRight" id="alertAdmin" style="right: 0;">
+        <div class="icon">
+            <i class="fa fa-check"></i>
+        </div>
+        <strong class="ml-5">Welcome <?= $user->username ?>!</strong>
+        Kamu login sebagai Operator.
+    </div>
+    <script>
+        setTimeout(function() {
+            var successAlert = document.getElementById('alertAdmin');
+            successAlert.classList.remove('animate__slideInRight');
+            successAlert.classList.add('animate__slideOutRight');
+            setTimeout(function() {
+                successAlert.style.display = 'none';
+            }, 2000);
+        }, 5000);
+    </script>
+    <?php
+    // Set session adminLoggedIn to true
+    session()->set('adminLoggedIn', true);
+    ?>
+<?php endif; ?>

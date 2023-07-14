@@ -41,7 +41,7 @@ $user = $auth->user();
             <div class="header-mobile__bar">
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
-                        <a class="logo" href="index.html">
+                        <a class="logo" href="/">
                             <img src="/img/icon/admin.png" alt="Admin dashboard" />
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
@@ -56,84 +56,61 @@ $user = $auth->user();
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
                         <li class="has-sub">
-                            <a class="js-arrow" href="#">
+                            <a class="js-arrow" href="/">
                                 <i class="fas fa-tachometer-alt"></i>Dashboard</a>
                             <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
                             </ul>
                         </li>
+                        <?php if (!logged_in() || in_groups('admin')) : ?>
+                            <li>
+                                <a href="/admin/transaksi">
+                                    <i class="fas fa-chart-bar"></i>Transaksi</a>
+                            </li>
+                            <li>
+                                <a href="/admin/tiket">
+                                    <i class="bi bi-ticket-detailed-fill"></i>Tiket</a>
+                            </li>
+                            <li>
+                                <a href="admin/user">
+                                    <i class="bi bi-people-fill"></i>Users</a>
+                            </li>
+                            <li class="has-sub">
+                                <a class="js-arrow" href="#">
+                                    <i class="fas fa-copy"></i>Pages</a>
+                                <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                    <li>
+                                        <a href="admin/berita"><i class="bi bi-newspaper"></i>Berita</a>
+                                    </li>
+                                    <li>
+                                        <a href="admin/kelas"><i class="bi bi-sort-numeric-up-alt"></i>Kelas Tiket</a>
+                                    </li>
+                                    <li>
+                                        <a href="admin/kendaraan"><i class="bi bi-car-front-fill"></i>Kendaraan</a>
+                                    </li>
+                                    <li>
+                                        <a href="admin/kapal"><i class="bi bi-wrench"></i></i>Penyedia Layanan</a>
+                                    </li>
+                                    <li>
+                                        <a href="admin/jam"><i class="bi bi-clock-fill"></i>Jam Tiket</a>
+                                    </li>
+                                    <li>
+                                        <a href="admin/lokasi"><i class="bi bi-geo-alt-fill"></i>Lokasi</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        <?php elseif (in_groups('operator')) : ?>
+                            <li>
+                                <a href="/operator/tiket">
+                                    <i class="bi bi-ticket-detailed-fill"></i>Tiket</a>
+                            </li>
+                            <li>
+                                <a href="/operator/print">
+                                    <i class="bi bi-printer-fill"></i>Print Tiket</a>
+                            </li>
+                        <?php endif ?>
                         <li>
-                            <a href="chart.html">
-                                <i class="fas fa-chart-bar"></i>Transaksi</a>
-                        </li>
-                        <li>
-                            <a href="table.html">
-                                <i class="fas fa-table"></i>Tables</a>
-                        </li>
-                        <li>
-                            <a href="form.html">
-                                <i class="far fa-check-square"></i>Forms</a>
-                        </li>
-                        <li>
-                            <a href="calendar.html">
-                                <i class="fas fa-calendar-alt"></i>Calendar</a>
-                        </li>
-                        <li>
-                            <a href="map.html">
-                                <i class="fas fa-map-marker-alt"></i>Maps</a>
-                        </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-copy"></i>Pages</a>
-                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                                <li>
-                                    <a href="login.html">Login</a>
-                                </li>
-                                <li>
-                                    <a href="register.html">Register</a>
-                                </li>
-                                <li>
-                                    <a href="forget-pass.html">Forget Password</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-desktop"></i>UI Elements</a>
-                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                                <li>
-                                    <a href="button.html">Button</a>
-                                </li>
-                                <li>
-                                    <a href="badge.html">Badges</a>
-                                </li>
-                                <li>
-                                    <a href="tab.html">Tabs</a>
-                                </li>
-                                <li>
-                                    <a href="card.html">Cards</a>
-                                </li>
-                                <li>
-                                    <a href="alert.html">Alerts</a>
-                                </li>
-                                <li>
-                                    <a href="progress-bar.html">Progress Bars</a>
-                                </li>
-                                <li>
-                                    <a href="modal.html">Modals</a>
-                                </li>
-                                <li>
-                                    <a href="switch.html">Switchs</a>
-                                </li>
-                                <li>
-                                    <a href="grid.html">Grids</a>
-                                </li>
-                                <li>
-                                    <a href="fontawesome.html">Fontawesome Icon</a>
-                                </li>
-                                <li>
-                                    <a href="typo.html">Typography</a>
-                                </li>
-                            </ul>
+                            <a href="/logout">
+                                <i class="bi bi-door-open-fill"></i>Logout</a>
                         </li>
                     </ul>
                 </div>
@@ -152,45 +129,57 @@ $user = $auth->user();
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
                         <li class="active has-sub">
-                            <a class="js-arrow" href="#">
+                            <a class="js-arrow" href="/">
                                 <i class="fas fa-tachometer-alt"></i>Dashboard</a>
                         </li>
-                        <li>
-                            <a href="/admin/transaksi">
-                                <i class="fas fa-chart-bar"></i>Transaksi</a>
-                        </li>
-                        <li>
-                            <a href="/admin/tiket">
-                                <i class="bi bi-ticket-detailed-fill"></i>Tiket</a>
-                        </li>
-                        <li>
-                            <a href="admin/user">
-                                <i class="bi bi-people-fill"></i>Users</a>
-                        </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-copy"></i>More<i class="bi bi-caret-down-fill fa-xs" style="margin-left:50%"></i></a>
-                            <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <li>
-                                    <a href="admin/berita"><i class="bi bi-newspaper"></i>Berita</a>
-                                </li>
-                                <li>
-                                    <a href="admin/kelas"><i class="bi bi-sort-numeric-up-alt"></i>Kelas Tiket</a>
-                                </li>
-                                <li>
-                                    <a href="admin/kendaraan"><i class="bi bi-car-front-fill"></i>Kendaraan</a>
-                                </li>
-                                <li>
-                                    <a href="admin/kapal"><i class="bi bi-wrench"></i></i>Penyedia Layanan</a>
-                                </li>
-                                <li>
-                                    <a href="admin/jam"><i class="bi bi-clock-fill"></i>Jam Tiket</a>
-                                </li>
-                                <li>
-                                    <a href="admin/lokasi"><i class="bi bi-geo-alt-fill"></i>Lokasi</a>
-                                </li>
-                            </ul>
-                        </li>
+                        <?php if (!logged_in() || in_groups('admin')) : ?>
+                            <li>
+                                <a href="/admin/transaksi">
+                                    <i class="fas fa-chart-bar"></i>Transaksi</a>
+                            </li>
+                            <li>
+                                <a href="/admin/tiket">
+                                    <i class="bi bi-ticket-detailed-fill"></i>Tiket</a>
+                            </li>
+                            <li>
+                                <a href="admin/user">
+                                    <i class="bi bi-people-fill"></i>Users</a>
+                            </li>
+                            <li class="has-sub">
+                                <a class="js-arrow" href="#">
+                                    <i class="fas fa-copy"></i>More<i class="bi bi-caret-down-fill fa-xs" style="margin-left:50%"></i></a>
+                                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                    <li>
+                                        <a href="admin/berita"><i class="bi bi-newspaper"></i>Berita</a>
+                                    </li>
+                                    <li>
+                                        <a href="admin/kelas"><i class="bi bi-sort-numeric-up-alt"></i>Kelas Tiket</a>
+                                    </li>
+                                    <li>
+                                        <a href="admin/kendaraan"><i class="bi bi-car-front-fill"></i>Kendaraan</a>
+                                    </li>
+                                    <li>
+                                        <a href="admin/kapal"><i class="bi bi-wrench"></i></i>Penyedia Layanan</a>
+                                    </li>
+                                    <li>
+                                        <a href="admin/jam"><i class="bi bi-clock-fill"></i>Jam Tiket</a>
+                                    </li>
+                                    <li>
+                                        <a href="admin/lokasi"><i class="bi bi-geo-alt-fill"></i>Lokasi</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                        <?php elseif (in_groups('operator')) : ?>
+                            <li>
+                                <a href="/operator/tiket">
+                                    <i class="bi bi-ticket-detailed-fill"></i>Tiket</a>
+                            </li>
+                            <li>
+                                <a href="/operator/print">
+                                    <i class="bi bi-printer-fill"></i>Print Tiket</a>
+                            </li>
+                        <?php endif; ?>
                         <li class="has-sub">
                             <a class="js-arrow" href="/logout">
                                 <i class="bi bi-door-open-fill"></i>Log Out</a>
@@ -211,52 +200,12 @@ $user = $auth->user();
                             <form class="form-header" action="" method="POST">
 
                             </form>
+
                             <div class="header-button">
-                                <div class="noti-wrap">
-                                    <div class="noti__item js-item-menu">
-                                        <i class="zmdi zmdi-notifications"></i>
-                                        <span class="quantity">3</span>
-                                        <div class="notifi-dropdown js-dropdown">
-                                            <div class="notifi__title">
-                                                <p>You have 3 Notifications</p>
-                                            </div>
-                                            <div class="notifi__item">
-                                                <div class="bg-c1 img-cir img-40">
-                                                    <i class="zmdi zmdi-email-open"></i>
-                                                </div>
-                                                <div class="content">
-                                                    <p>You got a email notification</p>
-                                                    <span class="date">April 12, 2018 06:50</span>
-                                                </div>
-                                            </div>
-                                            <div class="notifi__item">
-                                                <div class="bg-c2 img-cir img-40">
-                                                    <i class="zmdi zmdi-account-box"></i>
-                                                </div>
-                                                <div class="content">
-                                                    <p>Your account has been blocked</p>
-                                                    <span class="date">April 12, 2018 06:50</span>
-                                                </div>
-                                            </div>
-                                            <div class="notifi__item">
-                                                <div class="bg-c3 img-cir img-40">
-                                                    <i class="zmdi zmdi-file-text"></i>
-                                                </div>
-                                                <div class="content">
-                                                    <p>You got a new file</p>
-                                                    <span class="date">April 12, 2018 06:50</span>
-                                                </div>
-                                            </div>
-                                            <div class="notifi__footer">
-                                                <a href="#">All notifications</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
-                                            <img src="<?= base_url('img/' . $user->user_image) ?>" alt="User_image" />
+                                            <img src="<?= base_url('img/user/' . $user->user_image) ?>" alt="User_image" />
                                         </div>
                                         <div class="content">
                                             <a class="js-acc-btn" href="#"><?= $user->username ?></a>
@@ -264,9 +213,7 @@ $user = $auth->user();
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
                                                 <div class="image">
-                                                    <a href="#">
-                                                        <img src="<?= base_url('img/' . $user->user_image) ?>" alt="User_image" />
-                                                    </a>
+                                                    <img src="<?= base_url('img/user/' . $user->user_image) ?>" alt="User_image" />
                                                 </div>
                                                 <div class="content">
                                                     <h5 class="name">
@@ -277,20 +224,12 @@ $user = $auth->user();
                                             </div>
                                             <div class="account-dropdown__body">
                                                 <div class="account-dropdown__item">
-                                                    <a href="#">
+                                                    <a href="user/account">
                                                         <i class="zmdi zmdi-account"></i>Account</a>
-                                                </div>
-                                                <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-settings"></i>Setting</a>
-                                                </div>
-                                                <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-money-box"></i>Billing</a>
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__footer">
-                                                <a href="#">
+                                                <a href="/logout">
                                                     <i class="zmdi zmdi-power"></i>Logout</a>
                                             </div>
                                         </div>
@@ -308,87 +247,115 @@ $user = $auth->user();
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="overview-wrap">
-                                    <h2 class="title-1">overview</h2><a href="/generate">
-                                        <button class="au-btn au-btn-icon au-btn--blue rounded-pill">
-                                            <i class="zmdi zmdi-plus"></i>Generate Tiket</button></a>
-                                </div>
+                                <?php if (!logged_in() || in_groups('admin')) : ?>
+                                    <div class="overview-wrap">
+                                        <h2 class="title-1">Admin Dashboard</h2><a href="/generate">
+                                            <button class="au-btn au-btn-icon au-btn--blue rounded-pill">
+                                                <i class="zmdi zmdi-plus"></i>Generate Tiket</button></a>
+                                    </div>
+                                <?php elseif (in_groups('operator')) : ?>
+                                    <div class="overview-wrap">
+                                        <h2 class="title-1">Operator Dashboard</h2>
+                                    </div>
+                                <?php endif ?>
                             </div>
                         </div>
-                        <div class="row m-t-25">
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c1">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-account-o"></i>
+                        <?php if (!logged_in() || in_groups('admin')) : ?>
+                            <div class="row m-t-25">
+                                <div class="col-sm-6 col-lg-3">
+                                    <div class="overview-item overview-item--c1">
+                                        <div class="overview__inner">
+                                            <div class="overview-box clearfix">
+                                                <div class="icon">
+                                                    <i class="zmdi zmdi-account-o"></i>
+                                                </div>
+                                                <div class="text">
+                                                    <h3 class="text-white"><?= $userAktif ?></h3>
+                                                    <span>Pengguna aktif</span>
+                                                </div>
                                             </div>
-                                            <div class="text">
-                                                <h3 class="text-white"><?= $userAktif ?></h3>
-                                                <span>Pengguna aktif</span>
+                                            <div class="overview-chart">
+                                                <canvas id="widgetChart1"></canvas>
                                             </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart1"></canvas>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c2">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-shopping-cart"></i>
+                                <div class="col-sm-6 col-lg-3">
+                                    <div class="overview-item overview-item--c2">
+                                        <div class="overview__inner">
+                                            <div class="overview-box clearfix">
+                                                <div class="icon">
+                                                    <i class="zmdi zmdi-shopping-cart"></i>
+                                                </div>
+                                                <div class="text">
+                                                    <h3 class="text-white"><?= $tiketBerhasil ?></h3>
+                                                    <span>Tiket terjual</span>
+                                                </div>
                                             </div>
-                                            <div class="text">
-                                                <h3 class="text-white"><?= $tiketBerhasil ?></h3>
-                                                <span>Tiket terjual</span>
+                                            <div class="overview-chart">
+                                                <canvas id="widgetChart2"></canvas>
                                             </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart2"></canvas>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c3">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-calendar-note"></i>
+                                <div class="col-sm-6 col-lg-3">
+                                    <div class="overview-item overview-item--c3">
+                                        <div class="overview__inner">
+                                            <div class="overview-box clearfix">
+                                                <div class="icon">
+                                                    <i class="zmdi zmdi-calendar-note"></i>
+                                                </div>
+                                                <div class="text">
+                                                    <h3 class="text-white"><?= $tiketBulan; ?></h3>
+                                                    <span>Bulan ini</span>
+                                                </div>
                                             </div>
-                                            <div class="text">
-                                                <h3 class="text-white"><?= $tiketBulan; ?></h3>
-                                                <span>Bulan ini</span>
+                                            <div class="overview-chart">
+                                                <canvas id="widgetChart3"></canvas>
                                             </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart3"></canvas>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c4">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-money"></i>
+                                <div class="col-sm-6 col-lg-3">
+                                    <div class="overview-item overview-item--c4">
+                                        <div class="overview__inner">
+                                            <div class="overview-box clearfix">
+                                                <div class="icon">
+                                                    <i class="zmdi zmdi-money"></i>
+                                                </div>
+                                                <div class="text">
+                                                    <h3 class="text-white">Rp.<?= number_format($paymentBerhasil, 0, ',', '.') ?></h3>
+                                                    <span>Total pendapatan</span>
+                                                </div>
                                             </div>
-                                            <div class="text">
-                                                <h3 class="text-white">Rp.<?= number_format($paymentBerhasil, 0, ',', '.') ?></h3>
-                                                <span>Total pendapatan</span>
+                                            <div class="overview-chart">
+                                                <canvas id="widgetChart4"></canvas>
                                             </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart4"></canvas>
                                         </div>
                                     </div>
                                 </div>
+
+                            <?php elseif (in_groups('operator')) : ?>
+                                <div class="col-sm-6 col-lg-3 mt-5">
+                                    <div class="overview-item overview-item--c2">
+                                        <div class="overview__inner">
+                                            <div class="overview-box clearfix">
+                                                <div class="icon">
+                                                    <i class="zmdi zmdi-shopping-cart"></i>
+                                                </div>
+                                                <div class="text">
+                                                    <h3 class="text-white"><?= $tiketBerhasil ?></h3>
+                                                    <span>Tiket terjual</span>
+                                                </div>
+                                            </div>
+                                            <div class="overview-chart">
+                                                <canvas id="widgetChart2"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
                             </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -421,7 +388,7 @@ $user = $auth->user();
 
             <!-- Copyright -->
             <div class="text-center p-3" style="background-color: #1c1c1ced;">
-                <img src="img/logo2.png" style="max-width: 35px; max-height:35px;">
+                <img src="/img/icon/logo.png" style="max-width: 35px; max-height:35px;">
                 <a class="text-white" style="font-weight: bold;" href="#">Go-RoRo</a>
             </div>
             <!-- Copyright -->

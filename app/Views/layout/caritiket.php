@@ -9,13 +9,13 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div for="Penumpang" class="text-input">Jumlah Penumpang:</div>
-                                <input id="pilih-penumpang" onclick="showFloatingCard()" class="select-icon-tiket" readonly placeholder="Jumlah Penumpang" style="background-size:14px 14px; background-image: url('/img/userkelompok.png');" required>
+                                <input id="pilih-penumpang" onclick="showFloatingCard()" class="select-icon-tiket input-tiket" readonly placeholder="Jumlah Penumpang" style="background-size:14px 14px; background-image: url('/img/layout/userkelompok.png');" required>
                                 <div id="floating-card" class="floating-card">
                                     <div class="form-group card-penumpang">
                                         <label for="dewasa">Dewasa<a class="font-abu"> / </a>Anak</label>
                                         <div class="text-penumpang">Usia 2 tahun atau lebih</div>
                                         <button class="btn-penumpangKurang" type="button" onclick="decrement('dewasa')">-</button>
-                                        <input class="penumpang" id="dewasa" min="0" max="9" value="0" readonly>
+                                        <input class="penumpang " id="dewasa" min="0" max="9" value="0" readonly>
                                         <button class="btn-penumpangTambah" type="button" onclick="increment('dewasa')">+</button>
 
                                     </div>
@@ -31,7 +31,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div for="asal" class="text-input">Pelabuhan Asal:</div>
-                                <select id="asal" name="asal" class="select-icon-tiket" style="background-image: url('/img/ship.png');" required>
+                                <select id="asal" name="asal" class="select-icon-tiket select-tiket" style="background-image: url('/img/layout/ship.png');" required>
                                     <option disabled selected value="">Pilih Asal</option>
                                     <option value="2">Air Putih</option>
                                     <option value="1">Sungai Selari</option>
@@ -39,13 +39,13 @@
                             </div>
                             <div class="col-md-4">
                                 <div for="tanggal" class="text-input">Tanggal Keberangkatan:</div>
-                                <input type="text" id="tanggal" placeholder="Pilih Tanggal" class="select-icon-tiket" style="background-size: 14px 14px; background-image: url('/img/calendar.png');" readonly>
+                                <input type="text" id="tanggal" placeholder="Pilih Tanggal" class="select-icon-tiket input-tiket" style="background-size: 14px 14px; background-image: url('/img/layout/calendar.png');" required readonly>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-4">
                                 <div for="layanan" class="text-input">Jenis Penggunaan Jasa:</div>
-                                <input id="pilih-kendaraan" onclick="showFloatingKendaraan()" readonly placeholder="Berkendara atau tidak" class="select-icon-tiket" style="background-image: url('/img/car.png');" required>
+                                <input id="pilih-kendaraan" onclick="showFloatingKendaraan()" readonly placeholder="Berkendara atau tidak" class="select-icon-tiket input-tiket" style="background-image: url('/img/layout/car.png');" required>
                                 <div id="floatingKendaraan">
                                     <div id="modeSelection" style="display: flex; flex-direction: column; align-items: center;">
                                         <div class="text-left">Jenis Penggunaan Jasa </div>
@@ -92,10 +92,10 @@
                             </div>
                             <div class="col-md-4">
                                 <div for="tujuan" class="text-input">Pelabuhan Tujuan:<a>
-                                        <img src="/img/repeat.png" class="image-tiket" alt="Gambar">
+                                        <img src="/img/layout/repeat.png" class="image-tiket" alt="Gambar">
                                     </a>
                                 </div>
-                                <select id="tujuan" name="tujuan" class="select-icon-tiket" style="background-image: url('/img/ship2.png');" required>
+                                <select id="tujuan" name="tujuan" class="select-icon-tiket select-tiket" style="background-image: url('/img/layout/ship2.png');" required>
                                     <option disabled selected value="">Pilih Tujuan</option>
                                     <option value="1">Sungai Selari</option>
                                     <option value="2">Air Putih</option>
@@ -104,7 +104,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div for="Kelas" class="text-input">Kelas:</div>
-                                <select id="kelas" name="kelas" class="select-icon-tiket" style="background-size: 16px 16px; background-image: url('/img/kelas.png');" required readonly>
+                                <select id="kelas" name="kelas" class="select-icon-tiket select-tiket" style="background-size: 16px 16px; background-image: url('/img/layout/kelas.png');" required readonly>
                                     <option value="Ekonomi">Ekonomi</option>
                                     <option value="Premium">Premium</option>
                                 </select>
@@ -116,7 +116,7 @@
                             <div class="col-md-4"><button type="submit" class="button-cari">Cari</button></div>
                         </div>
                     </div>
-                    <input name="kouta_kendaraan" id="koutaKendaraanValue" hidden></input>
+                    <input name="kouta_kendaraan" id="koutaKendaraanValue" hidden required></input>
                     <input type="number" name="kouta_penumpang" required hidden>
                     <input type="hidden" id="hiddenTanggal" name="tanggal" required>
                 </form>

@@ -25,112 +25,115 @@
 
 <body>
     <?= $this->include('layout/alerts'); ?>
-    <?= $this->include('layout/sidebar'); ?>
+    <?= $this->include('admin/sidebar'); ?>
     <?= $this->include('admin/detail_tiket'); ?>
     <?= $this->include('admin/edit_tiket'); ?>
-    <h2>Data Tiket</h2>
-    <br>
     <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="form-group has-search">
-                    <div class=" input-group">
-                        <div class="form-group has-search">
-                            <span class="fa fa-search form-control-feedback" style="z-index:3;"></span>
-                            <input type="text" style="min-width: 500px; z-index:2;" id="myInput" class="form-control" placeholder="Cari tiket melalui, ID, Tanggal Keberangkatan, Tiba, Asal, Tujuan, Sisa Tiket...." onclick="toggleDropdown()">
-                        </div>
-                        <div id="dropdownOptions" class="dropdown-menu animate__animated animate__fadeInDown" style="margin-top: -15px; z-index:1; min-width: 430px;">
-                            <div class="row ">
-                                <div class="col">
-                                    <option class="dropdown-item select" onclick="filterTable('all')">Semua</option>
-                                </div>
-                                <div class="col ">
-                                    <option class="dropdown-item" onclick="filterTable('today')">Hari Ini</option>
-                                </div>
-                                <div class="col">
-                                    <option class="dropdown-item" onclick="filterTable('1week')">Mingguan</option>
-                                </div>
-                                <div class="col">
-                                    <option class="dropdown-item" onclick="filterTable('1month')">Bulanan</option>
-                                </div>
-                                <div class="col">
-                                    <option class="dropdown-item" onclick="filterTable('1year')">Tahunan</option>
+        <h2>Data Tiket</h2>
+        <br>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group has-search">
+                        <div class=" input-group">
+                            <div class="form-group has-search">
+                                <span class="fa fa-search form-control-feedback" style="z-index:3;"></span>
+                                <input type="text" style="min-width: 500px; z-index:2;" id="myInput" class="form-control" placeholder="Cari tiket melalui, ID, Tanggal Keberangkatan, Tiba, Asal, Tujuan, Sisa Tiket...." onclick="toggleDropdown()">
+                            </div>
+                            <div id="dropdownOptions" class="dropdown-menu animate__animated animate__fadeInDown" style="margin-top: -15px; z-index:1; min-width: 430px;">
+                                <div class="row ">
+                                    <div class="col">
+                                        <option class="dropdown-item select" onclick="filterTable('all')">Semua</option>
+                                    </div>
+                                    <div class="col ">
+                                        <option class="dropdown-item" onclick="filterTable('today')">Hari Ini</option>
+                                    </div>
+                                    <div class="col">
+                                        <option class="dropdown-item" onclick="filterTable('1week')">Mingguan</option>
+                                    </div>
+                                    <div class="col">
+                                        <option class="dropdown-item" onclick="filterTable('1month')">Bulanan</option>
+                                    </div>
+                                    <div class="col">
+                                        <option class="dropdown-item" onclick="filterTable('1year')">Tahunan</option>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-md-4 offset-md-4">
-                <div class="row">
-                    <div class="col">
-                        <a href="<?= route_to('exportTiket') ?>" class="btn btn-success btn-sm"><i class="fas fa-file-excel"></i> Export Ke Excel</a>
-                    </div>
-                    <div class="col">
-                        <a href="/tiket/generate" class="btn btn-warning text-white btn-sm"><i class="fas fa-cog"></i> Buat Tiket Baru</a>
-                    </div>
-                    <div class="col">
-                        <a data-toggle="modal" data-target="#modalConfirmDeleteAll" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus Semua</a>
+                <div class="col-md-4 offset-md-4">
+                    <div class="row">
+                        <div class="col">
+                            <a href="<?= route_to('exportTiket') ?>" class="btn btn-success btn-sm"><i class="fas fa-file-excel"></i> Export Ke Excel</a>
+                        </div>
+                        <div class="col">
+                            <a href="/tiket/generate" class="btn btn-warning text-white btn-sm"><i class="fas fa-cog"></i> Buat Tiket Baru</a>
+                        </div>
+                        <div class="col">
+                            <a data-toggle="modal" data-target="#modalConfirmDeleteAll" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus Semua</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <table class="table table-hover mt-2">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Tanggal</th>
-                <th>Keberangkatan</th>
-                <th>Tiba</th>
-                <th>Asal</th>
-                <th>Tujuan</th>
-                <th>Sisa Tiket</th>
-                <th>Opsi</th>
-            </tr>
-        </thead>
-        <tbody id="myTable">
-            <?php if (!empty($tiket)) : ?>
-                <?php foreach ($tiket as $key => $tiket) : ?>
-                    <tr>
-                        <td><?= $tiket->id_tiket; ?></td>
-                        <td><?= date('d-m-Y', strtotime($tiket->tanggal)); ?></td>
-                        <td><?= date('H:i', strtotime($tiket->jam_keberangkatan)); ?> WIB</td>
-                        <td><?= date('H:i', strtotime($tiket->jam_tiba)); ?> WIB</td>
-                        <td><?= $tiket->tiket_asal; ?></td>
-                        <td><?= $tiket->tiket_tujuan; ?></td>
-                        <?php if ($tiket->koutapenumpang === '0') : ?>
-                            <td class="text-danger">Habis</td>
-                        <?php elseif ($tiket->koutapenumpang > '50') : ?>
-                            <td class="text-success"><?= $tiket->koutapenumpang; ?></td>
-                        <?php elseif ($tiket->koutapenumpang <= '50') : ?>
-                            <td class="text-warning"><?= $tiket->koutapenumpang; ?></td>
-                        <?php endif; ?>
-                        <td>
-                            <a href="#" class="btn btn-success btn-sm" data-toggle="modal" data-target="#detailModal<?= $tiket->idtiket; ?>" data-toggle="tooltip" title="Detail">
-                                <i class="bi bi-info-circle"></i>
-                            </a>
-                            <a href="#" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editModal<?= $tiket->idtiket; ?>" data-toggle="tooltip" title="Edit">
-                                <i class="bi bi-pencil-fill " style="color:white;"></i>
-                            </a>
-                            <a data-toggle="modal" data-target="#modalConfirmDelete<?= $tiket->idtiket; ?>" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Delete">
-                                <i class="bi bi-trash-fill"></i>
-                            </a>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            <?php else : ?>
+        <table class="table table-hover mt-2">
+            <thead>
                 <tr>
-                    <td colspan="7">No ticket found.</td>
+                    <th>ID</th>
+                    <th>Tanggal</th>
+                    <th>Keberangkatan</th>
+                    <th>Tiba</th>
+                    <th>Asal</th>
+                    <th>Tujuan</th>
+                    <th>Sisa Tiket</th>
+                    <th>Opsi</th>
                 </tr>
-            <?php endif; ?>
-        </tbody>
-    </table>
+            </thead>
+            <tbody id="myTable">
+                <?php if (!empty($tiket)) : ?>
+                    <?php foreach ($tiket as $key => $tiket) : ?>
+                        <tr>
+                            <td><?= $tiket->id_tiket; ?></td>
+                            <td><?= date('d-m-Y', strtotime($tiket->tanggal)); ?></td>
+                            <td><?= date('H:i', strtotime($tiket->jam_keberangkatan)); ?> WIB</td>
+                            <td><?= date('H:i', strtotime($tiket->jam_tiba)); ?> WIB</td>
+                            <td><?= $tiket->tiket_asal; ?></td>
+                            <td><?= $tiket->tiket_tujuan; ?></td>
+                            <?php if ($tiket->koutapenumpang === '0') : ?>
+                                <td class="text-danger">Habis</td>
+                            <?php elseif ($tiket->koutapenumpang > '50') : ?>
+                                <td class="text-success"><?= $tiket->koutapenumpang; ?></td>
+                            <?php elseif ($tiket->koutapenumpang <= '50') : ?>
+                                <td class="text-warning"><?= $tiket->koutapenumpang; ?></td>
+                            <?php endif; ?>
+                            <td>
+                                <a href="#" class="btn btn-success btn-sm" data-toggle="modal" data-target="#detailModal<?= $tiket->idtiket; ?>" data-toggle="tooltip" title="Detail">
+                                    <i class="bi bi-info-circle"></i>
+                                </a>
+                                <a href="#" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editModal<?= $tiket->idtiket; ?>" data-toggle="tooltip" title="Edit">
+                                    <i class="bi bi-pencil-fill " style="color:white;"></i>
+                                </a>
+                                <a data-toggle="modal" data-target="#modalConfirmDelete<?= $tiket->idtiket; ?>" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Delete">
+                                    <i class="bi bi-trash-fill"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php else : ?>
+                    <tr>
+                        <td colspan="7">No ticket found.</td>
+                    </tr>
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
 </body>
 
 </html>
+<script src="<?= base_url('js/script.js') ?>"></script>
 <script>
     $(document).ready(function() {
         $("#myInput").on("keyup", function() {

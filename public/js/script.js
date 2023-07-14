@@ -1,3 +1,19 @@
+$(document).ready(function () {
+  $("#myInput").on("keyup", function () {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function () {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+    });
+
+    // Mengatur ulang nomor urutan
+    var count = 1;
+    $("#myTable tr:visible").each(function () {
+      var rowId = $(this).find("th").attr("id");
+      $("#" + rowId).text(count);
+      count++;
+    });
+  });
+});
 // Sidebar
 (function ($) {
   "use strict";
@@ -20,10 +36,10 @@
 
     // Animasikan pergerakan geser menggunakan efek slide
     if ($("#sidebar").hasClass("active")) {
-      $("#geser").animate({ "margin-left": "350px" }, 500);
+      $("#geser").animate({ "margin-left": "400px" }, 500);
       $(".footer").hide();
       $(".card-tiket").each(function (index) {
-        $(this).animate({ "margin-left": "350px" }, 500);
+        $(this).animate({ "margin-left": "400px" }, 500);
       });
     } else {
       $("#geser").animate({ "margin-left": "200px" }, 500);

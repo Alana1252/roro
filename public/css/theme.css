@@ -1429,7 +1429,7 @@ body {
 
 .navbar {
   padding: 15px 10px;
-  background: #fff;
+  background: #ffffff;
   border: none;
   border-radius: 0;
   margin-bottom: 40px;
@@ -1456,22 +1456,30 @@ body {
 }
 
 #sidebar {
-  min-width: 300px;
-  max-width: 300px;
-  background: #1d1919;
-  color: #fff;
+  min-width: 240px;
+  max-width: 240px;
+  background: #ffffff;
+  color: #000000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   -webkit-transition: all 0.3s;
   -o-transition: all 0.3s;
   transition: all 0.3s;
 }
 #sidebar.active {
-  margin-left: -300px;
+  margin-left: -240px;
 }
-#sidebar .logo {
-  display: block;
-  width: 120px;
-  height: 120px;
+#sidebar .logos {
+  width: 240px;
+  height: 82px;
+  padding: 20px 0;
   margin: 0 auto;
+  background: transparent;
+  margin-bottom: 25px;
+  -webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+#sidebar .icons {
+  font-size: 24px;
 }
 #sidebar .logo span {
   display: block;
@@ -1489,21 +1497,42 @@ body {
   font-size: 14px;
 }
 #sidebar ul li a {
+  text-decoration: none;
   padding: 10px 0;
   display: block;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(0, 0, 0, 0.8);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 #sidebar ul li a:hover {
-  color: #f8b739;
+  color: #4272d7;
 }
 #sidebar ul li.active > a {
   background: transparent;
-  color: #f8b739;
+  color: #000000;
+  text-decoration: none;
+}
+#sidebar .deactive {
+  padding: 10px 0;
+  margin: 0 auto;
+  margin-top: 20px;
+  background: transparent;
+  width: 150px;
+  height: 100px;
+  background: rgba(214, 214, 214, 0.162);
+  border-radius: 6px;
+  margin-bottom: 25px;
+}
+
+#sidebar .active {
+  background: #f8b8395a;
+}
+
+#sidebar .deactive:hover {
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
 }
 @media (max-width: 991.98px) {
   #sidebar {
-    margin-left: -300px;
+    margin-left: -240px;
   }
   #sidebar.active {
     margin-left: 0;
@@ -1556,4 +1585,17 @@ a[data-toggle="collapse"] {
   width: 100%;
   padding: 10px;
   text-align: left;
+}
+
+#dropdownnav {
+  background-color: white;
+  min-width: 300px;
+  justify-content: left;
+}
+
+#dropdownnav img {
+  -webkit-clip-path: polygon(12% 17%, 90% 17%, 91% 90%, 14% 91%);
+  clip-path: polygon(12% 17%, 90% 17%, 91% 90%, 14% 91%);
+  height: 60px;
+  width: 60px;
 }

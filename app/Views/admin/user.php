@@ -17,7 +17,7 @@
 </head>
 
 <body>
-    <?= $this->include('layout/sidebar'); ?>
+    <?= $this->include('admin/sidebar'); ?>
     <?= $this->include('admin/detail_user'); ?>
     <?= $this->include('admin/edit_user'); ?>
 
@@ -33,7 +33,7 @@
     </div> -->
 
     <div class="container">
-        <h2>Data User</h2>
+        <h1><?= $title ?></h1>
         <br>
         <div class="form-group has-search">
             <span class="fa fa-search form-control-feedback"></span>
@@ -99,24 +99,7 @@
 </body>
 
 </html>
-<script>
-    $(document).ready(function() {
-        $("#myInput").on("keyup", function() {
-            var value = $(this).val().toLowerCase();
-            $("#myTable tr").filter(function() {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
-            });
 
-            // Mengatur ulang nomor urutan
-            var count = 1;
-            $("#myTable tr:visible").each(function() {
-                var rowId = $(this).find("th").attr("id");
-                $("#" + rowId).text(count);
-                count++;
-            });
-        });
-    });
-</script>
 <script src="<?= base_url('js/script.js') ?>"></script>
 <!-- <script>
     $(document).ready(function() {

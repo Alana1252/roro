@@ -37,7 +37,7 @@
         <?= $this->include('layout/footer'); ?>
         <div class="whatsapp">
             <a href="https://api.whatsapp.com/send?phone=085363534753" target="_blank">
-                <img src="/img/whatsapp.png" alt="WhatsApp">
+                <img src="/img/layout/whatsapp.png" alt="WhatsApp">
             </a>
             <div class="whatsapp-tooltip">Hubungi Kami!</div>
         </div>

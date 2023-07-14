@@ -10,6 +10,7 @@ $user = $auth->user();
 
 
 <head>
+    <title>Cari Tiket | Go-RoRo</title>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -25,7 +26,9 @@ $user = $auth->user();
 </head>
 
 
-<body>
+<body style="background-color:#f1f1f1;">
+
+
     <?php if (!$isLoggedIn || $showModal) : ?>
         <script>
             $(document).ready(function() {
@@ -35,7 +38,7 @@ $user = $auth->user();
     <?php endif; ?>
     <?php if ($isLoggedIn) : ?>
         <?= $this->include('layout/sidebar'); ?>
-        <div class="card-caritiket" id="geser" style="margin-left: 350px;">
+        <div class="card-caritiket bg-white" id="geser" style="margin-left: 250px;">
             <div class="ticket-align">
                 <form action="<?= site_url('tiket/search'); ?>" method="get">
                     <div class="caritiket-title pt-1">Cari Tiket Anda</div>
@@ -44,7 +47,7 @@ $user = $auth->user();
                         <div class="row">
                             <div class="col-md-4">
                                 <div for="Penumpang" class="text-input">Jumlah Penumpang:</div>
-                                <input id="pilih-penumpang" onclick="showFloatingCard()" class="select-icon-tiket input-tiket" readonly placeholder="Jumlah Penumpang" style="background-size:14px 14px; background-image: url('/img/userkelompok.png');" required>
+                                <input id="pilih-penumpang" onclick="showFloatingCard()" class="select-icon-tiket input-tiket" readonly placeholder="Jumlah Penumpang" style="background-size:14px 14px; background-image: url('/img/layout/userkelompok.png');" required>
                                 <div id="floating-card" class="floating-card">
                                     <div class="form-group card-penumpang">
                                         <label for="dewasa">Dewasa<a class="font-abu"> / </a>Anak</label>
@@ -66,7 +69,7 @@ $user = $auth->user();
                             </div>
                             <div class="col-md-4">
                                 <div for="asal" class="text-input">Pelabuhan Asal:</div>
-                                <select id="asal" name="asal" class="select-icon-tiket select-tiket" style="background-image: url('/img/ship.png');" required>
+                                <select id="asal" name="asal" class="select-icon-tiket select-tiket" style="background-image: url('/img/layout/ship.png');" required>
                                     <option disabled selected value="">Pilih Asal</option>
                                     <option value="2">Air Putih</option>
                                     <option value="1">Sungai Selari</option>
@@ -74,13 +77,13 @@ $user = $auth->user();
                             </div>
                             <div class="col-md-4">
                                 <div for="tanggal" class="text-input">Tanggal Keberangkatan:</div>
-                                <input type="text" id="tanggal" placeholder="Pilih Tanggal" class="select-icon-tiket input-tiket" style="background-size: 14px 14px; background-image: url('/img/calendar.png');" required readonly>
+                                <input type="text" id="tanggal" placeholder="Pilih Tanggal" class="select-icon-tiket input-tiket" style="background-size: 14px 14px; background-image: url('/img/layout/calendar.png');" required readonly>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-4">
                                 <div for="layanan" class="text-input">Jenis Penggunaan Jasa:</div>
-                                <input id="pilih-kendaraan" onclick="showFloatingKendaraan()" readonly placeholder="Berkendara atau tidak" class="select-icon-tiket input-tiket" style="background-image: url('/img/car.png');" required>
+                                <input id="pilih-kendaraan" onclick="showFloatingKendaraan()" readonly placeholder="Berkendara atau tidak" class="select-icon-tiket input-tiket" style="background-image: url('/img/layout/car.png');" required>
                                 <div id="floatingKendaraan">
                                     <div id="modeSelection" style="display: flex; flex-direction: column; align-items: center;">
                                         <div class="text-left">Jenis Penggunaan Jasa </div>
@@ -127,10 +130,10 @@ $user = $auth->user();
                             </div>
                             <div class="col-md-4">
                                 <div for="tujuan" class="text-input">Pelabuhan Tujuan:<a>
-                                        <img src="/img/repeat.png" class="image-tiket" alt="Gambar">
+                                        <img src="/img/layout/repeat.png" class="image-tiket" alt="Gambar">
                                     </a>
                                 </div>
-                                <select id="tujuan" name="tujuan" class="select-icon-tiket select-tiket" style="background-image: url('/img/ship2.png');" required>
+                                <select id="tujuan" name="tujuan" class="select-icon-tiket select-tiket" style="background-image: url('/img/layout/ship2.png');" required>
                                     <option disabled selected value="">Pilih Tujuan</option>
                                     <option value="1">Sungai Selari</option>
                                     <option value="2">Air Putih</option>
@@ -139,7 +142,7 @@ $user = $auth->user();
                             </div>
                             <div class="col-md-4">
                                 <div for="Kelas" class="text-input">Kelas:</div>
-                                <select id="kelas" name="kelas" class="select-icon-tiket select-tiket" style="background-size: 16px 16px; background-image: url('/img/kelas.png');" required readonly>
+                                <select id="kelas" name="kelas" class="select-icon-tiket select-tiket" style="background-size: 16px 16px; background-image: url('/img/layout/kelas.png');" required readonly>
                                     <option value="Ekonomi">Ekonomi</option>
                                     <option value="Premium">Premium</option>
                                 </select>
@@ -159,9 +162,9 @@ $user = $auth->user();
         </div>
         <?php if (!empty($tikets)) : ?>
             <?php foreach ($tikets as $index => $tiket) : ?>
-                <div class="card-tiket geser<?= $index ?>" style="margin-left: 350px;">
+                <div class="card-tiket geser<?= $index ?>" style="margin-left: 250px;">
                     <div class="layanan-tiket">
-                        <img class="logo-tiket" src="/img/logo2.png" alt="Airputih" />
+                        <img class="logo-tiket" src="/img/icon/logo.png" alt="Airputih" />
                         <div class="card-kapal">
                             <?= $kapalModel->getKapalName($tiket['kapal']); ?>
                         </div>

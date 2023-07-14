@@ -63,15 +63,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div>
-                            <img id="photo-preview" class="img foto-card mb-2" src="<?= base_url('img/' . $user->user_image) ?>" alt="User Photo">
-                            <div class="form-group">
-                                <input type="file" id="photo" class="form-control form-control-file" name="photo" onchange="uploadFile(this)">
-                            </div>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-striped bg-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Update</button>
@@ -81,4 +72,5 @@
             </div>
         </div>
     </div>
+
 <?php endforeach; ?>

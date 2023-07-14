@@ -86,7 +86,7 @@ class TambahController extends BaseController
             ->setBackgroundColor(new Color(255, 255, 255));
 
         // Create generic logo
-        $logo = Logo::create(FCPATH . '/img/logo2.png')
+        $logo = Logo::create(FCPATH . '/img/icon/.png')
             ->setResizeToWidth(50)
             ->setPunchoutBackground(true);
 
